@@ -92,6 +92,11 @@
   .how strong { display: block; }
   .how span { color: var(--muted); font-size: 15px; }
 
+  .quote { margin: 28px 0 0; padding: 28px; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 14px; }
+  .quote p { font-family: Fraunces, Georgia, serif; font-size: 22px; line-height: 1.4; margin: 0 0 16px; }
+  .quote footer { padding: 0; border: 0; font-size: 15px; color: var(--muted); }
+  .quote footer strong { color: var(--text); }
+
   .contact { text-align: center; }
   .contact p { color: var(--muted); max-width: 32em; margin: 0 auto 28px; }
   .contact .actions { justify-content: center; }
@@ -130,7 +135,7 @@
           <a class="alt js-mail" href="#contact">Or send me an email</a>
         </div>
       </div>
-      <div class="portrait" aria-hidden="true">GP</div>
+      <div class="portrait"><img src="giorgio.jpg" alt="Giorgio Piccirillo" width="200" height="200"></div>
     </div>
   </div>
 
@@ -198,6 +203,18 @@
         <div><strong>4. Follow-up</strong><span>Notes your team can keep and reuse.</span></div>
       </div>
       <p class="alt" style="margin-top:28px">Online only · English or Italian · Price on request</p>
+    </div>
+  </section>
+
+  <!-- Hidden until a real, approved quote arrives. To publish: paste the exact words,
+       name and role, then remove the word "hidden" from the section tag. -->
+  <section id="feedback" hidden>
+    <div class="wrap">
+      <h2>What people say</h2>
+      <blockquote class="quote">
+        <p>[Exact quote, as approved by the author]</p>
+        <footer><strong>Elena Fontana</strong> · [Role], Università di Pavia</footer>
+      </blockquote>
     </div>
   </section>
 
