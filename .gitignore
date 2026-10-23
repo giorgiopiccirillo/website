@@ -5,3 +5,7 @@ venv/
 .venv/
 __pycache__/
 .DS_Store
+
+# Local-only drafts, never published
+local_*
+.claude/
