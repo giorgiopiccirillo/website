@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Giorgio Piccirillo · Formazione DreamApply</title>
+<meta name="description" content="Formazione online su DreamApply per gli uffici ammissioni delle università, in italiano o in inglese, a cura di Giorgio Piccirillo, Vice Team Lead Admissions alla SRH University Berlin.">
+<link rel="alternate" hreflang="en" href="./">
+<link rel="alternate" hreflang="it" href="it.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --text: #1c1f24;
+    --muted: #5b6270;
+    --line: #e4e1d8;
+    --accent: #1f5f5b;
+    --accent-ink: #ffffff;
+    --accent-soft: #e3efed;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121417;
+      --surface: #1b1e23;
+      --text: #ecebe6;
+      --muted: #a3a9b4;
+      --line: #2c3037;
+      --accent: #6fbfb6;
+      --accent-ink: #0d1716;
+      --accent-soft: #1d2d2c;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 400 17px/1.6 Inter, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+  h1, h2, h3 { font-family: Fraunces, Georgia, serif; font-weight: 600; line-height: 1.15; margin: 0; }
+  a { color: var(--accent); }
+
+  header.top { padding: 22px 0; }
+  header.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .brand { font-weight: 600; letter-spacing: .01em; }
+  .top-link { font-size: 15px; font-weight: 500; text-decoration: none; }
+  .top-nav { display: flex; align-items: center; gap: 18px; }
+  .lang { font-size: 14px; color: var(--muted); text-decoration: none; }
+  .lang:hover { color: var(--accent); }
+
+  .hero { padding: 56px 0 72px; }
+  .hero .wrap { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; }
+  .eyebrow { color: var(--accent); font-weight: 600; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 14px; }
+  .hero h1 { font-size: clamp(36px, 6vw, 58px); }
+  .hero p.lead { font-size: 19px; color: var(--muted); max-width: 34em; margin: 20px 0 32px; }
+  .portrait {
+    width: 200px; height: 200px; border-radius: 50%;
+    background: var(--accent-soft); color: var(--accent);
+    display: grid; place-items: center;
+    font-family: Fraunces, Georgia, serif; font-size: 64px; font-weight: 500;
+    border: 1px solid var(--line); overflow: hidden;
+  }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; }
+
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; }
+  .btn {
+    display: inline-block; background: var(--accent); color: var(--accent-ink);
+    padding: 14px 24px; border-radius: 10px; font-weight: 600; text-decoration: none;
+  }
+  .btn:hover { filter: brightness(1.08); }
+  .btn:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .alt { color: var(--muted); font-size: 15px; }
+
+  section { padding: 64px 0; border-top: 1px solid var(--line); }
+  section h2 { font-size: clamp(28px, 4vw, 36px); margin-bottom: 18px; }
+  .about { display: grid; grid-template-columns: 1fr 1.6fr; gap: 40px; }
+  .about p { margin: 0 0 14px; }
+  .facts { list-style: none; padding: 0; margin: 0; }
+  .facts li { padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .facts li span { display: block; color: var(--muted); font-size: 14px; }
+
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 28px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+  .card .num { color: var(--accent); font-weight: 600; font-size: 14px; }
+  .card h3 { font-size: 22px; margin: 6px 0 12px; }
+  .card ul { margin: 0; padding-left: 18px; color: var(--muted); }
+  .card li { margin: 4px 0; }
+
+  .how { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 28px; }
+  .how div { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; }
+  .how strong { display: block; }
+  .how span { color: var(--muted); font-size: 15px; }
+
+  .quote { margin: 28px 0 0; padding: 28px; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 14px; }
+  .quote p { font-family: Fraunces, Georgia, serif; font-size: 22px; line-height: 1.4; margin: 0 0 16px; }
+  .quote footer { padding: 0; border: 0; font-size: 15px; color: var(--muted); }
+  .quote footer strong { color: var(--text); }
+
+  .contact { text-align: center; }
+  .contact p { color: var(--muted); max-width: 32em; margin: 0 auto 28px; }
+  .contact .actions { justify-content: center; }
+
+  footer { padding: 28px 0 40px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); }
+  footer p { margin: 4px 0; }
+
+  @media (max-width: 760px) {
+    .hero { padding: 24px 0 48px; }
+    .hero .wrap { grid-template-columns: 1fr; gap: 28px; }
+    .portrait { width: 120px; height: 120px; font-size: 40px; order: -1; }
+    .about, .cards { grid-template-columns: 1fr; gap: 24px; }
+    .how { grid-template-columns: 1fr 1fr; }
+    section { padding: 48px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <span class="brand">Giorgio Piccirillo</span>
+    <nav class="top-nav">
+      <a class="lang" href="./" hreflang="en" lang="en">English</a>
+      <a class="top-link js-book" href="#contact">Prenota una call conoscitiva</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Formazione DreamApply</p>
+        <h1>Un ufficio ammissioni sicuro su DreamApply.</h1>
+        <p class="lead">Formazione online e pratica, da chi usa DreamApply ogni giorno per gestire le ammissioni di un'università. Il vostro team impara il sistema sulle attività che svolge davvero.</p>
+        <div class="actions">
+          <a class="btn js-book" href="#contact">Prenota una call di 15 minuti</a>
+          <a class="alt js-mail" href="#contact">Oppure scrivimi una email</a>
+        </div>
+      </div>
+      <div class="portrait"><img src="giorgio.jpg" alt="Giorgio Piccirillo" width="200" height="200"></div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap about">
+      <div>
+        <h2>Chi sono</h2>
+        <ul class="facts">
+          <li><span>Ruolo</span>Vice Team Lead, Admissions</li>
+          <li><span>Università</span>SRH University Berlin</li>
+          <li><span>Lingue</span>Italiano · Inglese</li>
+          <li><span>Relatore</span><a href="https://www.thepielivegermany.com/event/2026/speakers" target="_blank" rel="noopener">The PIE Live Germany 2026</a></li>
+        </ul>
+      </div>
+      <div>
+        <p>Sono Giorgio. Lavoro nell'ufficio ammissioni della SRH University Berlin, dove DreamApply è il sistema che usiamo dalla prima candidatura fino all'immatricolazione.</p>
+        <p>Ogni giorno gestisco in DreamApply candidature, offerte, lettere e borse di studio. Creo anche i report e le dashboard che il nostro team usa per seguire le immatricolazioni.</p>
+        <p>Formo gli uffici ammissioni come vorrei essere formato io: su casi reali, con un linguaggio semplice e con tempo per le vostre domande.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="topics">
+    <div class="wrap">
+      <h2>Cosa insegno</h2>
+      <p class="alt">Scegliete un tema o combinateli. Ogni sessione è costruita sul vostro team e sulla vostra configurazione.</p>
+      <div class="cards">
+        <div class="card">
+          <div class="num">01</div>
+          <h3>Lavoro quotidiano sulle ammissioni</h3>
+          <ul>
+            <li>Valutare e gestire le candidature</li>
+            <li>Stati, decisioni e offerte</li>
+            <li>Documenti, lettere e modelli email</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="num">02</div>
+          <h3>Impostazione e configurazione</h3>
+          <ul>
+            <li>Corsi di studio e sessioni di ammissione</li>
+            <li>Moduli di candidatura</li>
+            <li>Flussi di lavoro e punteggi</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="num">03</div>
+          <h3>Report ed esportazioni</h3>
+          <ul>
+            <li>Filtri e ricerche salvate</li>
+            <li>Esportazioni affidabili</li>
+            <li>Dai dati ai report sulle immatricolazioni</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <h2>Come funziona</h2>
+      <div class="how">
+        <div><strong>1. Call conoscitiva</strong><span>15 minuti per capire di cosa ha bisogno il vostro team.</span></div>
+        <div><strong>2. Proposta</strong><span>Propongo i temi e la durata della sessione.</span></div>
+        <div><strong>3. Formazione</strong><span>Online e dal vivo, su Zoom o Teams.</span></div>
+        <div><strong>4. Materiali</strong><span>Appunti che il team può conservare e riutilizzare.</span></div>
+      </div>
+      <p class="alt" style="margin-top:28px">Solo online · Italiano o inglese · Prezzo su richiesta</p>
+    </div>
+  </section>
+
+  <!-- Hidden until a real, approved quote arrives. To publish: paste the exact words,
+       name and role, then remove the word "hidden" from the section tag. -->
+  <section id="feedback" hidden>
+    <div class="wrap">
+      <h2>Dicono di me</h2>
+      <blockquote class="quote">
+        <p>[Citazione esatta, approvata dall'autrice]</p>
+        <footer><strong>Elena Fontana</strong> · [Ruolo], Università di Pavia</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Parliamone</h2>
+      <p>Raccontatemi del vostro team e di cosa volete migliorare in DreamApply. La call conoscitiva è gratuita.</p>
+      <div class="actions">
+        <a class="btn js-book" href="#contact">Prenota una call di 15 minuti</a>
+        <a class="alt js-mail" href="#contact">Oppure scrivimi una email</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Giorgio Piccirillo · Formatore indipendente.</p>
+    <p>DreamApply è un marchio del rispettivo titolare. Questo sito non è affiliato né approvato da DreamApply.</p>
+  </div>
+</footer>
+
+<script>
+  // Paste a Calendly (or similar) link here to make the booking buttons open it.
+  const BOOKING_URL = "";
+  const EMAIL = "giorgiopiccirillo89" + "@" + "gmail.com";
+
+  const mailto = (subject) => "mailto:" + EMAIL + "?subject=" + encodeURIComponent(subject);
+  document.querySelectorAll(".js-book").forEach((a) => {
+    a.href = BOOKING_URL || mailto("Formazione DreamApply: call conoscitiva");
+    if (BOOKING_URL) { a.target = "_blank"; a.rel = "noopener"; }
+  });
+  document.querySelectorAll(".js-mail").forEach((a) => {
+    a.href = mailto("Formazione DreamApply");
+  });
+</script>
+</body>
+</html>
