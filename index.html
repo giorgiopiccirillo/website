@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Giorgio Piccirillo · DreamApply Trainer</title>
+<meta name="description" content="Online DreamApply training for university admissions teams, in English or Italian, by Giorgio Piccirillo, Vice Team Lead Admissions at SRH University Berlin.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --text: #1c1f24;
+    --muted: #5b6270;
+    --line: #e4e1d8;
+    --accent: #1f5f5b;
+    --accent-ink: #ffffff;
+    --accent-soft: #e3efed;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121417;
+      --surface: #1b1e23;
+      --text: #ecebe6;
+      --muted: #a3a9b4;
+      --line: #2c3037;
+      --accent: #6fbfb6;
+      --accent-ink: #0d1716;
+      --accent-soft: #1d2d2c;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 400 17px/1.6 Inter, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+  h1, h2, h3 { font-family: Fraunces, Georgia, serif; font-weight: 600; line-height: 1.15; margin: 0; }
+  a { color: var(--accent); }
+
+  header.top { padding: 22px 0; }
+  header.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .brand { font-weight: 600; letter-spacing: .01em; }
+  .top-link { font-size: 15px; font-weight: 500; text-decoration: none; }
+
+  .hero { padding: 56px 0 72px; }
+  .hero .wrap { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; }
+  .eyebrow { color: var(--accent); font-weight: 600; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 14px; }
+  .hero h1 { font-size: clamp(36px, 6vw, 58px); }
+  .hero p.lead { font-size: 19px; color: var(--muted); max-width: 34em; margin: 20px 0 32px; }
+  .portrait {
+    width: 200px; height: 200px; border-radius: 50%;
+    background: var(--accent-soft); color: var(--accent);
+    display: grid; place-items: center;
+    font-family: Fraunces, Georgia, serif; font-size: 64px; font-weight: 500;
+    border: 1px solid var(--line); overflow: hidden;
+  }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; }
+
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; }
+  .btn {
+    display: inline-block; background: var(--accent); color: var(--accent-ink);
+    padding: 14px 24px; border-radius: 10px; font-weight: 600; text-decoration: none;
+  }
+  .btn:hover { filter: brightness(1.08); }
+  .btn:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .alt { color: var(--muted); font-size: 15px; }
+
+  section { padding: 64px 0; border-top: 1px solid var(--line); }
+  section h2 { font-size: clamp(28px, 4vw, 36px); margin-bottom: 18px; }
+  .about { display: grid; grid-template-columns: 1fr 1.6fr; gap: 40px; }
+  .about p { margin: 0 0 14px; }
+  .facts { list-style: none; padding: 0; margin: 0; }
+  .facts li { padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .facts li span { display: block; color: var(--muted); font-size: 14px; }
+
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 28px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+  .card .num { color: var(--accent); font-weight: 600; font-size: 14px; }
+  .card h3 { font-size: 22px; margin: 6px 0 12px; }
+  .card ul { margin: 0; padding-left: 18px; color: var(--muted); }
+  .card li { margin: 4px 0; }
+
+  .how { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 28px; }
+  .how div { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; }
+  .how strong { display: block; }
+  .how span { color: var(--muted); font-size: 15px; }
+
+  .contact { text-align: center; }
+  .contact p { color: var(--muted); max-width: 32em; margin: 0 auto 28px; }
+  .contact .actions { justify-content: center; }
+
+  footer { padding: 28px 0 40px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); }
+  footer p { margin: 4px 0; }
+
+  @media (max-width: 760px) {
+    .hero { padding: 24px 0 48px; }
+    .hero .wrap { grid-template-columns: 1fr; gap: 28px; }
+    .portrait { width: 120px; height: 120px; font-size: 40px; order: -1; }
+    .about, .cards { grid-template-columns: 1fr; gap: 24px; }
+    .how { grid-template-columns: 1fr 1fr; }
+    section { padding: 48px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <span class="brand">Giorgio Piccirillo</span>
+    <a class="top-link js-book" href="#contact">Book an intro call</a>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">DreamApply Trainer</p>
+        <h1>Get your admissions team confident in DreamApply.</h1>
+        <p class="lead">Practical online training from someone who uses DreamApply every day to run admissions at a university. Your team learns the system on the tasks they actually do.</p>
+        <div class="actions">
+          <a class="btn js-book" href="#contact">Book a 15-min intro call</a>
+          <a class="alt js-mail" href="#contact">Or send me an email</a>
+        </div>
+      </div>
+      <div class="portrait" aria-hidden="true">GP</div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap about">
+      <div>
+        <h2>About me</h2>
+        <ul class="facts">
+          <li><span>Role</span>Vice Team Lead, Admissions</li>
+          <li><span>University</span>SRH University Berlin</li>
+          <li><span>Languages</span>English · Italian</li>
+        </ul>
+      </div>
+      <div>
+        <p>I'm Giorgio. I work in admissions at SRH University Berlin, where DreamApply is the system we use from the first application to enrolment.</p>
+        <p>Day to day, I handle applications, offers, letters and scholarships in DreamApply, and I build the reports and dashboards our team uses to track enrolment numbers.</p>
+        <p>I train admissions teams the way I would want to be trained: on real tasks, in plain language, with time for your own questions.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="topics">
+    <div class="wrap">
+      <h2>What I teach</h2>
+      <p class="alt">Pick one topic or combine them. Each session is shaped around your team and your setup.</p>
+      <div class="cards">
+        <div class="card">
+          <div class="num">01</div>
+          <h3>Daily admissions work</h3>
+          <ul>
+            <li>Reviewing and processing applications</li>
+            <li>Statuses, decisions and offers</li>
+            <li>Documents, letters and email templates</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="num">02</div>
+          <h3>Setup and configuration</h3>
+          <ul>
+            <li>Programmes and intakes</li>
+            <li>Application forms</li>
+            <li>Workflows and scoring</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="num">03</div>
+          <h3>Reports and exports</h3>
+          <ul>
+            <li>Filters and saved searches</li>
+            <li>Exports you can trust</li>
+            <li>Turning data into enrolment reports</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <h2>How it works</h2>
+      <div class="how">
+        <div><strong>1. Intro call</strong><span>15 minutes to hear what your team needs.</span></div>
+        <div><strong>2. Plan</strong><span>I propose topics and a session length.</span></div>
+        <div><strong>3. Training</strong><span>Live online, on Zoom or Teams.</span></div>
+        <div><strong>4. Follow-up</strong><span>Notes your team can keep and reuse.</span></div>
+      </div>
+      <p class="alt" style="margin-top:28px">Online only · English or Italian · Price on request</p>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Let's talk</h2>
+      <p>Tell me about your team and what you want to get better at in DreamApply. The intro call is free.</p>
+      <div class="actions">
+        <a class="btn js-book" href="#contact">Book a 15-min intro call</a>
+        <a class="alt js-mail" href="#contact">Or send me an email</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Giorgio Piccirillo · Independent trainer.</p>
+    <p>DreamApply is a trademark of its owner. This site is not affiliated with or endorsed by DreamApply.</p>
+  </div>
+</footer>
+
+<script>
+  // Paste a Calendly (or similar) link here to make the booking buttons open it.
+  const BOOKING_URL = "";
+  const EMAIL = "giorgiopiccirillo89" + "@" + "gmail.com";
+
+  const mailto = (subject) => "mailto:" + EMAIL + "?subject=" + encodeURIComponent(subject);
+  document.querySelectorAll(".js-book").forEach((a) => {
+    a.href = BOOKING_URL || mailto("DreamApply training: intro call");
+    if (BOOKING_URL) { a.target = "_blank"; a.rel = "noopener"; }
+  });
+  document.querySelectorAll(".js-mail").forEach((a) => {
+    a.href = mailto("DreamApply training");
+  });
+</script>
+</body>
+</html>
