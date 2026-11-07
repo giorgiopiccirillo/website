@@ -9,3 +9,6 @@ __pycache__/
 # Local-only drafts, never published
 local_*
 .claude/
+
+# Agent scratch workspace
+.superpowers/
