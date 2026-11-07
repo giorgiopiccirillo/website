@@ -583,7 +583,7 @@ body {{ margin: 0; background: var(--bg); color: var(--ink); font-family: var(--
 .meta {{ display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 6px; color: var(--ink-2);
   font-size: 13px; }}
 .tag {{ display: inline-block; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft);
-  color: var(--accent); font-weight: 600; font-size: 12px; }}
+  color: var(--accent-text, var(--accent)); font-weight: 600; font-size: 12px; }}
 .controls {{ display: flex; flex-wrap: wrap; gap: 8px; }}
 .ctl {{ display: inline-flex; align-items: center; gap: 6px; min-width: 0; color: var(--ink-2);
   font-size: 12px; font-weight: 600; }}
@@ -593,7 +593,7 @@ body {{ margin: 0; background: var(--bg); color: var(--ink); font-family: var(--
 .seg button {{ font: inherit; font-size: 13px; font-weight: 600; border: 0; background: var(--panel);
   color: var(--ink-2); padding: 5px 10px; cursor: pointer; }}
 .seg button + button {{ border-left: 1px solid var(--line); }}
-.seg button[aria-pressed="true"] {{ background: var(--accent); color: var(--panel); }}
+.seg button[aria-pressed="true"] {{ background: var(--accent); color: var(--on-accent, var(--panel)); }}
 .seg button:focus-visible {{ outline: 2px solid var(--accent); outline-offset: -2px; }}
 .ctl select:focus-visible {{ outline: 2px solid var(--accent); outline-offset: 1px; }}
 .notice {{ margin: 10px 0 0; color: var(--ink-2); font-size: 12px; }}
@@ -603,7 +603,7 @@ body {{ margin: 0; background: var(--bg); color: var(--ink); font-family: var(--
   font: inherit; font-size: 14px; font-weight: 600; padding: 10px 12px; cursor: pointer;
   border-bottom: 2px solid transparent; margin-bottom: -1px; }}
 .tabs button:hover {{ color: var(--ink); }}
-.tabs button[aria-selected="true"] {{ color: var(--accent); border-bottom-color: var(--accent); }}
+.tabs button[aria-selected="true"] {{ color: var(--accent-text, var(--accent)); border-bottom-color: var(--accent); }}
 .tabs button:focus-visible {{ outline: 2px solid var(--accent); outline-offset: -2px; }}
 .panel {{ display: none; }}
 .panel[data-on] {{ display: block; }}
@@ -628,7 +628,7 @@ body {{ margin: 0; background: var(--bg); color: var(--ink); font-family: var(--
 .span-3 {{ grid-column: 1 / -1; }}
 .card-body svg {{ display: block; max-width: 100%; height: auto; }}
 .keypoints {{ background: var(--accent-soft); border-color: transparent; }}
-.keypoints h3 {{ color: var(--accent); }}
+.keypoints h3 {{ color: var(--accent-text, var(--accent)); }}
 .keypoints ol {{ margin: 10px 0 0; padding-left: 20px; }}
 .keypoints li {{ margin: 0 0 10px; font-size: 14px; }}
 .keypoints b {{ font-family: var(--font-num); color: var(--ink); }}
@@ -641,7 +641,7 @@ th {{ text-align: left; font-size: 11px; text-transform: uppercase; letter-spaci
 td {{ padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: middle; }}
 .num {{ text-align: right; font-family: var(--font-num); font-variant-numeric: tabular-nums; white-space: nowrap; }}
 small.wip {{ color: var(--ink-2); font-size: 0.8em; margin-left: 0.4em; }}
-td.up {{ color: var(--accent); font-weight: 600; }}
+td.up {{ color: var(--accent-text, var(--accent)); font-weight: 600; }}
 td.down {{ color: var(--ink-2); font-weight: 600; }}
 tr.total td {{ font-weight: 700; border-bottom: 0; border-top: 2px solid var(--ink); }}
 td.raw {{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px;
@@ -658,7 +658,7 @@ td.raw {{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 .conv li:last-child {{ border-bottom: 0; }}
 .conv-num {{ font-family: var(--font-num); font-size: 22px; color: var(--ink); }}
 .source {{ margin: 16px 0 0; font-size: 11px; color: var(--ink-2); }}
-.btn {{ font: inherit; font-size: 13px; font-weight: 600; color: var(--panel); background: var(--accent);
+.btn {{ font: inherit; font-size: 13px; font-weight: 600; color: var(--on-accent, var(--panel)); background: var(--accent);
   border: 1px solid var(--accent); border-radius: 6px; padding: 5px 10px; cursor: pointer; white-space: nowrap; }}
 .btn:hover {{ filter: brightness(1.08); }}
 .btn:focus-visible {{ outline: 2px solid var(--accent); outline-offset: 2px; }}
@@ -678,7 +678,7 @@ td.raw {{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 [data-style="command"] .source, [data-style="command"] .panel-head p {{ font-family: var(--font-num); }}
 [data-style="command"] .card h3, [data-style="command"] .tabs button {{ text-transform: uppercase;
   letter-spacing: 0.08em; font-size: 12px; }}
-[data-style="command"] .kpi-label {{ color: var(--accent); opacity: 1; }}
+[data-style="command"] .kpi-label {{ color: var(--accent-text, var(--accent)); opacity: 1; }}
 [data-style="command"] .kpi-value {{ text-shadow: 0 0 12px rgba(34, 211, 238, 0.45); }}
 [data-style="command"] .tag {{ background: transparent; border: 1px solid var(--accent); }}
 [data-style="command"] .tabs button[aria-selected="true"] {{ text-shadow: 0 0 8px rgba(34, 211, 238, 0.6); }}
@@ -693,12 +693,13 @@ td.raw {{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 [data-style="editorial"] .kpis {{ border-radius: 0; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink);
   background: var(--kpi-bg); }}
 [data-style="editorial"] .kpi + .kpi {{ border-left-color: var(--line); }}
-[data-style="editorial"] .kpi-label {{ color: var(--accent); opacity: 1; font-weight: 600; }}
+[data-style="editorial"] .kpi-label {{ color: var(--accent-text, var(--accent)); opacity: 1; font-weight: 600; }}
 [data-style="editorial"] .kpi-value {{ font-weight: 400; }}
 [data-style="editorial"] .kpi-sub {{ opacity: 1; color: var(--ink-2); }}
 [data-style="editorial"] .keypoints {{ border-color: var(--line); border-left: 3px solid var(--accent); }}
 [data-style="editorial"] .conv-num {{ font-weight: 400; }}
 [data-style="editorial"] .tag {{ border-radius: 2px; }}
+{_brand_css()}
 {_print_css()}
 @media (max-width: 1000px) {{
   .kpis {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
@@ -719,6 +720,19 @@ td.raw {{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 """
 
 
+def _brand_css() -> str:
+    """Per-style soft tint and text colour derived from a custom brand colour.
+
+    --brand-* are set inline by applyConfig only when ?accent= is valid; the
+    fallbacks keep each style's own tokens otherwise.
+    """
+    out = []
+    for sid, kind in (("exec-light", "l"), ("editorial", "l"), ("exec-dark", "d"), ("command", "d")):
+        out.append(f'[data-style="{sid}"] {{ --accent-soft: var(--brand-soft-{kind}, {STYLES[sid]["accent-soft"]}); '
+                   f'--accent-text: var(--brand-text-{kind}, var(--accent)); }}')
+    return "\n".join(out)
+
+
 def _print_css() -> str:
     """Print: one A4 landscape page with the #report section, always in exec-light.
 
@@ -731,6 +745,8 @@ def _print_css() -> str:
   :root[data-style] {{
 {toks}
     color-scheme: light;
+    --accent-soft: var(--brand-soft-l, {STYLES[DEFAULT_STYLE]['accent-soft']});
+    --accent-text: var(--brand-text-l, var(--accent));
   }}
   html, body {{ background: #FFFFFF !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }}
   body {{ font-size: 13px; }}
@@ -894,6 +910,51 @@ JS = r"""(function () {
   }
   /*</parseConfig>*/
 
+  /*<accentFamily>*/
+  function accentFamily(hex) {
+    function rgb(h) { return [0, 2, 4].map(function (i) { return parseInt(h.slice(i, i + 2), 16); }); }
+    function toHex(c) {
+      return "#" + c.map(function (v) {
+        var n = Math.max(0, Math.min(255, Math.round(v)));
+        return (n < 16 ? "0" : "") + n.toString(16);
+      }).join("").toUpperCase();
+    }
+    function mix(c, base, amount) {
+      return c.map(function (v, i) { return v * amount + base[i] * (1 - amount); });
+    }
+    function lum(c) {
+      var l = c.map(function (v) {
+        v = v / 255;
+        return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+      });
+      return 0.2126 * l[0] + 0.7152 * l[1] + 0.0722 * l[2];
+    }
+    function contrast(a, b) {
+      var x = lum(a), y = lum(b);
+      return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
+    }
+    // Move c toward `toward` in small steps until it reads at 4.5:1 on bg.
+    function readable(c, bg, toward) {
+      var out = c;
+      for (var t = 0; t <= 1.0001 && contrast(out, bg) < 4.5; t += 0.05) { out = mix(toward, c, t); }
+      return out;
+    }
+    var c = rgb(hex);
+    var white = [255, 255, 255], dark = [11, 18, 32];
+    var softL = mix(c, white, 0.15), softD = mix(c, dark, 0.20);
+    return {
+      accent: "#" + hex,
+      accent2: toHex(c.map(function (v) { return v * 0.8; })),
+      accentSoft: toHex(softL),
+      softLight: toHex(softL),
+      softDark: toHex(softD),
+      textLight: toHex(readable(c, softL, [0, 0, 0])),
+      textDark: toHex(readable(c, softD, white)),
+      onAccent: contrast(c, white) >= contrast(c, [0, 0, 0]) ? "#ffffff" : "#000000"
+    };
+  }
+  /*</accentFamily>*/
+
   var STYLE_KEY = "demo.style";
   var LANG_KEY = "demo.lang";
   var styleSelect = document.getElementById("style-select");
@@ -944,10 +1005,20 @@ JS = r"""(function () {
     Array.prototype.forEach.call(document.querySelectorAll("[data-uni-name]"), function (el) {
       el.textContent = cfg.name;
     });
+    var rootStyle = document.documentElement.style;
+    var ACCENT_VARS = ["--accent", "--accent-2", "--on-accent", "--brand-soft-l", "--brand-soft-d",
+      "--brand-text-l", "--brand-text-d"];
     if (cfg.accent) {
-      document.documentElement.style.setProperty("--accent", "#" + cfg.accent);
+      var fam = accentFamily(cfg.accent);
+      rootStyle.setProperty("--accent", fam.accent);
+      rootStyle.setProperty("--accent-2", fam.accent2);
+      rootStyle.setProperty("--on-accent", fam.onAccent);
+      rootStyle.setProperty("--brand-soft-l", fam.softLight);
+      rootStyle.setProperty("--brand-soft-d", fam.softDark);
+      rootStyle.setProperty("--brand-text-l", fam.textLight);
+      rootStyle.setProperty("--brand-text-d", fam.textDark);
     } else {
-      document.documentElement.style.removeProperty("--accent");
+      ACCENT_VARS.forEach(function (v) { rootStyle.removeProperty(v); });
     }
 
     cfg.tabs.forEach(function (id) {
@@ -1028,7 +1099,10 @@ JS = r"""(function () {
 
 def _js() -> str:
     default_names = {lg: demo_i18n.t("uni.default_name", lg) for lg in ("it", "en")}
-    labels = json.dumps(demo_i18n.LABELS, ensure_ascii=True, sort_keys=True).replace("</", "<\\/")
+    # The configurator's own cfg.* keys are not used by the demo.
+    demo_labels = {lg: {k: v for k, v in d.items() if not k.startswith("cfg.")}
+                   for lg, d in demo_i18n.LABELS.items()}
+    labels = json.dumps(demo_labels, ensure_ascii=True, sort_keys=True).replace("</", "<\\/")
     return (JS.replace("__STYLE_IDS__", json.dumps(list(STYLES)))
             .replace("__TAB_IDS__", json.dumps(list(TABS)))
             .replace("__FLAGGED_TABS__", json.dumps({t: t for t in sorted(FLAGGED)}))

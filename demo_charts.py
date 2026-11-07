@@ -19,6 +19,7 @@ INK = "var(--ink)"
 INK2 = "var(--ink-2)"
 LINE = "var(--line)"
 ACCENT = "var(--accent)"
+ACCENT_TEXT = "var(--accent-text, var(--accent))"
 ACCENT2 = "var(--accent-2)"
 PANEL2 = "var(--panel-2)"
 FONT = 'font-family="inherit"'
@@ -131,7 +132,7 @@ def line_vs_target(series: Sequence[int], target: Sequence[int],
     if s_end is not None:
         up = t_end is None or s_end >= t_end
         body.append(_text(px(len(series) - 1) + 8, py(s_end) + (-2 if up else 12), str(s_end),
-                          size=12, fill=ACCENT, weight="700"))
+                          size=12, fill=ACCENT_TEXT, weight="700"))
     if t_end is not None:
         up = s_end is not None and s_end < t_end
         body.append(_text(px(len(target) - 1) + 8, py(t_end) + (-2 if up else 12), str(t_end),

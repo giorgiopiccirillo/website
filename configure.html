@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Costruisci la tua dashboard</title>
+<style>
+:root {
+  --bg: #F3F4F5;
+  --panel: #FFFFFF;
+  --panel-2: #F7F8F9;
+  --ink: #15191E;
+  --ink-2: #5E6671;
+  --line: #DCE0E4;
+  --accent: #0E7C86;
+  --accent-2: #7DB9BF;
+  --accent-soft: #E2F0F1;
+  --kpi-bg: #15191E;
+  --kpi-ink: #FFFFFF;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-num: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --radius: 10px;
+  --shadow: 0 1px 2px rgba(21, 25, 30, 0.05);
+  --glow: none;
+  --accent-text: #0E7C86;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body);
+  font-size: 15px; line-height: 1.45; }
+a { color: var(--accent); }
+.wrap { max-width: 1440px; margin: 0 auto; padding: 18px 24px 40px; }
+.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 10px 24px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.who { min-width: 0; }
+.brand { display: block; color: var(--ink-2); font-size: 13px; font-weight: 600; }
+h1 { margin: 2px 0 0; font-size: 26px; line-height: 1.2; font-weight: 700; letter-spacing: -0.01em; }
+.top-ctl { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; font-size: 13px; }
+.back { font-weight: 600; text-decoration: none; }
+.back:hover { text-decoration: underline; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.seg button { font: inherit; font-size: 13px; font-weight: 600; border: 0; background: var(--panel);
+  color: var(--ink-2); padding: 5px 10px; cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: #FFFFFF; }
+.seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.intro { margin: 14px 0 18px; color: var(--ink-2); font-size: 14px; max-width: 70ch; }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; align-items: start; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 16px 18px; box-shadow: var(--shadow); min-width: 0; }
+form { display: grid; gap: 14px; min-width: 0; }
+fieldset.card { margin: 0; }
+legend, .card h2 { padding: 0; font-size: 15px; font-weight: 700; margin: 0 0 10px; }
+fieldset.card legend { float: left; width: 100%; }
+fieldset.card legend + * { clear: both; }
+.num { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px;
+  margin-right: 8px; border-radius: 50%; background: var(--accent-soft); color: var(--accent);
+  font-size: 12px; font-weight: 700; vertical-align: 1px; }
+.hint { margin: 6px 0 0; color: var(--ink-2); font-size: 12px; }
+.field-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.checks { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 6px 14px; }
+.check { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; cursor: pointer; padding: 3px 0; }
+.check input { margin: 3px 0 0; accent-color: var(--accent); width: 16px; height: 16px; flex: 0 0 auto; }
+.extra { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
+.extra-head { display: block; font-size: 12px; font-weight: 600; color: var(--ink-2);
+  text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+.check small { display: block; color: var(--ink-2); font-size: 12px; }
+.error { margin: 10px 0 0; padding: 8px 10px; border-radius: 6px; background: #FDECEC;
+  color: #9B1C1C; font-size: 13px; font-weight: 600; }
+.error[hidden] { display: none; }
+.styles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.style-card { position: relative; display: block; border: 1px solid var(--line); border-radius: 8px;
+  padding: 8px; cursor: pointer; background: var(--panel); }
+.style-card:hover { border-color: var(--ink-2); }
+.style-card:has(input:checked) { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.style-card:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+.style-card input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.style-card input:checked ~ .sw { outline: 2px solid var(--accent); outline-offset: 2px; }
+.style-card input:checked ~ .style-name .tick { border: 5px solid var(--accent); }
+.style-card input:focus-visible ~ .sw { outline: 2px solid var(--accent); outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--accent-soft); }
+.vh { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.sw { display: grid; grid-template-columns: 1fr 1.6fr; gap: 5px; height: 58px; padding: 6px;
+  border-radius: 4px; background: var(--sw-bg); border: 1px solid rgba(0, 0, 0, 0.08); }
+.sw-kpi { border-radius: 3px; background: var(--sw-kpi); }
+.sw-panel { border-radius: 3px; background: var(--sw-panel); padding: 6px; display: flex;
+  flex-direction: column; justify-content: flex-end; gap: 4px; }
+.sw-bar { display: block; height: 6px; border-radius: 2px; background: var(--sw-accent); width: 85%; }
+.sw-bar + .sw-bar { width: 55%; opacity: 0.6; }
+.style-name { display: flex; align-items: center; justify-content: space-between; gap: 6px;
+  margin-top: 7px; font-size: 13px; font-weight: 600; }
+.tick { width: 16px; height: 16px; border-radius: 50%; border: 1px solid var(--line); flex: 0 0 auto; }
+.colour-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+input[type="color"] { width: 52px; height: 36px; padding: 2px; border: 1px solid var(--line);
+  border-radius: 6px; background: var(--panel); cursor: pointer; }
+input[type="color"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.colour-state { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.btn { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--panel);
+  border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; cursor: pointer; }
+.btn:hover:not(:disabled) { border-color: var(--accent); }
+.btn:disabled { color: var(--ink-2); opacity: 0.6; cursor: default; }
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.radios { display: flex; flex-wrap: wrap; gap: 6px 22px; }
+.radios .check input { accent-color: var(--accent); }
+#send { display: grid; gap: 14px; min-width: 0; }
+input[type="text"], input[type="email"] { width: 100%; font: inherit; color: var(--ink); background: var(--panel);
+  border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; }
+input[type="text"]:focus-visible, input[type="email"]:focus-visible { outline: 2px solid var(--accent);
+  outline-offset: 0; border-color: var(--accent); }
+#link-url { font-size: 13px; text-overflow: ellipsis; }
+.btn-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin-top: 10px; }
+a.btn { display: inline-block; text-decoration: none; }
+a.btn[aria-disabled="true"] { color: var(--ink-2); opacity: 0.6; cursor: default; pointer-events: none; }
+.btn-primary { background: var(--accent); color: #FFFFFF; border-color: var(--accent); padding: 8px 14px; }
+a.btn-primary[aria-disabled="true"] { color: #FFFFFF; }
+.copied { font-size: 13px; color: var(--ink-2); }
+.copied[hidden] { display: none; }
+.contact { display: grid; gap: 10px; margin-top: 8px; }
+.send-hint { margin: 0 0 4px; }
+.preview { min-width: 0; padding: 12px; }
+.preview h2 { margin: 0 0 10px 4px; font-size: 13px; font-weight: 700; color: var(--ink-2);
+  text-transform: uppercase; letter-spacing: 0.05em; }
+#preview { display: block; width: 100%; height: 900px; border: 1px solid var(--line);
+  border-radius: 6px; background: var(--bg); }
+@media (min-width: 1000px) {
+  .layout { grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); gap: 24px; }
+  .preview { position: sticky; top: 16px; }
+  #preview { height: calc(100vh - 80px); min-height: 560px; }
+}
+@media (max-width: 480px) {
+  .wrap { padding: 14px 16px 32px; }
+  h1 { font-size: 22px; }
+  .card { padding: 14px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div class="who">
+    <span class="brand">Giorgio Piccirillo</span>
+    <h1 data-i18n="cfg.page_title">Costruisci la tua dashboard</h1>
+  </div>
+  <div class="top-ctl">
+    <span class="vh" id="page-lang-label" data-i18n="cfg.page_language">Lingua della pagina</span><span class="seg" role="group" aria-labelledby="page-lang-label"><button type="button" data-setlang="it" lang="it" aria-pressed="true">IT</button><button type="button" data-setlang="en" lang="en" aria-pressed="false">EN</button></span>
+    <a class="back" href="index.html" data-i18n="cfg.back">Torna al sito</a>
+  </div>
+</header>
+<p class="intro" data-i18n="cfg.intro">Scegli cosa vedere e come deve apparire: l&#x27;anteprima si aggiorna mentre scegli. Dati dimostrativi: nessun dato reale.</p>
+<div class="layout">
+<form id="cfg-form" novalidate>
+<fieldset class="card"><legend><span class="num" aria-hidden="true">1</span><span data-i18n="cfg.s1">La tua università</span></legend><div><label class="field-label" for="uni" data-i18n="cfg.name_label">Nome dell&#x27;università</label><input type="text" id="uni" name="uni" maxlength="80" autocomplete="organization" placeholder="Es. Università degli Studi" data-i18n-ph="cfg.name_ph" aria-describedby="uni-hint"><p class="hint" id="uni-hint" data-i18n="cfg.name_hint">Fino a 80 caratteri. Se lo lasci vuoto, compare un nome di esempio.</p></div></fieldset>
+<fieldset class="card" id="tabs-set" aria-describedby="tabs-error"><legend><span class="num" aria-hidden="true">2</span><span data-i18n="cfg.s2">Cosa vuoi vedere</span></legend><div><div class="checks"><label class="check" for="opt-overview"><input type="checkbox" id="opt-overview" name="tab" value="overview" checked><span data-i18n="tab.overview">Panoramica</span></label><label class="check" for="opt-weekly"><input type="checkbox" id="opt-weekly" name="tab" value="weekly" checked><span data-i18n="tab.weekly">Settimanale</span></label><label class="check" for="opt-countries"><input type="checkbox" id="opt-countries" name="tab" value="countries" checked><span data-i18n="tab.countries">Paesi</span></label><label class="check" for="opt-programmes"><input type="checkbox" id="opt-programmes" name="tab" value="programmes" checked><span data-i18n="tab.programmes">Corsi</span></label><label class="check" for="opt-natint"><input type="checkbox" id="opt-natint" name="tab" value="natint" checked><span data-i18n="tab.natint">Italiani e internazionali</span></label><label class="check" for="opt-funnel"><input type="checkbox" id="opt-funnel" name="tab" value="funnel" checked><span data-i18n="tab.funnel">Imbuto</span></label><label class="check" for="opt-deferrals"><input type="checkbox" id="opt-deferrals" name="tab" value="deferrals" checked><span data-i18n="tab.deferrals">Rinvii</span></label><label class="check" for="opt-advisors"><input type="checkbox" id="opt-advisors" name="tab" value="advisors" checked><span data-i18n="tab.advisors">Consulenti</span></label><label class="check" for="opt-fees"><input type="checkbox" id="opt-fees" name="tab" value="fees" checked><span data-i18n="tab.fees">Tasse</span></label></div><p class="hint" data-i18n="cfg.s2_hint">Le sezioni compaiono nella dashboard in questo ordine.</p><p class="error" id="tabs-error" role="alert" hidden data-i18n="cfg.no_tabs">Scegli almeno una sezione qui sopra</p><div class="extra"><span class="extra-head" data-i18n="cfg.extra">In più</span><label class="check" for="opt-beforeafter"><input type="checkbox" id="opt-beforeafter" name="flag" value="beforeafter"><span><span data-i18n="tab.beforeafter">Prima e dopo</span><small data-i18n="tab.beforeafter.sub">L&#x27;esportazione disordinata accanto al risultato pulito</small></span></label></div></div></fieldset>
+<fieldset class="card"><legend><span class="num" aria-hidden="true">3</span><span data-i18n="cfg.s3">Stile</span></legend><div class="styles"><label class="style-card" style="--sw-bg: #F3F4F5; --sw-panel: #FFFFFF; --sw-accent: #0E7C86; --sw-kpi: #15191E;" for="style-exec-light"><input type="radio" name="style" id="style-exec-light" value="exec-light" checked><span class="sw" aria-hidden="true"><span class="sw-kpi"></span><span class="sw-panel"><span class="sw-bar"></span><span class="sw-bar"></span></span></span><span class="style-name"><span data-i18n="style.exec-light">Direzione chiaro</span><span class="tick" aria-hidden="true"></span></span></label><label class="style-card" style="--sw-bg: #0F161E; --sw-panel: #18212B; --sw-accent: #3FC1C9; --sw-kpi: #0B1117;" for="style-exec-dark"><input type="radio" name="style" id="style-exec-dark" value="exec-dark"><span class="sw" aria-hidden="true"><span class="sw-kpi"></span><span class="sw-panel"><span class="sw-bar"></span><span class="sw-bar"></span></span></span><span class="style-name"><span data-i18n="style.exec-dark">Direzione scuro</span><span class="tick" aria-hidden="true"></span></span></label><label class="style-card" style="--sw-bg: #050A13; --sw-panel: #0A1422; --sw-accent: #22D3EE; --sw-kpi: #03070D;" for="style-command"><input type="radio" name="style" id="style-command" value="command"><span class="sw" aria-hidden="true"><span class="sw-kpi"></span><span class="sw-panel"><span class="sw-bar"></span><span class="sw-bar"></span></span></span><span class="style-name"><span data-i18n="style.command">Sala di controllo</span><span class="tick" aria-hidden="true"></span></span></label><label class="style-card" style="--sw-bg: #F5EFE4; --sw-panel: #FBF8F2; --sw-accent: #A0522D; --sw-kpi: #FBF8F2;" for="style-editorial"><input type="radio" name="style" id="style-editorial" value="editorial"><span class="sw" aria-hidden="true"><span class="sw-kpi"></span><span class="sw-panel"><span class="sw-bar"></span><span class="sw-bar"></span></span></span><span class="style-name"><span data-i18n="style.editorial">Editoriale</span><span class="tick" aria-hidden="true"></span></span></label></div></fieldset>
+<fieldset class="card"><legend><span class="num" aria-hidden="true">4</span><span data-i18n="cfg.s4">Colore del tuo ateneo</span></legend><div class="colour-row"><label class="vh" for="colour" data-i18n="cfg.colour_label">Colore principale</label><input type="color" id="colour" value="#0e7c86" data-i18n-title="cfg.colour_label" title="Colore principale"><span class="colour-state"><span id="colour-from-style" data-i18n="cfg.colour_from_style">Colore dello stile</span><span id="colour-value" hidden></span></span><button type="button" class="btn" id="colour-reset" disabled data-i18n="cfg.colour_reset">Usa il colore dello stile</button></div></fieldset>
+<fieldset class="card"><legend><span class="num" aria-hidden="true">5</span><span data-i18n="cfg.s5">Lingua della dashboard</span></legend><div class="radios"><label class="check" for="dlang-it"><input type="radio" name="dlang" id="dlang-it" value="it" checked><span lang="it">Italiano</span></label><label class="check" for="dlang-en"><input type="radio" name="dlang" id="dlang-en" value="en"><span lang="en">English</span></label></div></fieldset>
+<section id="send"><div class="card"><h2><span data-i18n="cfg.link_title">Il tuo link</span></h2><label class="vh" for="link-url" data-i18n="cfg.link_title">Il tuo link</label><input type="text" id="link-url" readonly aria-describedby="link-hint" value=""><p class="hint" id="link-hint" data-i18n="cfg.link_hint">Questo link apre la dashboard con le tue scelte.</p><div class="btn-row"><button type="button" class="btn" id="link-copy" data-i18n="cfg.link_copy">Copia link</button><a class="btn" id="link-open" target="_blank" rel="noopener" data-i18n="cfg.link_open">Apri</a><span class="copied" id="link-copy-hint" role="status" hidden data-i18n="cfg.link_copy_hint">Premi Cmd/Ctrl+C per copiare</span><span class="copied" id="link-copied" role="status" hidden data-i18n="cfg.link_copied">Link copiato</span></div></div><div class="card"><h2><span data-i18n="cfg.send_title">Invia a Giorgio</span></h2><p class="hint send-hint" data-i18n="cfg.send_hint">Facoltativo: dimmi chi sei, così so a chi rispondere.</p><div class="contact"><div><label class="field-label" for="send-name" data-i18n="cfg.contact_name">Il tuo nome</label><input type="text" id="send-name" maxlength="80" autocomplete="name"></div><div><label class="field-label" for="send-role" data-i18n="cfg.contact_role">Il tuo ruolo</label><input type="text" id="send-role" maxlength="80" autocomplete="organization-title"></div><div><label class="field-label" for="send-email" data-i18n="cfg.contact_email">La tua email</label><input type="email" id="send-email" maxlength="80" autocomplete="email"></div></div><div class="btn-row"><a class="btn btn-primary" id="send-btn" data-i18n="cfg.send_btn">Invia a Giorgio</a></div><p class="hint" data-i18n="cfg.privacy">Nulla viene salvato su questo sito. &#x27;Invia a Giorgio&#x27; apre la tua app email con le tue scelte; decidi tu se inviarla.</p></div></section>
+</form>
+<section class="card preview" aria-labelledby="preview-head">
+  <h2 id="preview-head" data-i18n="cfg.preview">Anteprima</h2>
+  <iframe id="preview" title="Anteprima della dashboard" data-i18n-title="cfg.preview_title" src="demo.html?style=exec-light&amp;lang=it" loading="lazy"></iframe>
+</section>
+</div>
+</div>
+<script id="app">
+/*<buildDemoUrl>*/
+var DEMO_DEFAULT_STYLE = "exec-light";
+var DEMO_DEFAULT_TABS = ["overview", "weekly", "countries", "programmes", "natint",
+  "funnel", "deferrals", "advisors", "fees"];
+var DEMO_FLAGGED_TABS = { beforeafter: "beforeafter" };
+
+function buildDemoUrl(cfg, base) {
+  var q = new URLSearchParams();
+  // Always explicit: the demo fills a missing style from the viewer's last-used one.
+  q.set("style", cfg.style || DEMO_DEFAULT_STYLE);
+  q.set("lang", cfg.lang);
+  var flags = (cfg.flags || []).filter(function (f, i, a) { return a.indexOf(f) === i; });
+  // The demo appends a flag's tab itself, last, so it is left out of the list.
+  var tabs = (cfg.tabs || []).filter(function (id) { return !DEMO_FLAGGED_TABS[id]; });
+  var isDefault = tabs.length === DEMO_DEFAULT_TABS.length &&
+    tabs.every(function (id, i) { return id === DEMO_DEFAULT_TABS[i]; });
+  if (tabs.length && !isDefault) { q.set("tabs", tabs.join(",")); }
+  var name = Array.from(String(cfg.name || "").trim()).slice(0, 80).join("").trim();
+  if (name) { q.set("name", name); }
+  if (cfg.accent) { q.set("accent", cfg.accent); }
+  if (flags.length) { q.set("flag", flags.join(",")); }
+  return base + "?" + q.toString();
+}
+/*</buildDemoUrl>*/
+
+/*<formToCfg>*/
+var FORM_STYLE_IDS = ["exec-light", "exec-dark", "command", "editorial"];
+var FORM_TAB_IDS = ["overview", "weekly", "countries", "programmes", "natint", "funnel", "deferrals", "advisors", "fees"];
+
+// state = {name, tabs: ticked tab ids (any order), beforeafter: bool,
+//          style, accent: "#rrggbb" | "rrggbb" | null, lang}
+// -> cfg for buildDemoUrl, or {error: "no_tabs"} when no section is ticked.
+function formToCfg(state) {
+  var ticked = state.tabs || [];
+  var tabs = FORM_TAB_IDS.filter(function (id) { return ticked.indexOf(id) >= 0; });
+  if (!tabs.length) { return { error: "no_tabs" }; }
+  var hex = String(state.accent || "").replace(/^#/, "");
+  return {
+    style: FORM_STYLE_IDS.indexOf(state.style) >= 0 ? state.style : FORM_STYLE_IDS[0],
+    lang: state.lang === "en" ? "en" : "it",
+    tabs: tabs,
+    name: String(state.name || ""),
+    accent: /^[0-9a-fA-F]{6}$/.test(hex) ? hex.toUpperCase() : null,
+    flags: state.beforeafter ? ["beforeafter"] : []
+  };
+}
+/*</formToCfg>*/
+
+/*<buildMailto>*/
+// labels: the page-language LABELS dict (tab.*, style.*, cfg.mail_*, ...).
+// cfg: a formToCfg result; contact: {name, role, email}, all optional.
+// The result is never longer than MAIL_MAX characters: it is shortened in
+// steps (subject without the name, shorter contact details, no embedded link).
+var MAIL_MAX = 1800;
+function buildMailto(cfg, contact, labels) {
+  if (!cfg || cfg.error) { return ""; }
+  contact = contact || {};
+  var to = "giorgiopiccirillo89" + "@" + "gmail.com";
+  var L = function (k) { return labels[k] || k; };
+  var cut = function (v, n) { return Array.from(String(v)).slice(0, n).join("").trim(); };
+  var clean = function (v, n) {
+    return cut(String(v || "").replace(/\s+/g, " ").trim(), n) || "\u2014";
+  };
+  var uni = cut(String(cfg.name || "").trim(), 80) || L("uni.default_name");
+  var ids = (cfg.tabs || []).concat(cfg.flags || []);
+  var sections = ids.filter(function (id, i) { return ids.indexOf(id) === i; })
+    .map(function (id) { return L("tab." + id); }).join(", ");
+  var colour = cfg.accent ? "#" + cfg.accent : L("cfg.colour_from_style");
+  var link = buildDemoUrl(cfg, "https://giorgiopiccirillo.com/demo.html");
+  var fallbackLink = L("cfg.mail_link_long") + " https://giorgiopiccirillo.com/configure.html";
+  function make(o) {
+    var u = cut(uni, o.uniMax);
+    var body = [
+      L("cfg.mail_university") + ": " + u,
+      L("cfg.mail_role") + ": " + clean(contact.role, o.max),
+      L("cfg.mail_name") + ": " + clean(contact.name, o.max),
+      L("cfg.mail_email") + ": " + clean(contact.email, o.max),
+      L("cfg.mail_sections") + ": " + sections,
+      L("cfg.mail_style") + ": " + L("style." + cfg.style),
+      L("cfg.mail_colour") + ": " + colour,
+      L("cfg.mail_dashlang") + ": " + (cfg.lang === "en" ? "English" : "Italiano"),
+      o.link ? L("cfg.mail_link") + ": " + link : fallbackLink
+    ].join("\r\n");
+    var subject = L("cfg.mail_subject") + (o.subjectName ? " \u2014 " + u : "");
+    return "mailto:" + to + "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(body);
+  }
+  var steps = [
+    { subjectName: true, max: 80, uniMax: 80, link: true },
+    { subjectName: false, max: 80, uniMax: 80, link: true },
+    { subjectName: false, max: 40, uniMax: 80, link: true },
+    { subjectName: false, max: 40, uniMax: 80, link: false },
+    { subjectName: false, max: 20, uniMax: 40, link: false },
+    { subjectName: false, max: 10, uniMax: 20, link: false }
+  ];
+  var out = "";
+  for (var i = 0; i < steps.length; i++) {
+    out = make(steps[i]);
+    if (out.length <= MAIL_MAX) { return out; }
+  }
+  return out;
+}
+/*</buildMailto>*/
+
+(function () {
+  "use strict";
+  var LABELS = {"en": {"cfg.back": "Back to the site", "cfg.colour_from_style": "Style colour", "cfg.colour_label": "Main colour", "cfg.colour_reset": "Use the style's colour", "cfg.contact_email": "Your email", "cfg.contact_name": "Your name", "cfg.contact_role": "Your role", "cfg.extra": "Extra", "cfg.intro": "Choose what to see and how it should look: the preview updates as you go. Demo data: no real data.", "cfg.link_copied": "Link copied", "cfg.link_copy": "Copy link", "cfg.link_copy_hint": "Press Cmd/Ctrl+C to copy", "cfg.link_hint": "This link opens the dashboard with your choices.", "cfg.link_open": "Open", "cfg.link_title": "Your link", "cfg.mail_colour": "Colour", "cfg.mail_dashlang": "Dashboard language", "cfg.mail_email": "Email", "cfg.mail_link": "Link", "cfg.mail_link_long": "Link too long for email: set it up again at", "cfg.mail_name": "Name", "cfg.mail_role": "Role", "cfg.mail_sections": "Sections", "cfg.mail_style": "Style", "cfg.mail_subject": "Dashboard request", "cfg.mail_university": "University", "cfg.name_hint": "Up to 80 characters. Leave it empty to show a sample name.", "cfg.name_label": "University name", "cfg.name_ph": "E.g. University of Example", "cfg.no_tabs": "Pick at least one section above", "cfg.page_language": "Page language", "cfg.page_title": "Build your dashboard", "cfg.preview": "Preview", "cfg.preview_title": "Dashboard preview", "cfg.privacy": "Nothing is saved on this site. 'Send to Giorgio' opens your own email app with your choices; you decide whether to send it.", "cfg.s1": "Your university", "cfg.s2": "What you want to see", "cfg.s2_hint": "Sections appear in the dashboard in this order.", "cfg.s3": "Style", "cfg.s4": "Your university's colour", "cfg.s5": "Dashboard language", "cfg.send_btn": "Send to Giorgio", "cfg.send_hint": "Optional: tell me who you are so I know who to reply to.", "cfg.send_title": "Send to Giorgio", "style.command": "Control room", "style.editorial": "Editorial", "style.exec-dark": "Executive dark", "style.exec-light": "Executive light", "tab.advisors": "Advisers", "tab.beforeafter": "Before and after", "tab.beforeafter.sub": "The messy export next to the clean result", "tab.countries": "Countries", "tab.deferrals": "Deferrals", "tab.fees": "Fees", "tab.funnel": "Funnel", "tab.natint": "National vs international", "tab.overview": "Overview", "tab.programmes": "Programmes", "tab.weekly": "Weekly", "uni.default_name": "Your University"}, "it": {"cfg.back": "Torna al sito", "cfg.colour_from_style": "Colore dello stile", "cfg.colour_label": "Colore principale", "cfg.colour_reset": "Usa il colore dello stile", "cfg.contact_email": "La tua email", "cfg.contact_name": "Il tuo nome", "cfg.contact_role": "Il tuo ruolo", "cfg.extra": "In più", "cfg.intro": "Scegli cosa vedere e come deve apparire: l'anteprima si aggiorna mentre scegli. Dati dimostrativi: nessun dato reale.", "cfg.link_copied": "Link copiato", "cfg.link_copy": "Copia link", "cfg.link_copy_hint": "Premi Cmd/Ctrl+C per copiare", "cfg.link_hint": "Questo link apre la dashboard con le tue scelte.", "cfg.link_open": "Apri", "cfg.link_title": "Il tuo link", "cfg.mail_colour": "Colore", "cfg.mail_dashlang": "Lingua della dashboard", "cfg.mail_email": "Email", "cfg.mail_link": "Link", "cfg.mail_link_long": "Link troppo lungo per l'email: rifai la configurazione su", "cfg.mail_name": "Nome", "cfg.mail_role": "Ruolo", "cfg.mail_sections": "Sezioni", "cfg.mail_style": "Stile", "cfg.mail_subject": "Richiesta dashboard", "cfg.mail_university": "Università", "cfg.name_hint": "Fino a 80 caratteri. Se lo lasci vuoto, compare un nome di esempio.", "cfg.name_label": "Nome dell'università", "cfg.name_ph": "Es. Università degli Studi", "cfg.no_tabs": "Scegli almeno una sezione qui sopra", "cfg.page_language": "Lingua della pagina", "cfg.page_title": "Costruisci la tua dashboard", "cfg.preview": "Anteprima", "cfg.preview_title": "Anteprima della dashboard", "cfg.privacy": "Nulla viene salvato su questo sito. 'Invia a Giorgio' apre la tua app email con le tue scelte; decidi tu se inviarla.", "cfg.s1": "La tua università", "cfg.s2": "Cosa vuoi vedere", "cfg.s2_hint": "Le sezioni compaiono nella dashboard in questo ordine.", "cfg.s3": "Stile", "cfg.s4": "Colore del tuo ateneo", "cfg.s5": "Lingua della dashboard", "cfg.send_btn": "Invia a Giorgio", "cfg.send_hint": "Facoltativo: dimmi chi sei, così so a chi rispondere.", "cfg.send_title": "Invia a Giorgio", "style.command": "Sala di controllo", "style.editorial": "Editoriale", "style.exec-dark": "Direzione scuro", "style.exec-light": "Direzione chiaro", "tab.advisors": "Consulenti", "tab.beforeafter": "Prima e dopo", "tab.beforeafter.sub": "L'esportazione disordinata accanto al risultato pulito", "tab.countries": "Paesi", "tab.deferrals": "Rinvii", "tab.fees": "Tasse", "tab.funnel": "Imbuto", "tab.natint": "Italiani e internazionali", "tab.overview": "Panoramica", "tab.programmes": "Corsi", "tab.weekly": "Settimanale", "uni.default_name": "La tua Università"}};
+  var STYLE_ACCENTS = {"exec-light": "#0e7c86", "exec-dark": "#3fc1c9", "command": "#22d3ee", "editorial": "#a0522d"};
+  var LANG_KEY = "cfg.lang";
+
+  /*<prefs>*/
+  function loadPref(key) {
+    try {
+      var v = globalThis.localStorage.getItem(key);
+      return typeof v === "string" ? v : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function savePref(key, value) {
+    try {
+      globalThis.localStorage.setItem(key, String(value));
+    } catch (e) {
+      /* storage blocked or full: the choice simply is not remembered */
+    }
+  }
+  /*</prefs>*/
+
+  var form = document.getElementById("cfg-form");
+  var frame = document.getElementById("preview");
+  var nameInput = document.getElementById("uni");
+  var colour = document.getElementById("colour");
+  var colourReset = document.getElementById("colour-reset");
+  var colourValue = document.getElementById("colour-value");
+  var colourFromStyle = document.getElementById("colour-from-style");
+  var tabsError = document.getElementById("tabs-error");
+  var linkUrl = document.getElementById("link-url");
+  var linkCopy = document.getElementById("link-copy");
+  var linkOpen = document.getElementById("link-open");
+  var linkCopied = document.getElementById("link-copied");
+  var sendBtn = document.getElementById("send-btn");
+  var contactName = document.getElementById("send-name");
+  var contactRole = document.getElementById("send-role");
+  var contactEmail = document.getElementById("send-email");
+  var linkHint = document.getElementById("link-copy-hint");
+  var currentLang = "it";
+  var copiedTimer = null;
+  var langButtons = Array.prototype.slice.call(document.querySelectorAll("[data-setlang]"));
+  var accent = null;  // null until the visitor touches the picker
+  var lastUrl = frame.getAttribute("src");
+  var timer = null;
+
+  function checkedValue(name) {
+    var el = form.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : null;
+  }
+
+  function readState() {
+    var tabs = Array.prototype.map.call(
+      form.querySelectorAll('input[name="tab"]:checked'), function (el) { return el.value; });
+    return {
+      name: nameInput.value,
+      tabs: tabs,
+      beforeafter: document.getElementById("opt-beforeafter").checked,
+      style: checkedValue("style"),
+      accent: accent,
+      lang: checkedValue("dlang")
+    };
+  }
+
+  function showColour() {
+    var custom = accent !== null;
+    colourReset.disabled = !custom;
+    colourFromStyle.hidden = custom;
+    colourValue.hidden = !custom;
+    colourValue.textContent = custom ? accent.toUpperCase() : "";
+    if (!custom) { colour.value = STYLE_ACCENTS[checkedValue("style")] || colour.value; }
+  }
+
+  function refreshSend() {
+    var cfg = window.currentCfg;
+    var blocked = !cfg || !!cfg.error;
+    var link = blocked ? "" : buildDemoUrl(cfg, "https://giorgiopiccirillo.com/demo.html");
+    linkUrl.value = link;
+    linkCopy.disabled = blocked;
+    if (blocked) {
+      linkOpen.removeAttribute("href");
+      linkOpen.setAttribute("aria-disabled", "true");
+      sendBtn.removeAttribute("href");
+      sendBtn.setAttribute("aria-disabled", "true");
+      return;
+    }
+    linkOpen.setAttribute("href", link);
+    linkOpen.removeAttribute("aria-disabled");
+    sendBtn.setAttribute("href", buildMailto(cfg, {
+      name: contactName.value, role: contactRole.value, email: contactEmail.value
+    }, LABELS[currentLang]));
+    sendBtn.removeAttribute("aria-disabled");
+  }
+
+  linkCopy.addEventListener("click", function () {
+    if (linkCopy.disabled) { return; }
+    var done = function () {
+      linkCopied.hidden = false;
+      clearTimeout(copiedTimer);
+      copiedTimer = setTimeout(function () { linkCopied.hidden = true; }, 2000);
+    };
+    var fallback = function () {
+      linkUrl.focus();
+      linkUrl.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+      if (ok) { done(); } else { linkHint.hidden = false; }
+    };
+    linkHint.hidden = true;
+    try {
+      navigator.clipboard.writeText(linkUrl.value).then(done, fallback);
+    } catch (e) {
+      fallback();
+    }
+  });
+  linkUrl.addEventListener("focus", function () { linkUrl.select(); });
+  [linkOpen, sendBtn].forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (a.getAttribute("aria-disabled") === "true") { e.preventDefault(); }
+    });
+  });
+
+  // The current cfg, or {error}; the link box and Send read it too.
+  function update(now) {
+    var cfg = formToCfg(readState());
+    var blocked = !!cfg.error;
+    tabsError.hidden = !blocked;
+    form.toggleAttribute("data-blocked", blocked);
+    window.currentCfg = cfg;
+    refreshSend();
+    if (blocked) { clearTimeout(timer); return; }
+    var url = buildDemoUrl(cfg, "demo.html");
+    clearTimeout(timer);
+    var go = function () {
+      if (url !== lastUrl) { lastUrl = url; frame.src = url; }
+    };
+    if (now) { go(); } else { timer = setTimeout(go, 250); }
+  }
+
+  function setOwnText(el, text) {
+    var n = el.firstChild;
+    while (n && n.nodeType !== 3) { n = n.nextSibling; }
+    if (n) { n.data = text; } else { el.insertBefore(document.createTextNode(text), el.firstChild); }
+  }
+
+  // Changes only the configurator's own labels, never the dashboard language.
+  function setPageLang(lang) {
+    lang = lang === "en" ? "en" : "it";
+    var dict = LABELS[lang];
+    document.documentElement.setAttribute("lang", lang);
+    Array.prototype.forEach.call(document.querySelectorAll("[data-i18n]"), function (el) {
+      var v = dict[el.getAttribute("data-i18n")];
+      if (typeof v === "string") { setOwnText(el, v); }
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("[data-i18n-title]"), function (el) {
+      var v = dict[el.getAttribute("data-i18n-title")];
+      if (typeof v === "string") { el.setAttribute("title", v); }
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("[data-i18n-ph]"), function (el) {
+      var v = dict[el.getAttribute("data-i18n-ph")];
+      if (typeof v === "string") { el.setAttribute("placeholder", v); }
+    });
+    document.title = dict["cfg.page_title"];
+    currentLang = lang;
+    if (typeof refreshSend === "function" && window.currentCfg) { refreshSend(); }
+    langButtons.forEach(function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-setlang") === lang ? "true" : "false");
+    });
+    return lang;
+  }
+
+  langButtons.forEach(function (b) {
+    b.addEventListener("click", function () {
+      savePref(LANG_KEY, setPageLang(b.getAttribute("data-setlang")));
+    });
+  });
+
+  colour.addEventListener("input", function () {
+    accent = colour.value;
+    showColour();
+    update(false);
+  });
+  colourReset.addEventListener("click", function () {
+    accent = null;
+    showColour();
+    update(false);
+    colour.focus();
+  });
+  form.addEventListener("submit", function (e) { e.preventDefault(); });
+  form.addEventListener("input", function (e) {
+    if (e.target === colour) { return; }
+    if (e.target.name === "style") { showColour(); }
+    update(false);
+  });
+  form.addEventListener("change", function (e) {
+    if (e.target === colour) { return; }
+    if (e.target.name === "style") { showColour(); }
+    update(false);
+  });
+
+  // Start: page language from the saved choice (default IT); the dashboard
+  // language starts equal to it, then stays independent of the page switch.
+  var pageLang = setPageLang(loadPref(LANG_KEY) || "it");
+  document.getElementById("dlang-" + pageLang).checked = true;
+  showColour();
+  update(true);
+})();
+</script>
+</body>
+</html>

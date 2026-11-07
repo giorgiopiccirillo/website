@@ -216,6 +216,21 @@ class DemoChartTests(unittest.TestCase):
         self._parse(demo_charts.line_vs_target([3], [3]))
         self.assertNotIn("chart.last_year", demo_charts.line_vs_target([1, 2], [1, 2]))
 
+    def test_no_raw_accent_text_fill(self):
+        import demo_charts
+        pat = re.compile(r'<text\b[^>]*\bfill="var\(--accent\)"')
+        outs = [
+            demo_charts.hbars([("A", 3), ("B", 5)], 8),
+            demo_charts.line_vs_target([5, 9, 14], [6, 10, 12], [4, 7, 9]),
+            demo_charts.donut([("A", 30), ("B", 70)], "100"),
+            demo_charts.funnel([("A", 200), ("B", 120)]),
+            demo_charts.heatmap(["UE", "Extra"], ["L", "LM"], [[3, 5], [1, 0]]),
+            (Path(__file__).parent / "demo.html").read_text(encoding="utf-8"),
+        ]
+        for out in outs:
+            self.assertIsNone(pat.search(out))
+        self.assertIn("var(--accent-text, var(--accent))", outs[1])
+
     def test_donut(self):
         import demo_charts
         svg = demo_charts.donut([("Italiani", 30), (("Internazionali", "International"), 70)], "100")
@@ -398,6 +413,21 @@ class DemoBuildTests(unittest.TestCase):
             start = self.html.index('<section class="panel" id="%s"' % tid)
             end = self.html.index("</section>", start)
             self.assertIn('data-i18n="ui.source_line"', self.html[start:end], tid)
+
+    def test_accent_text_routed_through_accent_text(self):
+        css = self.html[self.html.index("<style"):self.html.index("</style>")]
+        stripped = css.replace("var(--accent-text, var(--accent))", "")
+        self.assertNotRegex(stripped, r"(?<![-\w])color:\s*var\(--accent\)")
+
+    def test_brand_mapping_in_screen_and_print_css(self):
+        css = self.html[self.html.index("<style"):self.html.index("</style>")]
+        printed = css[css.index("@media print"):]
+        screen = css[:css.index("@media print")]
+        for sid, kind in (("exec-light", "l"), ("editorial", "l"), ("exec-dark", "d"), ("command", "d")):
+            self.assertIn('[data-style="%s"] { --accent-soft: var(--brand-soft-%s,' % (sid, kind), screen)
+            self.assertIn("--accent-text: var(--brand-text-%s, var(--accent))" % kind, screen)
+        self.assertIn("--accent-soft: var(--brand-soft-l,", printed)
+        self.assertIn("--accent-text: var(--brand-text-l, var(--accent))", printed)
 
     def test_tokens_and_style(self):
         for v in ("--bg", "--panel", "--panel-2", "--ink", "--ink-2", "--line", "--accent",

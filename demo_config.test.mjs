@@ -133,3 +133,45 @@ test("loadPref survives a missing storage object", () => {
   assert.equal(p.loadPref("k"), null);
   assert.doesNotThrow(() => p.savePref("k", "v"));
 });
+
+function loadFamily() {
+  const code = between("/*<accentFamily>*/", "/*</accentFamily>*/");
+  return new Function(code + "\nreturn accentFamily;")();
+}
+function lumOf(h) {
+  const c = [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255)
+    .map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+  return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+}
+function contrastOf(a, b) {
+  const x = lumOf(a), y = lumOf(b);
+  return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
+}
+
+test("accentFamily picks a readable text colour for the accent", () => {
+  const f = loadFamily();
+  assert.equal(f("0E7C86").onAccent, "#ffffff");
+  assert.equal(f("FFE600").onAccent, "#000000");
+  for (const hex of ["FFE600", "0E7C86", "22D3EE", "A0522D", "000000", "FFFFFF", "777777", "808080"]) {
+    const fam = f(hex);
+    assert.ok(contrastOf(fam.onAccent, fam.accent) >= 4.5, hex);
+    assert.equal(fam.accent, "#" + hex);
+  }
+});
+
+test("accentFamily accent2 is darker and the soft tints follow the spec", () => {
+  const f = loadFamily();
+  for (const hex of ["FFE600", "0E7C86", "22D3EE", "A0522D", "FFFFFF"]) {
+    const fam = f(hex);
+    assert.ok(lumOf(fam.accent2) < lumOf(fam.accent), hex);
+  }
+  const fam = f("0E7C86");
+  assert.equal(fam.accent2, "#0B636B");
+  assert.equal(fam.softLight, fam.accentSoft);
+  assert.ok(lumOf(fam.softLight) > lumOf(fam.softDark));
+  for (const hex of ["FFE600", "0E7C86", "FFFFFF", "000000"]) {
+    const x = f(hex);
+    assert.ok(contrastOf(x.textLight, x.softLight) >= 4.5, hex + " light");
+    assert.ok(contrastOf(x.textDark, x.softDark) >= 4.5, hex + " dark");
+  }
+});
