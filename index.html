@@ -2,263 +2,703 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Giorgio Piccirillo · DreamApply Trainer</title>
-<meta name="description" content="Online DreamApply training for university admissions teams, in English or Italian, by Giorgio Piccirillo, Vice Team Lead Admissions at SRH University Berlin.">
-<link rel="alternate" hreflang="en" href="./">
-<link rel="alternate" hreflang="it" href="it.html">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Giorgio Piccirillo · AI for companies</title>
+<meta name="description" content="Giorgio Piccirillo builds company brains, dashboards and reports, and trains teams on the CRM they use every day, such as DreamApply. Based in Berlin.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cg transform='rotate(-30 12 12)'%3E%3Ccircle cx='7.3' cy='3.2' r='1.45'/%3E%3Crect x='5.5' y='4.7' width='3.6' height='14.6' rx='1.8'/%3E%3Crect x='14.9' y='4.7' width='3.6' height='14.6' rx='1.8'/%3E%3Ccircle cx='16.7' cy='20.8' r='1.45'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+html, body { background: #000000 !important; color: #ffffff; }
+</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&family=Instrument+Serif:ital@1&display=swap">
 <style>
+:root {
+  --bg: #000000;
+  --text: #ffffff;
+  --muted: #9a9a9a;
+  --stat: #d8d8d8;
+  --border: rgba(255, 255, 255, 0.16);
+  --border-soft: rgba(255, 255, 255, 0.12);
+  --logo: 15.5px;
+  --logo-mark: 22px;
+  --nav: 14px;
+  --nav-h: 40px;
+  --nav-pad: 18px;
+  --btn: 13.5px;
+  --btn-h: 40px;
+  --btn-pad: 16px;
+  --hero-btn-h: 42px;
+  --h1: 48px;
+  --lede: 15.5px;
+  --badge: 12.5px;
+  --badge-pad: 9px 15px;
+  --stat-size: 13.5px;
+  --header-y: 22px;
+  --header-x: 40px;
+  --stats-x: 72px;
+  --stats-y: 36px;
+  --hero-gap: 85px;
+  --copy-max: 860px;
+  --lede-max: 470px;
+  --badge-mb: 22px;
+  --lede-mt: 18px;
+  --actions-mt: 26px;
+  --actions-gap: 10px;
+  --nav-gap: 8px;
+  --icon: 20px;
+  --icon-w: 38px;
+  --icon-h: 21px;
+}
+
+html, body { background: #000000; background: var(--bg, #000000); color: #ffffff; color: var(--text, #ffffff); }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  position: relative;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+/* ---------- layers ---------- */
+.hero-photo {
+  position: fixed; inset: 0; z-index: 0;
+  background: #000;
+  animation: in-photo 1.6s ease both;
+}
+.hero-photo video {
+  width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;
+}
+.grain {
+  position: fixed; inset: 0; z-index: 100; pointer-events: none; opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.page {
+  position: relative; z-index: 1;
+  display: grid; grid-template-rows: auto 1fr auto;
+  min-height: 100vh; min-height: 100dvh;
+}
+.menu-backdrop { display: none; }
+
+/* ---------- header ---------- */
+.header {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  padding: var(--header-y) var(--header-x) 10px;
+  position: relative; z-index: 50;
+}
+.logo {
+  display: inline-flex; align-items: center; gap: 9px; justify-self: start;
+  font-size: var(--logo); font-weight: 600; letter-spacing: -0.03em; color: #fff;
+}
+.logo-mark { width: var(--logo-mark); height: var(--logo-mark); display: grid; place-items: center; border-radius: 5px; background: linear-gradient(180deg,#fff,#cfcfcf); color: #111; font-size: calc(var(--logo-mark) * 0.5); font-weight: 700; letter-spacing: -0.04em; }
+.logo svg { width: var(--logo-mark); height: var(--logo-mark); display: block; }
+.logo-suffix { font-weight: 400; }
+
+.nav { display: flex; align-items: center; gap: var(--nav-gap); justify-self: center; }
+.nav a {
+  position: relative; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center;
+  height: var(--nav-h); padding: 0 var(--nav-pad); border-radius: 7px;
+  border: 1px solid rgba(198,198,198,0.55);
+  background: linear-gradient(105deg, #050505 0%, #2a2a2a 48%, #4a4a4a 100%);
+  color: #f3f3f3; font-size: var(--nav); font-weight: 400; letter-spacing: -0.01em; white-space: nowrap;
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.nav a::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.16) 50%, transparent 70%);
+  transform: translateX(-120%); transition: transform 0.6s ease;
+}
+.nav a:hover {
+  border-color: rgba(235,235,235,0.9);
+  background: linear-gradient(105deg, #111 0%, #3a3a3a 45%, #6a6a6a 100%);
+  box-shadow: 0 0 18px rgba(200,210,230,0.18);
+}
+.nav a:hover::before { transform: translateX(120%); }
+
+.header-cta { justify-self: end; }
+
+.burger {
+  display: none; width: 42px; height: 42px; border-radius: 6px;
+  border: 1px solid var(--border); background: rgba(8,8,8,0.55);
+  z-index: 60; cursor: pointer; place-items: center; align-content: center; gap: 5px;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.burger:hover { border-color: rgba(255,255,255,0.32); background: rgba(255,255,255,0.05); }
+.burger span {
+  display: block; width: 16px; height: 1.5px; background: #fff; border-radius: 1px;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+body.menu-open .burger span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+body.menu-open .burger span:nth-child(2) { opacity: 0; }
+body.menu-open .burger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ---------- buttons ---------- */
+.btn {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center;
+  height: var(--btn-h); padding: 0 var(--btn-pad); border-radius: 6px;
+  font-size: var(--btn); font-weight: 500; letter-spacing: -0.02em; line-height: 1;
+  white-space: nowrap; cursor: pointer;
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, color 0.35s ease, filter 0.35s ease;
+}
+.btn::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.45) 48%, transparent 76%);
+  transform: translateX(-130%); transition: transform 0.65s ease;
+}
+.btn:hover::after { transform: translateX(130%); }
+.btn-solid {
+  background: linear-gradient(180deg, #ffffff 0%, #e7e7e7 48%, #cfcfcf 100%);
+  color: #111; border: 1px solid #fff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.95);
+}
+.btn-solid:hover {
+  background: linear-gradient(180deg, #fff 0%, #f3f6ff 42%, #d5def2 100%);
+  border-color: #f2f6ff;
+  box-shadow: inset 0 1px 0 #fff, 0 0 22px rgba(186,208,255,0.35), 0 8px 18px rgba(255,255,255,0.12);
+}
+.btn-ghost {
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(0,0,0,0.45) 50%, rgba(160,175,200,0.08));
+  color: #fff; border: 1px solid rgba(198,198,198,0.45);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+}
+.btn-ghost:hover {
+  background: linear-gradient(135deg, rgba(210,225,255,0.18), rgba(0,0,0,0.35) 48%, rgba(180,195,220,0.16));
+  border-color: rgba(220,230,255,0.75);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.22), 0 0 20px rgba(170,200,255,0.22);
+}
+.hero-actions .btn { height: var(--hero-btn-h); padding: 0 18px; }
+.hero-actions .btn-solid:hover {
+  box-shadow: inset 0 1px 0 #fff, 0 0 26px rgba(186,208,255,0.4), 0 8px 18px rgba(255,255,255,0.14);
+}
+.hero-actions .btn-ghost {
+  background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(0,0,0,0.5) 46%, rgba(150,170,200,0.1));
+  border: 1px solid rgba(198,198,198,0.55);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+}
+.hero-actions .btn-ghost:hover {
+  border-color: rgba(220,230,255,0.8);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.22), 0 0 24px rgba(170,200,255,0.28);
+}
+
+/* ---------- hero ---------- */
+.hero {
+  display: flex; align-items: flex-end; justify-content: center;
+  padding: 8px 24px var(--hero-gap); min-height: 0;
+}
+.hero-copy {
+  position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center;
+  text-align: center; max-width: var(--copy-max); width: 100%;
+}
+.badge {
+  display: inline-flex; align-items: center; gap: 8px; margin-bottom: var(--badge-mb);
+  padding: var(--badge-pad); border: 0; border-radius: 5px;
+  background: linear-gradient(90deg, #7d7d7d 0%, #2a2a2a 52%, #0a0a0a 100%);
+  color: #f2f2f2; font-size: var(--badge); font-weight: 400; letter-spacing: -0.01em;
+}
+.badge-star {
+  width: 18px; height: 20px; fill: #fff; flex: none;
+  filter: drop-shadow(0 0 3px rgba(255,255,255,0.45));
+  animation: in-star 0.9s 0.28s both;
+}
+h1 {
+  display: flex; flex-direction: column; align-items: center;
+  font-weight: 500; letter-spacing: -0.045em; line-height: 1.12; color: #fff;
+  font-size: var(--h1);
+}
+.headline-line { display: block; overflow: hidden; padding: 0.06em 0.15em 0.14em; }
+h1 em {
+  font-family: "Instrument Serif", "Times New Roman", Times, serif;
+  font-style: italic; font-weight: 400; font-size: 1.08em; letter-spacing: -0.03em;
+  color: #9a9a9a; animation: in-em 1.2s 0.72s both; white-space: nowrap;
+}
+.lede {
+  max-width: var(--lede-max); margin-top: var(--lede-mt); color: #9a9a9a;
+  font-size: var(--lede); font-weight: 400; line-height: 1.55; letter-spacing: -0.015em;
+}
+.hero-actions {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: var(--actions-gap); margin-top: var(--actions-mt);
+}
+
+/* ---------- stats ---------- */
+.stats {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  padding: 0 var(--stats-x) var(--stats-y);
+  padding-bottom: max(var(--stats-y), env(safe-area-inset-bottom));
+  color: #d8d8d8;
+}
+.stat {
+  display: inline-flex; align-items: center; gap: 14px;
+  font-size: var(--stat-size); letter-spacing: -0.015em; white-space: nowrap;
+}
+.stat-icon { width: var(--icon); height: var(--icon); flex: none; color: #e8e8e8; }
+.stat-icon-wide { width: var(--icon-w); height: var(--icon-h); flex: none; }
+
+/* ---------- entrance motion ---------- */
+.appear {
+  opacity: 1;
+  animation-duration: 1.05s; animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-delay: var(--d, 0.08s);
+}
+.appear--scale { animation-name: in-scale; }
+.appear--soft  { animation-name: in-soft; }
+.appear--mask  { animation-name: in-mask; }
+.appear--pop   { animation-name: in-pop; }
+.appear--btn   { animation-name: in-btn; }
+.appear--side  { animation-name: in-side; }
+.appear--stat  { animation-name: in-stat; }
+.lede.appear { animation-duration: 1.25s; }
+.appear.is-in, .hero-photo.is-in {
+  animation: none; opacity: 1; transform: none; clip-path: none; filter: none;
+}
+@keyframes in-scale { from { opacity: 0; transform: scale(0.84); } to { opacity: 1; transform: none; } }
+@keyframes in-soft  { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes in-mask  { from { opacity: 0; transform: translateY(40%); } to { opacity: 1; transform: none; } }
+@keyframes in-pop   { 0% { opacity: 0; transform: scale(0.9); } 70% { opacity: 1; transform: scale(1.03); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes in-btn   { from { opacity: 0; transform: translateY(18px) scale(0.94); } to { opacity: 1; transform: none; } }
+@keyframes in-side  { from { opacity: 0; transform: translateX(22px); } to { opacity: 1; transform: none; } }
+@keyframes in-stat  { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+@keyframes in-star  { 0% { transform: scale(0.2) rotate(-50deg); } 65% { transform: scale(1.2) rotate(8deg); } 100% { transform: none; } }
+@keyframes in-em    { from { opacity: 0.35; filter: blur(4px); } to { opacity: 1; filter: none; } }
+@keyframes in-photo { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- desktop lock ---------- */
+@media (min-width: 901px) {
+  .page { height: 100vh; height: 100dvh; overflow: hidden; }
+}
+
+/* ---------- responsive ---------- */
+@media (min-width: 1280px) and (max-width: 1599px) {
+  :root { --h1: 54px; --lede: 16px; --header-x: 48px; --stats-x: 80px; --copy-max: 900px; }
+}
+@media (min-width: 1600px) {
   :root {
-    --bg: #f7f6f2;
-    --surface: #ffffff;
-    --text: #1c1f24;
-    --muted: #5b6270;
-    --line: #e4e1d8;
-    --accent: #1f5f5b;
-    --accent-ink: #ffffff;
-    --accent-soft: #e3efed;
+    --logo: 17px; --logo-mark: 24px; --nav: 15px; --nav-h: 44px; --nav-pad: 20px;
+    --btn: 15px; --btn-h: 44px; --hero-btn-h: 48px; --h1: 64px; --lede: 18px; --badge: 13.5px;
+    --stat-size: 15px; --header-y: 28px; --header-x: 64px; --stats-x: 96px; --stats-y: 44px;
+    --copy-max: 980px; --lede-max: 540px; --badge-mb: 26px; --lede-mt: 22px; --actions-mt: 30px;
+    --actions-gap: 12px; --icon: 22px; --icon-w: 45px; --icon-h: 24px;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #121417;
-      --surface: #1b1e23;
-      --text: #ecebe6;
-      --muted: #a3a9b4;
-      --line: #2c3037;
-      --accent: #6fbfb6;
-      --accent-ink: #0d1716;
-      --accent-soft: #1d2d2c;
-    }
+}
+@media (min-width: 1920px) {
+  :root {
+    --logo: 18px; --logo-mark: 26px; --nav: 16px; --nav-h: 48px; --nav-pad: 22px; --nav-gap: 10px;
+    --btn: 16px; --btn-h: 48px; --btn-pad: 22px; --hero-btn-h: 52px; --h1: 76px; --lede: 20px;
+    --badge: 14.5px; --badge-pad: 10px 15px; --stat-size: 16px; --header-y: 32px; --header-x: 80px;
+    --stats-x: 120px; --stats-y: 52px; --copy-max: 1120px; --lede-max: 620px; --icon-w: 48px; --icon-h: 26px;
   }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font: 400 17px/1.6 Inter, system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
+}
+@media (min-width: 2560px) {
+  :root { --h1: 88px; --lede: 22px; --header-x: 120px; --stats-x: 160px; --copy-max: 1280px; --lede-max: 680px; }
+}
+@media (min-width: 901px) and (max-width: 1279px) {
+  :root {
+    --logo: 15px; --nav: 13px; --nav-h: 36px; --nav-pad: 14px; --btn: 13px; --btn-h: 38px;
+    --hero-btn-h: 40px; --h1: 42px; --lede: 15px; --badge: 12px; --stat-size: 12.5px;
+    --header-y: 16px; --header-x: 28px; --stats-x: 36px; --stats-y: 28px; --hero-gap: 64px;
+    --copy-max: 760px; --lede-max: 440px; --badge-mb: 16px; --lede-mt: 14px; --actions-mt: 20px;
   }
-  .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
-  h1, h2, h3 { font-family: Fraunces, Georgia, serif; font-weight: 600; line-height: 1.15; margin: 0; }
-  a { color: var(--accent); }
-
-  header.top { padding: 22px 0; }
-  header.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-  .brand { font-weight: 600; letter-spacing: .01em; }
-  .top-link { font-size: 15px; font-weight: 500; text-decoration: none; }
-  .top-nav { display: flex; align-items: center; gap: 18px; }
-  .lang { font-size: 14px; color: var(--muted); text-decoration: none; }
-  .lang:hover { color: var(--accent); }
-
-  .hero { padding: 56px 0 72px; }
-  .hero .wrap { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; }
-  .eyebrow { color: var(--accent); font-weight: 600; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 14px; }
-  .hero h1 { font-size: clamp(36px, 6vw, 58px); }
-  .hero p.lead { font-size: 19px; color: var(--muted); max-width: 34em; margin: 20px 0 32px; }
-  .portrait {
-    width: 200px; height: 200px; border-radius: 50%;
-    background: var(--accent-soft); color: var(--accent);
-    display: grid; place-items: center;
-    font-family: Fraunces, Georgia, serif; font-size: 64px; font-weight: 500;
-    border: 1px solid var(--line); overflow: hidden;
+}
+@media (min-width: 901px) and (max-height: 850px) {
+  :root {
+    --header-y: 14px; --stats-y: 24px; --hero-gap: 48px; --h1: 40px;
+    --badge-mb: 12px; --lede-mt: 12px; --actions-mt: 16px;
   }
-  .portrait img { width: 100%; height: 100%; object-fit: cover; }
-
-  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; }
-  .btn {
-    display: inline-block; background: var(--accent); color: var(--accent-ink);
-    padding: 14px 24px; border-radius: 10px; font-weight: 600; text-decoration: none;
+}
+@media (min-width: 901px) and (max-height: 720px) {
+  :root {
+    --h1: 34px; --lede: 14px; --hero-gap: 32px; --stats-y: 18px; --nav-h: 30px;
+    --btn-h: 34px; --hero-btn-h: 36px; --badge-mb: 8px;
   }
-  .btn:hover { filter: brightness(1.08); }
-  .btn:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-  .alt { color: var(--muted); font-size: 15px; }
+}
 
-  section { padding: 64px 0; border-top: 1px solid var(--line); }
-  section h2 { font-size: clamp(28px, 4vw, 36px); margin-bottom: 18px; }
-  .about { display: grid; grid-template-columns: 1fr 1.6fr; gap: 40px; }
-  .about p { margin: 0 0 14px; }
-  .facts { list-style: none; padding: 0; margin: 0; }
-  .facts li { padding: 10px 0; border-bottom: 1px solid var(--line); }
-  .facts li span { display: block; color: var(--muted); font-size: 14px; }
-
-  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 28px; }
-  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
-  .card .num { color: var(--accent); font-weight: 600; font-size: 14px; }
-  .card h3 { font-size: 22px; margin: 6px 0 12px; }
-  .card ul { margin: 0; padding-left: 18px; color: var(--muted); }
-  .card li { margin: 4px 0; }
-
-  .how { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 28px; }
-  .how div { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; }
-  .how strong { display: block; }
-  .how span { color: var(--muted); font-size: 15px; }
-
-  .quote { margin: 28px 0 0; padding: 28px; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 14px; }
-  .quote p { font-family: Fraunces, Georgia, serif; font-size: 22px; line-height: 1.4; margin: 0 0 16px; }
-  .quote footer { padding: 0; border: 0; font-size: 15px; color: var(--muted); }
-  .quote footer strong { color: var(--text); }
-
-  .contact { text-align: center; }
-  .contact p { color: var(--muted); max-width: 32em; margin: 0 auto 28px; }
-  .contact .actions { justify-content: center; }
-
-  footer { padding: 28px 0 40px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); }
-  footer p { margin: 4px 0; }
-
-  @media (max-width: 760px) {
-    .hero { padding: 24px 0 48px; }
-    .hero .wrap { grid-template-columns: 1fr; gap: 28px; }
-    .portrait { width: 120px; height: 120px; font-size: 40px; order: -1; }
-    .about, .cards { grid-template-columns: 1fr; gap: 24px; }
-    .how { grid-template-columns: 1fr 1fr; }
-    section { padding: 48px 0; }
+@media (max-width: 900px) {
+  :root {
+    --logo: 16px; --btn: 15px; --btn-h: 46px; --hero-btn-h: 48px; --h1: 36px; --lede: 16.5px;
+    --badge: 13.5px; --stat-size: 15px; --header-y: 16px; --header-x: 18px; --stats-x: 20px;
+    --stats-y: 28px; --hero-gap: 36px; --lede-max: 100%; --copy-max: 100%;
   }
+  .header {
+    grid-template-columns: 1fr auto auto; gap: 8px;
+    padding: max(var(--header-y), env(safe-area-inset-top)) var(--header-x) 10px;
+  }
+  .logo, .header-cta, .burger { z-index: 80; position: relative; }
+  .header-cta { height: 42px; }
+  .burger { display: grid; }
+  .menu-backdrop {
+    display: block; position: fixed; inset: 0; z-index: 40; background: rgba(8,8,8,0.42);
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.28s ease, visibility 0.28s ease, backdrop-filter 0.28s ease;
+  }
+  body.menu-open .menu-backdrop {
+    opacity: 1; visibility: visible;
+    backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  }
+  body.menu-open { overflow: hidden; }
+  .nav {
+    position: fixed; inset: 0; z-index: 45; background: transparent; justify-self: stretch; align-self: stretch;
+    flex-direction: column; justify-content: center; align-items: stretch; gap: 12px;
+    padding: 96px 22px 32px;
+    padding-top: max(96px, calc(env(safe-area-inset-top) + 88px));
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity 0.28s ease, visibility 0.28s ease;
+  }
+  body.menu-open .nav { opacity: 1; visibility: visible; pointer-events: auto; }
+  .nav a { width: 100%; height: 56px; font-size: 19px; border-radius: 10px; }
+  .hero { padding: 20px 20px 64px; align-items: flex-end; }
+  .hero-copy, .lede { max-width: 100%; }
+  .stats {
+    flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+    white-space: normal; text-align: left;
+  }
+  .stat { white-space: normal; }
+}
+@media (max-width: 560px) {
+  :root { --h1: 34px; --lede: 16px; --header-x: 16px; }
+  .hero-actions { flex-direction: column; align-items: stretch; width: 100%; }
+  .hero-actions .btn { width: 100%; }
+}
+
+
+/* ---------- sections below the first screen ---------- */
+.below { position: relative; z-index: 1; background: #000; }
+.section { max-width: 1200px; margin: 0 auto; padding: 112px 40px 40px; }
+.section-head { max-width: 640px; margin-bottom: 40px; }
+.kicker { display: inline-block; font-size: 12.5px; color: #9a9a9a; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+.section h2 { font-size: 38px; font-weight: 500; letter-spacing: -0.04em; line-height: 1.12; }
+.section h2 em { font-family: "Instrument Serif", "Times New Roman", Times, serif; font-style: italic; font-weight: 400; font-size: 1.08em; color: #9a9a9a; letter-spacing: -0.03em; }
+.section-head p { margin-top: 14px; color: #9a9a9a; font-size: 16px; line-height: 1.6; letter-spacing: -0.015em; }
+
+.panel {
+  border: 1px solid var(--border-soft); border-radius: 12px;
+  background: linear-gradient(160deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01) 60%);
+}
+.services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.service { padding: 28px; display: flex; flex-direction: column; gap: 12px; }
+.service .num { font-size: 12.5px; color: #9a9a9a; }
+.service h3 { font-size: 20px; font-weight: 500; letter-spacing: -0.03em; }
+.service p { color: #b5b5b5; font-size: 14.5px; line-height: 1.6; letter-spacing: -0.01em; }
+.service ul { list-style: none; display: grid; gap: 6px; color: #d8d8d8; font-size: 14px; margin-top: 4px; }
+.service li::before { content: "—"; color: #6a6a6a; margin-right: 8px; }
+.service .more { margin-top: auto; padding-top: 10px; font-size: 14px; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.3); align-self: flex-start; transition: border-color 0.25s ease; }
+.service .more:hover { border-color: #fff; }
+
+.projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.project { overflow: hidden; display: flex; flex-direction: column; transition: border-color 0.3s ease, transform 0.3s ease; }
+.project:hover { border-color: rgba(255,255,255,0.28); }
+.project.wide { grid-column: span 2; }
+.project img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; display: block; border-bottom: 1px solid var(--border-soft); }
+.project-body { padding: 22px 24px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.project-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.tag { font-size: 12px; color: #9a9a9a; }
+.label { font-size: 11.5px; color: #111; background: #d8d8d8; border-radius: 4px; padding: 3px 7px; white-space: nowrap; }
+.project h3 { font-size: 19px; font-weight: 500; letter-spacing: -0.03em; }
+.project p { color: #b5b5b5; font-size: 14.5px; line-height: 1.6; letter-spacing: -0.01em; }
+.project .stack { margin-top: auto; padding-top: 6px; font-size: 12.5px; color: #7a7a7a; }
+.project .more { font-size: 14px; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.3); align-self: flex-start; }
+
+.contact { text-align: center; padding: 72px 32px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.contact p { color: #9a9a9a; font-size: 16px; max-width: 520px; line-height: 1.6; }
+.contact .hero-actions { margin-top: 10px; }
+.site-foot { max-width: 1200px; margin: 0 auto; padding: 32px 40px 48px; color: #6a6a6a; font-size: 13px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.site-foot a { color: #9a9a9a; }
+
+@media (max-width: 1000px) {
+  .services, .projects { grid-template-columns: 1fr 1fr; }
+  .services .service:last-child { grid-column: span 2; }
+}
+@media (max-width: 700px) {
+  .section { padding: 80px 18px 24px; }
+  .section h2 { font-size: 30px; }
+  .services, .projects { grid-template-columns: 1fr; }
+  .services .service:last-child, .project.wide { grid-column: auto; }
+  .site-foot { padding: 28px 18px 40px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .appear, .hero-photo, .hero h1 em, .badge-star { opacity: 1; transform: none; clip-path: none; filter: none; }
+}
 </style>
 </head>
-<body>
+<body style="background:#000;color:#fff">
 
-<header class="top">
-  <div class="wrap">
-    <span class="brand">Giorgio Piccirillo</span>
-    <nav class="top-nav">
-      <a class="lang" href="it.html" hreflang="it" lang="it">Italiano</a>
-      <a class="top-link js-book" href="#contact">Book an intro call</a>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="hero-photo" aria-hidden="true">
+  <video autoplay muted loop playsinline preload="auto"
+    src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260818_072341_50851634-bbc3-4c33-9acc-7647d4db44aa.mp4"></video>
+</div>
+
+<div class="page" id="top">
+  <div class="menu-backdrop" aria-hidden="true"></div>
+
+  <header class="header">
+    <a class="logo appear appear--scale" href="#top" aria-label="Giorgio Piccirillo, home" style="--d:0.08s">
+      <span class="logo-mark" aria-hidden="true">GP</span>
+      <span>Giorgio<span class="logo-suffix"> Piccirillo</span></span>
+    </a>
+
+    <nav class="nav" id="site-nav" aria-label="Primary">
+      <a class="appear appear--scale" href="#services" style="--d:0.16s">What I do</a>
+      <a class="appear appear--soft" href="#projects" style="--d:0.28s">Projects</a>
+      <a class="appear appear--scale" href="dreamapply.html" style="--d:0.40s">DreamApply training</a>
+      <a class="appear appear--soft" href="#contact" style="--d:0.52s">Contact</a>
     </nav>
-  </div>
-</header>
 
-<main>
-  <div class="hero">
-    <div class="wrap">
-      <div>
-        <p class="eyebrow">DreamApply Trainer</p>
-        <h1>Get your admissions team confident in DreamApply.</h1>
-        <p class="lead">Practical online training from someone who uses DreamApply every day to run admissions at a university. Your team learns the system on the tasks they actually do.</p>
-        <div class="actions">
-          <a class="btn js-book" href="#contact">Book a 15-min intro call</a>
-          <a class="alt js-mail" href="#contact">Or send me an email</a>
-        </div>
+    <a class="btn btn-solid header-cta appear appear--scale js-mail" href="#contact" style="--d:0.34s">Get in touch</a>
+
+    <button class="burger appear appear--scale" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu" style="--d:0.34s">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <main class="hero">
+    <div class="hero-copy">
+      <div class="badge appear appear--pop" style="--d:0.22s">
+        <svg class="badge-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6C12.55 2.6 12.88 3.15 13.08 4.7c.62 4.7 1.52 5.6 6.22 6.22 1.55.2 2.1.53 2.1 1.08s-.55.88-2.1 1.08c-4.7.62-5.6 1.52-6.22 6.22-.2 1.55-.53 2.1-1.08 2.1s-.88-.55-1.08-2.1c-.62-4.7-1.52-5.6-6.22-6.22C3.15 12.88 2.6 12.55 2.6 12s.55-.88 2.1-1.08c4.7-.62 5.6-1.52 6.22-6.22C11.12 3.15 11.45 2.6 12 2.6Z"/></svg>
+        Company brains · CRM · Dashboards
       </div>
-      <div class="portrait"><img src="giorgio.jpg" alt="Giorgio Piccirillo" width="200" height="200"></div>
-    </div>
-  </div>
 
-  <section id="about">
-    <div class="wrap about">
-      <div>
-        <h2>About me</h2>
-        <ul class="facts">
-          <li><span>Role</span>Vice Team Lead, Admissions</li>
-          <li><span>University</span>SRH University Berlin</li>
-          <li><span>Languages</span>English · Italian</li>
-          <li><span>Speaker</span><a href="https://www.thepielivegermany.com/event/2026/speakers" target="_blank" rel="noopener">The PIE Live Germany 2026</a></li>
+      <h1>
+        <span class="headline-line appear appear--mask" style="--d:0.42s">Make your company <em>AI proficient</em></span>
+        <span class="headline-line appear appear--mask" style="--d:0.62s">on the work it already does.</span>
+      </h1>
+
+      <p class="lede appear appear--soft" style="--d:0.82s">I build company brains, dashboards and reports, and I train teams on the CRM they use every day, such as DreamApply.</p>
+
+      <div class="hero-actions">
+        <a class="btn btn-solid appear appear--btn js-mail" href="#contact" style="--d:0.96s">Get in touch</a>
+        <a class="btn btn-ghost appear appear--side" href="#projects" style="--d:1.10s">See my projects</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="stats">
+    <div class="stat appear appear--stat" style="--d:1.12s">
+      <svg class="stat-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <defs>
+          <linearGradient id="gA" x1="3" y1="2" x2="14" y2="22" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" stop-opacity="0.38"/><stop offset="1" stop-color="#3a3a3a" stop-opacity="0.62"/></linearGradient>
+          <linearGradient id="gB" x1="13" y1="2" x2="24" y2="22" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3a3a3a" stop-opacity="0.38"/><stop offset="1" stop-color="#fff" stop-opacity="0.62"/></linearGradient>
+        </defs>
+        <rect x="3.4" y="2.6" width="7.2" height="18.8" rx="3.6" fill="url(#gA)"/>
+        <rect x="13.4" y="2.6" width="7.2" height="18.8" rx="3.6" fill="url(#gB)"/>
+        <rect x="9.2" y="10.9" width="5.6" height="2.2" rx="1.1" fill="#4a4a4a"/>
+      </svg>
+      <span>Vice Team Lead, Admissions · Berlin</span>
+    </div>
+
+    <div class="stat appear appear--stat" style="--d:1.28s">
+      <svg class="stat-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="2.4" y="2.4" width="19.2" height="19.2" rx="6.2" fill="#ffffff"/>
+        <path d="M12 7.1v7.4M8.15 12.35L12 16.2l3.85-3.85" fill="none" stroke="#111" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Speaker, The PIE Live Germany 2026</span>
+    </div>
+
+    <div class="stat appear appear--stat" style="--d:1.44s">
+      <svg class="stat-icon-wide" viewBox="0 0 30 22" style="width:calc(var(--icon-w) * 0.75)" aria-hidden="true">
+        <circle cx="10.2" cy="11" r="9.2" fill="#2b2b2b"/>
+        <text x="10.2" y="14.6" font-family="Inter, sans-serif" font-weight="700" font-size="9.5" text-anchor="middle" fill="#f4f4f4">EN</text>
+        <circle cx="20.2" cy="11" r="9.2" fill="#ffffff"/>
+        <text x="20.2" y="14.6" font-family="Inter, sans-serif" font-weight="700" font-size="9.5" text-anchor="middle" fill="#111">IT</text>
+      </svg>
+      <span>Works in English and Italian</span>
+    </div>
+  </footer>
+</div>
+
+<div class="below">
+  <section class="section" id="services">
+    <div class="section-head">
+      <span class="kicker">What I do</span>
+      <h2>Three ways I help a <em>team</em> work better.</h2>
+    </div>
+    <div class="services">
+      <article class="service panel">
+        <span class="num">01</span>
+        <h3>Company brains</h3>
+        <p>A knowledge base that an AI keeps up to date and that proves its own answers. Your team asks it questions in Claude or another assistant.</p>
+        <ul>
+          <li>Built from your own documents and exports</li>
+          <li>Test questions with known answers</li>
+          <li>Stops on personal data</li>
         </ul>
-      </div>
-      <div>
-        <p>I'm Giorgio. I work in admissions at SRH University Berlin, where DreamApply is the system we use from the first application to enrolment.</p>
-        <p>Day to day, I handle applications, offers, letters and scholarships in DreamApply, and I build the reports and dashboards our team uses to track enrolment numbers.</p>
-        <p>I train admissions teams the way I would want to be trained: on real tasks, in plain language, with time for your own questions.</p>
-      </div>
+      </article>
+      <article class="service panel">
+        <span class="num">02</span>
+        <h3>CRM and DreamApply</h3>
+        <p>I use DreamApply every day to run admissions at a university. I train teams on it, from daily work to setup and reports.</p>
+        <ul>
+          <li>Daily admissions work</li>
+          <li>Setup and configuration</li>
+          <li>Reports and exports</li>
+        </ul>
+        <a class="more" href="dreamapply.html">DreamApply training →</a>
+      </article>
+      <article class="service panel">
+        <span class="num">03</span>
+        <h3>Dashboards and reports</h3>
+        <p>Your CRM data turned into the numbers people act on: dashboards for the team and a report for leadership.</p>
+        <ul>
+          <li>Enrolment against target</li>
+          <li>At-risk programmes first</li>
+          <li>Executive report, ready to send</li>
+        </ul>
+        <a class="more" href="demo.html">See a demo with invented data →</a>
+      </article>
     </div>
   </section>
 
-  <section id="topics">
-    <div class="wrap">
-      <h2>What I teach</h2>
-      <p class="alt">Pick one topic or combine them. Each session is shaped around your team and your setup.</p>
-      <div class="cards">
-        <div class="card">
-          <div class="num">01</div>
-          <h3>Daily admissions work</h3>
-          <ul>
-            <li>Reviewing and processing applications</li>
-            <li>Statuses, decisions and offers</li>
-            <li>Documents, letters and email templates</li>
-          </ul>
+  <section class="section" id="projects">
+    <div class="section-head">
+      <span class="kicker">Projects</span>
+      <h2>Things I have <em>built</em>.</h2>
+      <p>Work projects are shown with invented data only.</p>
+    </div>
+    <div class="projects">
+      <article class="project panel wide">
+        <div class="project-body">
+          <div class="project-top"><span class="tag">Work</span><span class="label">Invented data</span></div>
+          <h3>Admissions dashboards</h3>
+          <p>The dashboards an admissions team runs a university intake on. Enrolment tracked against target. A programme-risk view that puts at-risk programmes first. Scholarship value calculated from applicant records.</p>
+          <a class="more" href="demo.html">Open the demo →</a>
         </div>
-        <div class="card">
-          <div class="num">02</div>
-          <h3>Setup and configuration</h3>
-          <ul>
-            <li>Programmes and intakes</li>
-            <li>Application forms</li>
-            <li>Workflows and scoring</li>
-          </ul>
+      </article>
+      <article class="project panel">
+        <div class="project-body">
+          <div class="project-top"><span class="tag">Work</span><span class="label">Invented data</span></div>
+          <h3>Executive enrolment report</h3>
+          <p>A landscape PDF for leadership: KPI cards, charts and heat tables by campus, language, citizenship and market. In English and German.</p>
         </div>
-        <div class="card">
-          <div class="num">03</div>
-          <h3>Reports and exports</h3>
-          <ul>
-            <li>Filters and saved searches</li>
-            <li>Exports you can trust</li>
-            <li>Turning data into enrolment reports</li>
-          </ul>
+      </article>
+      <article class="project panel">
+        <div class="project-body">
+          <div class="project-top"><span class="tag">Product</span><span class="label">Kit ready</span></div>
+          <h3>Company Brain</h3>
+          <p>A delivery kit for an AI-maintained company knowledge base. Trusted numbers come from the company's own exports, and test questions check every answer. It connects to Claude through MCP.</p>
+          <span class="stack">Python · SQLite · MCP · Markdown</span>
         </div>
+      </article>
+      <article class="project panel wide">
+        <img src="shot_homesettled.jpg" alt="HomeSettled dashboard" loading="lazy">
+        <div class="project-body">
+          <div class="project-top"><span class="tag">Venture · Co-founder</span><span class="label">Pre-launch</span></div>
+          <h3>HomeSettled</h3>
+          <p>An arrival operating system for international students coming to Germany. It puts every step in the right order, in one dashboard, with the student's family connected on the other side. Co-founded with Ramzi Hijjawi.</p>
+          <a class="more" href="https://homesettled.de" target="_blank" rel="noopener">homesettled.de →</a>
+        </div>
+      </article>
+      <article class="project panel">
+        <div class="project-body">
+          <div class="project-top"><span class="tag">Tool</span><span class="label">Prototype</span></div>
+          <h3>reverse-brand</h3>
+          <p>A command that turns a public website into a measured brand guide: type scale, colours, spacing and design tokens, plus slides and a video built from those tokens.</p>
+          <span class="stack">Node.js · Playwright · ffmpeg</span>
+        </div>
+      </article>
+      <article class="project panel">
+        <div class="project-body">
+          <div class="project-top"><span class="tag">Tool</span><span class="label">Prototype</span></div>
+          <h3>Jarvis</h3>
+          <p>A voice assistant on my desk. Say its name, ask, and it answers out loud.</p>
+          <span class="stack">Python · Whisper · Claude · ElevenLabs</span>
+        </div>
+      </article>
+      <article class="project panel">
+        <div class="project-body">
+          <div class="project-top"><span class="tag">Tool</span><span class="label">Running daily</span></div>
+          <h3>Paperwork Router</h3>
+          <p>Tickets and invoices file themselves. Once a day an agent reads new email, renames each file and adds a row to the right spreadsheet.</p>
+          <span class="stack">Python · Gmail API · Excel</span>
+        </div>
+      </article>
+      <article class="project panel">
+        <img src="shot_music-catalogue.jpg" alt="Music Catalogue screen" loading="lazy">
+        <div class="project-body">
+          <div class="project-top"><span class="tag">Music</span><span class="label">Private</span></div>
+          <h3>Music Catalogue</h3>
+          <p>A catalogue of every track I own, across disks, stores and apps, that knows which copy is the real one.</p>
+          <span class="stack">Python · FastAPI · PostgreSQL</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="contact panel">
+      <span class="kicker">Contact</span>
+      <h2>Let's <em>talk</em>.</h2>
+      <p>Tell me what your team does today and where it gets stuck. The first call is free.</p>
+      <div class="hero-actions">
+        <a class="btn btn-solid js-mail" href="#contact">Send me an email</a>
+        <a class="btn btn-ghost" href="dreamapply.html">DreamApply training</a>
       </div>
     </div>
   </section>
 
-  <section id="how">
-    <div class="wrap">
-      <h2>How it works</h2>
-      <div class="how">
-        <div><strong>1. Intro call</strong><span>15 minutes to hear what your team needs.</span></div>
-        <div><strong>2. Plan</strong><span>I propose topics and a session length.</span></div>
-        <div><strong>3. Training</strong><span>Live online, on Zoom or Teams.</span></div>
-        <div><strong>4. Follow-up</strong><span>Notes your team can keep and reuse.</span></div>
-      </div>
-      <p class="alt" style="margin-top:28px">Online only · English or Italian · Price on request</p>
-    </div>
-  </section>
-
-  <!-- Hidden until a real, approved quote arrives. To publish: paste the exact words,
-       name and role, then remove the word "hidden" from the section tag. -->
-  <section id="feedback" hidden>
-    <div class="wrap">
-      <h2>What people say</h2>
-      <blockquote class="quote">
-        <p>[Exact quote, as approved by the author]</p>
-        <footer><strong>Elena Fontana</strong> · [Role], Università di Pavia</footer>
-      </blockquote>
-    </div>
-  </section>
-
-  <section id="contact" class="contact">
-    <div class="wrap">
-      <h2>Let's talk</h2>
-      <p>Tell me about your team and what you want to get better at in DreamApply. The intro call is free.</p>
-      <div class="actions">
-        <a class="btn js-book" href="#contact">Book a 15-min intro call</a>
-        <a class="alt js-mail" href="#contact">Or send me an email</a>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div class="wrap">
-    <p>© 2026 Giorgio Piccirillo · Independent trainer.</p>
-    <p>DreamApply is a trademark of its owner. This site is not affiliated with or endorsed by DreamApply.</p>
-  </div>
-</footer>
+  <footer class="site-foot">
+    <span>© 2026 Giorgio Piccirillo · Berlin</span>
+    <span><a href="dreamapply.html">DreamApply training</a> · <a href="it.html">Italiano</a></span>
+  </footer>
+</div>
 
 <script>
-  // Paste a Calendly (or similar) link here to make the booking buttons open it.
-  const BOOKING_URL = "";
-  const EMAIL = "giorgiopiccirillo89" + "@" + "gmail.com";
+(function () {
+  var EMAIL = "giorgiopiccirillo89" + "@" + "gmail.com";
+  Array.prototype.forEach.call(document.querySelectorAll('.js-mail'), function (a) {
+    a.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Hello from your website');
+  });
 
-  const mailto = (subject) => "mailto:" + EMAIL + "?subject=" + encodeURIComponent(subject);
-  document.querySelectorAll(".js-book").forEach((a) => {
-    a.href = BOOKING_URL || mailto("DreamApply training: intro call");
-    if (BOOKING_URL) { a.target = "_blank"; a.rel = "noopener"; }
+  var els = Array.prototype.slice.call(document.querySelectorAll('.appear, .hero-photo'));
+  els.forEach(function (el) {
+    el.addEventListener('animationend', function (e) {
+      if (e.target === el) el.classList.add('is-in');
+    }, { once: true });
   });
-  document.querySelectorAll(".js-mail").forEach((a) => {
-    a.href = mailto("DreamApply training");
+
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      var probe = document.querySelector('.appear');
+      var ok = false;
+      try {
+        ok = probe && probe.getAnimations && probe.getAnimations().some(function (a) {
+          return a.playState === 'running' || a.playState === 'finished';
+        });
+      } catch (err) {}
+      if (!ok) els.forEach(function (el) { el.classList.add('is-in'); });
+    });
   });
+
+  var body = document.body;
+  var burger = document.querySelector('.burger');
+  var nav = document.getElementById('site-nav');
+  var backdrop = document.querySelector('.menu-backdrop');
+
+  function setMenu(open) {
+    body.classList.toggle('menu-open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  burger.addEventListener('click', function () { setMenu(!body.classList.contains('menu-open')); });
+  backdrop.addEventListener('click', function () { setMenu(false); });
+  Array.prototype.forEach.call(nav.querySelectorAll('a'), function (a) {
+    a.addEventListener('click', function () { setMenu(false); });
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+  var mq = window.matchMedia('(min-width: 901px)');
+  var onChange = function (e) { if (e.matches) setMenu(false); };
+  if (mq.addEventListener) mq.addEventListener('change', onChange); else mq.addListener(onChange);
+})();
 </script>
 </body>
 </html>
