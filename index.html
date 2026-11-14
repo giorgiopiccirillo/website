@@ -72,6 +72,12 @@ button { font-family: inherit; }
   background: #000;
   animation: in-photo 1.6s ease both;
 }
+/* Midnight blue tint on the motion only; text and buttons stay black and white */
+.hero-photo::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(120deg, #4f7cff 0%, #8fb3ff 55%, #3b4fd8 100%);
+  mix-blend-mode: multiply;
+}
 .hero-photo video {
   width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;
 }
