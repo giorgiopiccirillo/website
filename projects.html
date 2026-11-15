@@ -78,6 +78,7 @@ button { font-family: inherit; }
   background: linear-gradient(120deg, #4f7cff 0%, #8fb3ff 55%, #3b4fd8 100%);
   mix-blend-mode: multiply;
 }
+.frost-layer { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; pointer-events: none; z-index: 90; }
 .hero-photo video {
   width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;
 }
@@ -617,6 +618,28 @@ h1 em {
   var mq = window.matchMedia('(min-width: 901px)');
   var onChange = function (e) { if (e.matches) setMenu(false); };
   if (mq.addEventListener) mq.addEventListener('change', onChange); else mq.addListener(onChange);
+})();
+</script>
+<canvas class="frost-layer" aria-hidden="true"></canvas>
+<script src="frost.js"></script>
+<script>
+(function () {
+  if (!window.createFrost) return;
+  var c = document.querySelector('.frost-layer');
+  if (!c) return;
+  try {
+    var f = window.createFrost(c, {
+      tintThin: [0.72, 0.80, 1.0],
+      tintThick: [0.88, 0.92, 1.0],
+      opacity: 0.32,
+      strength: 0.5,
+      frost: 0,
+      meltRadius: 0.22,
+      refreeze: 1.5,
+      introDuration: 2.5
+    });
+    if (!f) c.remove();
+  } catch (e) { c.remove(); }
 })();
 </script>
 </body>
