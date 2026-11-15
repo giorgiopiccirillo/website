@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Giorgio Piccirillo · AI for companies</title>
-<meta name="description" content="Giorgio Piccirillo builds company brains, dashboards and reports, and trains teams on the CRM they use every day, such as DreamApply. Based in Berlin.">
+<title>Giorgio Piccirillo · Ideas, built with AI</title>
+<meta name="description" content="You bring the idea, I make it real with AI. Giorgio Piccirillo helps founders and companies turn ideas into working tools: company brains, dashboards and new products. Based in Berlin.">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cg transform='rotate(-30 12 12)'%3E%3Ccircle cx='7.3' cy='3.2' r='1.45'/%3E%3Crect x='5.5' y='4.7' width='3.6' height='14.6' rx='1.8'/%3E%3Crect x='14.9' y='4.7' width='3.6' height='14.6' rx='1.8'/%3E%3Ccircle cx='16.7' cy='20.8' r='1.45'/%3E%3C/g%3E%3C/svg%3E">
 <style>
@@ -430,6 +430,22 @@ h1 em {
   .site-foot { padding: 28px 18px 40px; }
 }
 
+
+/* ---------- process ---------- */
+.steps { list-style: none; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; counter-reset: step; }
+.step { padding: 24px 22px; display: flex; flex-direction: column; gap: 10px; position: relative; }
+.step .num { font-size: 12.5px; color: #8fb3ff; letter-spacing: 0.04em; }
+.step h3 { font-size: 17px; font-weight: 500; letter-spacing: -0.02em; }
+.step p { color: #b5b5b5; font-size: 14px; line-height: 1.6; }
+.process-note { margin-top: 20px; color: #9a9a9a; font-size: 14.5px; }
+.section-cta { margin-top: 28px; }
+.page-title { padding-top: 64px; }
+.page-title h1 { display: block; font-size: 52px; text-align: left; align-items: flex-start; }
+.page-title h1 em { white-space: normal; }
+.solo .header { padding-bottom: 0; }
+@media (max-width: 1100px) { .steps { grid-template-columns: repeat(2, 1fr); } .steps .step:last-child { grid-column: span 2; } }
+@media (max-width: 700px) { .steps { grid-template-columns: 1fr; } .steps .step:last-child { grid-column: auto; } .page-title h1 { font-size: 36px; } }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
   .appear, .hero-photo, .hero h1 em, .badge-star { opacity: 1; transform: none; clip-path: none; filter: none; }
@@ -456,12 +472,12 @@ h1 em {
 
     <nav class="nav" id="site-nav" aria-label="Primary">
       <a class="appear appear--scale" href="#services" style="--d:0.16s">What I do</a>
-      <a class="appear appear--soft" href="#projects" style="--d:0.28s">Projects</a>
-      <a class="appear appear--scale" href="dreamapply.html" style="--d:0.40s">DreamApply training</a>
+      <a class="appear appear--soft" href="#process" style="--d:0.28s">How it works</a>
+      <a class="appear appear--scale" href="projects.html" style="--d:0.40s">Projects</a>
       <a class="appear appear--soft" href="#contact" style="--d:0.52s">Contact</a>
     </nav>
 
-    <a class="btn btn-solid header-cta appear appear--scale js-mail" href="#contact" style="--d:0.34s">Get in touch</a>
+    <a class="btn btn-solid header-cta appear appear--scale js-mail" href="#contact" style="--d:0.34s">Let's talk</a>
 
     <button class="burger appear appear--scale" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu" style="--d:0.34s">
       <span></span><span></span><span></span>
@@ -472,19 +488,19 @@ h1 em {
     <div class="hero-copy">
       <div class="badge appear appear--pop" style="--d:0.22s">
         <svg class="badge-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6C12.55 2.6 12.88 3.15 13.08 4.7c.62 4.7 1.52 5.6 6.22 6.22 1.55.2 2.1.53 2.1 1.08s-.55.88-2.1 1.08c-4.7.62-5.6 1.52-6.22 6.22-.2 1.55-.53 2.1-1.08 2.1s-.88-.55-1.08-2.1c-.62-4.7-1.52-5.6-6.22-6.22C3.15 12.88 2.6 12.55 2.6 12s.55-.88 2.1-1.08c4.7-.62 5.6-1.52 6.22-6.22C11.12 3.15 11.45 2.6 12 2.6Z"/></svg>
-        Company brains · CRM · Dashboards
+        For founders and companies
       </div>
 
       <h1>
-        <span class="headline-line appear appear--mask" style="--d:0.42s">Make your company <em>AI proficient</em></span>
-        <span class="headline-line appear appear--mask" style="--d:0.62s">on the work it already does.</span>
+        <span class="headline-line appear appear--mask" style="--d:0.42s">You bring the <em>idea</em>.</span>
+        <span class="headline-line appear appear--mask" style="--d:0.62s">I make it real with AI.</span>
       </h1>
 
-      <p class="lede appear appear--soft" style="--d:0.82s">I build company brains, dashboards and reports, and I train teams on the CRM they use every day, such as DreamApply.</p>
+      <p class="lede appear appear--soft" style="--d:0.82s">You know your business. I know what AI can do with it. Together we turn your idea into a working tool, from the first conversation to the hand-over.</p>
 
       <div class="hero-actions">
-        <a class="btn btn-solid appear appear--btn js-mail" href="#contact" style="--d:0.96s">Get in touch</a>
-        <a class="btn btn-ghost appear appear--side" href="#projects" style="--d:1.10s">See my projects</a>
+        <a class="btn btn-solid appear appear--btn js-mail" href="#contact" style="--d:0.96s">Tell me your idea</a>
+        <a class="btn btn-ghost appear appear--side" href="#process" style="--d:1.10s">How it works</a>
       </div>
     </div>
   </main>
@@ -500,7 +516,7 @@ h1 em {
         <rect x="13.4" y="2.6" width="7.2" height="18.8" rx="3.6" fill="url(#gB)"/>
         <rect x="9.2" y="10.9" width="5.6" height="2.2" rx="1.1" fill="#4a4a4a"/>
       </svg>
-      <span>Vice Team Lead, Admissions · Berlin</span>
+      <span>Based in Berlin</span>
     </div>
 
     <div class="stat appear appear--stat" style="--d:1.28s">
@@ -508,17 +524,17 @@ h1 em {
         <rect x="2.4" y="2.4" width="19.2" height="19.2" rx="6.2" fill="#ffffff"/>
         <path d="M12 7.1v7.4M8.15 12.35L12 16.2l3.85-3.85" fill="none" stroke="#111" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <span>Speaker, The PIE Live Germany 2026</span>
+      <span>Co-founder, HomeSettled</span>
     </div>
 
     <div class="stat appear appear--stat" style="--d:1.44s">
       <svg class="stat-icon-wide" viewBox="0 0 30 22" style="width:calc(var(--icon-w) * 0.75)" aria-hidden="true">
         <circle cx="10.2" cy="11" r="9.2" fill="#2b2b2b"/>
-        <text x="10.2" y="14.6" font-family="Inter, sans-serif" font-weight="700" font-size="9.5" text-anchor="middle" fill="#f4f4f4">EN</text>
+        <text x="10.2" y="14.6" font-family="Inter, sans-serif" font-weight="700" font-size="9.5" text-anchor="middle" fill="#f4f4f4">◆</text>
         <circle cx="20.2" cy="11" r="9.2" fill="#ffffff"/>
-        <text x="20.2" y="14.6" font-family="Inter, sans-serif" font-weight="700" font-size="9.5" text-anchor="middle" fill="#111">IT</text>
+        <text x="20.2" y="14.6" font-family="Inter, sans-serif" font-weight="700" font-size="9.5" text-anchor="middle" fill="#111">●</text>
       </svg>
-      <span>Works in English and Italian</span>
+      <span>Speaker, The PIE Live Germany 2026</span>
     </div>
   </footer>
 </div>
@@ -527,134 +543,103 @@ h1 em {
   <section class="section" id="services">
     <div class="section-head">
       <span class="kicker">What I do</span>
-      <h2>Three ways I help a <em>team</em> work better.</h2>
+      <h2>From <em>idea</em> to working tool.</h2>
+      <p>You do not need to know AI. You need a clear idea of what you want to change. I bring the rest.</p>
     </div>
     <div class="services">
       <article class="service panel">
         <span class="num">01</span>
-        <h3>Company brains</h3>
-        <p>A knowledge base that an AI keeps up to date and that proves its own answers. Your team asks it questions in Claude or another assistant.</p>
+        <h3>Ideas into products</h3>
+        <p>You have an idea for a product, a service or a better way of working. I help you shape it, test it and build a first working version with Claude and other AI tools.</p>
         <ul>
-          <li>Built from your own documents and exports</li>
-          <li>Test questions with known answers</li>
-          <li>Stops on personal data</li>
+          <li>From a rough idea to a clear plan</li>
+          <li>A first version you can show</li>
+          <li>Honest advice on what AI can and cannot do</li>
         </ul>
       </article>
       <article class="service panel">
         <span class="num">02</span>
-        <h3>CRM and DreamApply</h3>
-        <p>I use DreamApply every day to run admissions at a university. I train teams on it, from daily work to setup and reports.</p>
+        <h3>Company brains</h3>
+        <p>All your company knowledge in one place that an AI keeps up to date. Your team asks a question and gets an answer that shows its source.</p>
         <ul>
-          <li>Daily admissions work</li>
-          <li>Setup and configuration</li>
-          <li>Reports and exports</li>
+          <li>Built from your own documents and data</li>
+          <li>Tested with questions you already know the answer to</li>
+          <li>Personal data stays out</li>
         </ul>
-        <a class="more" href="dreamapply.html">DreamApply training →</a>
       </article>
       <article class="service panel">
         <span class="num">03</span>
         <h3>Dashboards and reports</h3>
-        <p>Your CRM data turned into the numbers people act on: dashboards for the team and a report for leadership.</p>
+        <p>Your data turned into the numbers people act on: a live dashboard for the team and a clear report for leadership.</p>
         <ul>
-          <li>Enrolment against target</li>
-          <li>At-risk programmes first</li>
-          <li>Executive report, ready to send</li>
+          <li>Targets and progress on one screen</li>
+          <li>Problems shown first</li>
+          <li>Reports ready to send</li>
         </ul>
-        <a class="more" href="demo.html">See a demo with invented data →</a>
+        <a class="more" href="projects.html">See a dashboard →</a>
       </article>
     </div>
+  </section>
+
+  <section class="section" id="process">
+    <div class="section-head">
+      <span class="kicker">How it works</span>
+      <h2>A plan made <em>for you</em>, not a package.</h2>
+      <p>Every business is different, so every project starts by listening.</p>
+    </div>
+    <ol class="steps">
+      <li class="step panel">
+        <span class="num">01</span>
+        <h3>We talk</h3>
+        <p>A free first call. You tell me your idea or the problem you want to solve.</p>
+      </li>
+      <li class="step panel">
+        <span class="num">02</span>
+        <h3>I learn your needs</h3>
+        <p>How you work today, what data and tools you have, and what success looks like for you.</p>
+      </li>
+      <li class="step panel">
+        <span class="num">03</span>
+        <h3>We plan together</h3>
+        <p>A tailor-made plan: what we build, in which order, how long it takes and what it costs.</p>
+      </li>
+      <li class="step panel">
+        <span class="num">04</span>
+        <h3>I build</h3>
+        <p>In short rounds. You see a working version early and steer it as we go.</p>
+      </li>
+      <li class="step panel">
+        <span class="num">05</span>
+        <h3>You own it</h3>
+        <p>I hand it over and show your team how to use it. It is yours to keep.</p>
+      </li>
+    </ol>
   </section>
 
   <section class="section" id="projects">
     <div class="section-head">
       <span class="kicker">Projects</span>
       <h2>Things I have <em>built</em>.</h2>
-      <p>Work projects are shown with invented data only.</p>
+      <p>Dashboards, a company brain, a music catalogue for DJs and a startup. Work projects are shown with invented data only.</p>
     </div>
-    <div class="projects">
-      <article class="project panel wide">
-        <div class="project-body">
-          <div class="project-top"><span class="tag">Work</span><span class="label">Invented data</span></div>
-          <h3>Admissions dashboards</h3>
-          <p>The dashboards an admissions team runs a university intake on. Enrolment tracked against target. A programme-risk view that puts at-risk programmes first. Scholarship value calculated from applicant records.</p>
-          <a class="more" href="demo.html">Open the demo →</a>
-        </div>
-      </article>
-      <article class="project panel">
-        <div class="project-body">
-          <div class="project-top"><span class="tag">Work</span><span class="label">Invented data</span></div>
-          <h3>Executive enrolment report</h3>
-          <p>A landscape PDF for leadership: KPI cards, charts and heat tables by campus, language, citizenship and market. In English and German.</p>
-        </div>
-      </article>
-      <article class="project panel">
-        <div class="project-body">
-          <div class="project-top"><span class="tag">Product</span><span class="label">Kit ready</span></div>
-          <h3>Company Brain</h3>
-          <p>A delivery kit for an AI-maintained company knowledge base. Trusted numbers come from the company's own exports, and test questions check every answer. It connects to Claude through MCP.</p>
-          <span class="stack">Python · SQLite · MCP · Markdown</span>
-        </div>
-      </article>
-      <article class="project panel wide">
-        <img src="shot_homesettled.jpg" alt="HomeSettled dashboard" loading="lazy">
-        <div class="project-body">
-          <div class="project-top"><span class="tag">Venture · Co-founder</span><span class="label">Pre-launch</span></div>
-          <h3>HomeSettled</h3>
-          <p>An arrival operating system for international students coming to Germany. It puts every step in the right order, in one dashboard, with the student's family connected on the other side. Co-founded with Ramzi Hijjawi.</p>
-          <a class="more" href="https://homesettled.de" target="_blank" rel="noopener">homesettled.de →</a>
-        </div>
-      </article>
-      <article class="project panel">
-        <div class="project-body">
-          <div class="project-top"><span class="tag">Tool</span><span class="label">Prototype</span></div>
-          <h3>reverse-brand</h3>
-          <p>A command that turns a public website into a measured brand guide: type scale, colours, spacing and design tokens, plus slides and a video built from those tokens.</p>
-          <span class="stack">Node.js · Playwright · ffmpeg</span>
-        </div>
-      </article>
-      <article class="project panel">
-        <div class="project-body">
-          <div class="project-top"><span class="tag">Tool</span><span class="label">Prototype</span></div>
-          <h3>Jarvis</h3>
-          <p>A voice assistant on my desk. Say its name, ask, and it answers out loud.</p>
-          <span class="stack">Python · Whisper · Claude · ElevenLabs</span>
-        </div>
-      </article>
-      <article class="project panel">
-        <div class="project-body">
-          <div class="project-top"><span class="tag">Tool</span><span class="label">Running daily</span></div>
-          <h3>Paperwork Router</h3>
-          <p>Tickets and invoices file themselves. Once a day an agent reads new email, renames each file and adds a row to the right spreadsheet.</p>
-          <span class="stack">Python · Gmail API · Excel</span>
-        </div>
-      </article>
-      <article class="project panel">
-        <img src="shot_music-catalogue.jpg" alt="Music Catalogue screen" loading="lazy">
-        <div class="project-body">
-          <div class="project-top"><span class="tag">Music</span><span class="label">Private</span></div>
-          <h3>Music Catalogue</h3>
-          <p>A catalogue of every track I own, across disks, stores and apps, that knows which copy is the real one.</p>
-          <span class="stack">Python · FastAPI · PostgreSQL</span>
-        </div>
-      </article>
-    </div>
+    <a class="btn btn-solid section-cta" href="projects.html">See all projects</a>
   </section>
 
   <section class="section" id="contact">
     <div class="contact panel">
       <span class="kicker">Contact</span>
-      <h2>Let's <em>talk</em>.</h2>
-      <p>Tell me what your team does today and where it gets stuck. The first call is free.</p>
+      <h2>Got an idea? <em>Let's talk</em>.</h2>
+      <p>Tell me what you want to build or what slows your team down. The first call is free, and you leave it with a clear next step.</p>
       <div class="hero-actions">
         <a class="btn btn-solid js-mail" href="#contact">Send me an email</a>
-        <a class="btn btn-ghost" href="dreamapply.html">DreamApply training</a>
+        <a class="btn btn-ghost" href="projects.html">See my projects</a>
       </div>
     </div>
   </section>
 
   <footer class="site-foot">
     <span>© 2026 Giorgio Piccirillo · Berlin</span>
-    <span><a href="dreamapply.html">DreamApply training</a> · <a href="it.html">Italiano</a></span>
+    <span><a href="index.html">Home</a> · <a href="projects.html">Projects</a></span>
   </footer>
 </div>
 
@@ -662,7 +647,7 @@ h1 em {
 (function () {
   var EMAIL = "giorgiopiccirillo89" + "@" + "gmail.com";
   Array.prototype.forEach.call(document.querySelectorAll('.js-mail'), function (a) {
-    a.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Hello from your website');
+    a.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('An idea I would like to build');
   });
 
   var els = Array.prototype.slice.call(document.querySelectorAll('.appear, .hero-photo'));
