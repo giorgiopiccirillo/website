@@ -462,6 +462,21 @@ h1 em {
 .project img { filter: grayscale(1) sepia(0.35) hue-rotate(185deg) saturate(2.4) brightness(0.62) contrast(1.08); transition: filter 0.5s ease; }
 .project:hover img { filter: none; }
 
+
+/* ---------- intro: who I am, before what I do ---------- */
+.intro {
+  display: inline-flex; align-items: center; gap: 12px; margin-bottom: var(--badge-mb);
+  padding: 6px 18px 6px 6px; border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.14) 0%, rgba(40,40,40,0.7) 55%, rgba(10,10,10,0.85) 100%);
+  border: 1px solid rgba(255,255,255,0.16);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  text-align: left;
+}
+.intro-photo { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; display: block; flex: none; box-shadow: 0 0 0 1px rgba(255,255,255,0.25); }
+.intro-text { display: flex; flex-direction: column; gap: 2px; line-height: 1.2; }
+.intro-name { font-size: calc(var(--badge) + 2px); font-weight: 600; letter-spacing: -0.02em; color: #fff; }
+.intro-role { font-size: var(--badge); color: #bdbdbd; letter-spacing: -0.01em; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
   .appear, .hero-photo, .hero h1 em, .badge-star { opacity: 1; transform: none; clip-path: none; filter: none; }
@@ -502,9 +517,12 @@ h1 em {
 
   <main class="hero">
     <div class="hero-copy">
-      <div class="badge appear appear--pop" style="--d:0.22s">
-        <svg class="badge-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6C12.55 2.6 12.88 3.15 13.08 4.7c.62 4.7 1.52 5.6 6.22 6.22 1.55.2 2.1.53 2.1 1.08s-.55.88-2.1 1.08c-4.7.62-5.6 1.52-6.22 6.22-.2 1.55-.53 2.1-1.08 2.1s-.88-.55-1.08-2.1c-.62-4.7-1.52-5.6-6.22-6.22C3.15 12.88 2.6 12.55 2.6 12s.55-.88 2.1-1.08c4.7-.62 5.6-1.52 6.22-6.22C11.12 3.15 11.45 2.6 12 2.6Z"/></svg>
-        For founders and companies
+      <div class="intro appear appear--pop" style="--d:0.22s">
+        <img class="intro-photo" src="giorgio.jpg" alt="" width="80" height="80">
+        <span class="intro-text">
+          <span class="intro-name">Giorgio Piccirillo</span>
+          <span class="intro-role">AI builder for founders and companies</span>
+        </span>
       </div>
 
       <h1>
