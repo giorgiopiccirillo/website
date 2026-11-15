@@ -456,7 +456,12 @@ h1 em {
 
 <div class="grain" aria-hidden="true"></div>
 
-<div class="page solo" id="top" style="min-height:0;height:auto;display:block">
+<div class="hero-photo" aria-hidden="true">
+  <video autoplay muted loop playsinline preload="auto"
+    src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260818_072341_50851634-bbc3-4c33-9acc-7647d4db44aa.mp4"></video>
+</div>
+
+<div class="page solo" id="top" style="height:auto;min-height:72vh;min-height:72dvh;display:flex;flex-direction:column;overflow:visible">
   <div class="menu-backdrop" aria-hidden="true"></div>
   <header class="header">
     <a class="logo appear appear--scale" href="index.html" aria-label="Giorgio Piccirillo, home" style="--d:0.08s">
@@ -477,27 +482,22 @@ h1 em {
       <span></span><span></span><span></span>
     </button>
   </header>
+  <section class="section page-title" style="margin-top:auto;padding-bottom:56px;width:100%">
+    <span class="kicker">Projects</span>
+    <h1 class="appear appear--soft" style="--d:0.3s">Things I have <em>built</em>.</h1>
+    <div class="section-head"><p>Every project started as an idea and became a working tool. Client work is shown as a demo, so real data stays private.</p></div>
+  </section>
 </div>
 
 <div class="below">
-  <section class="section page-title">
-    <span class="kicker">Projects</span>
-    <h1>Things I have <em>built</em>.</h1>
-    <div class="section-head"><p>Each project started as an idea and became a working tool. Work projects are shown with invented data only.</p></div>
+  <section class="section" style="padding-top:56px">
     <div class="projects">
       <article class="project panel wide">
         <div class="project-body">
-          <div class="project-top"><span class="tag">Dashboard</span><span class="label">Invented data</span></div>
-          <h3>Admissions dashboard</h3>
-          <p>The live dashboard a university admissions team runs its intake on. Enrolments against target, a risk view that shows weak programmes first, and scholarship value worked out from applicant records.</p>
+          <div class="project-top"><span class="tag">Dashboards and reports</span><span class="label">Demo version</span></div>
+          <h3>Live dashboard and leadership report</h3>
+          <p>A team's numbers on one screen: targets against progress, with the problems shown first. Next to it, a report for leadership that is ready to send, with key figures, charts and tables. Built for a real team and running every day.</p>
           <a class="more" href="demo.html">Open the demo →</a>
-        </div>
-      </article>
-      <article class="project panel">
-        <div class="project-body">
-          <div class="project-top"><span class="tag">Report</span><span class="label">Invented data</span></div>
-          <h3>Executive report</h3>
-          <p>A report for leadership, ready to send: KPI cards, charts and heat tables by campus, language, citizenship and market. In English and German.</p>
         </div>
       </article>
       <article class="project panel">
@@ -532,22 +532,6 @@ h1 em {
           <h3>reverse-brand</h3>
           <p>Turns a public website into a measured brand guide: fonts, colours, spacing and design tokens, plus slides and a video built from them.</p>
           <span class="stack">Node.js · Playwright · ffmpeg</span>
-        </div>
-      </article>
-      <article class="project panel">
-        <div class="project-body">
-          <div class="project-top"><span class="tag">AI tool</span><span class="label">Prototype</span></div>
-          <h3>Jarvis</h3>
-          <p>A voice assistant on my desk. Say its name, ask, and it answers out loud.</p>
-          <span class="stack">Python · Whisper · Claude · ElevenLabs</span>
-        </div>
-      </article>
-      <article class="project panel">
-        <div class="project-body">
-          <div class="project-top"><span class="tag">Automation</span><span class="label">Running daily</span></div>
-          <h3>Paperwork Router</h3>
-          <p>Tickets and invoices file themselves. Once a day an agent reads new email, renames each file and adds a row to the right spreadsheet.</p>
-          <span class="stack">Python · Gmail API · Excel</span>
         </div>
       </article>
     </div>

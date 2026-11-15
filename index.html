@@ -446,6 +446,16 @@ h1 em {
 @media (max-width: 1100px) { .steps { grid-template-columns: repeat(2, 1fr); } .steps .step:last-child { grid-column: span 2; } }
 @media (max-width: 700px) { .steps { grid-template-columns: 1fr; } .steps .step:last-child { grid-column: auto; } .page-title h1 { font-size: 36px; } }
 
+
+/* ---------- about ---------- */
+.about { display: grid; grid-template-columns: 280px 1fr; gap: 48px; align-items: center; padding: 40px; }
+.about img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 14px; display: block; filter: saturate(0.9); box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 24px 60px rgba(79,124,255,0.18); }
+.about h2 { margin-bottom: 18px; }
+.about p { color: #c8c8c8; font-size: 16.5px; line-height: 1.7; letter-spacing: -0.01em; }
+.about p + p { margin-top: 14px; }
+.about .sign { margin-top: 22px; font-family: "Instrument Serif", "Times New Roman", serif; font-style: italic; font-size: 26px; color: #8fb3ff; }
+@media (max-width: 800px) { .about { grid-template-columns: 1fr; gap: 28px; padding: 24px; } .about img { max-width: 260px; } }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
   .appear, .hero-photo, .hero h1 em, .badge-star { opacity: 1; transform: none; clip-path: none; filter: none; }
@@ -581,6 +591,19 @@ h1 em {
     </div>
   </section>
 
+  <section class="section" id="about">
+    <div class="about panel">
+      <img src="giorgio.jpg" alt="Giorgio Piccirillo" width="800" height="800" loading="lazy">
+      <div>
+        <span class="kicker">About me</span>
+        <h2>Hi, I'm <em>Giorgio</em>.</h2>
+        <p>I'm Italian and I live in Berlin. By day I work in university admissions, where I built the dashboards and reports my team runs on. I co-founded HomeSettled, and at night I play records as a DJ.</p>
+        <p>What I enjoy most is sitting down with someone who has an idea, over a coffee or a call, and working out together how AI can make it real. You don't need to speak tech. That part is my job.</p>
+        <div class="sign">Giorgio</div>
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="process">
     <div class="section-head">
       <span class="kicker">How it works</span>
@@ -620,7 +643,7 @@ h1 em {
     <div class="section-head">
       <span class="kicker">Projects</span>
       <h2>Things I have <em>built</em>.</h2>
-      <p>Dashboards, a company brain, a music catalogue for DJs and a startup. Work projects are shown with invented data only.</p>
+      <p>Dashboards, a company brain, a music catalogue for DJs and a startup. Client work is shown as a demo, so real data stays private.</p>
     </div>
     <a class="btn btn-solid section-cta" href="projects.html">See all projects</a>
   </section>
