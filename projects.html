@@ -446,6 +446,13 @@ h1 em {
 @media (max-width: 1100px) { .steps { grid-template-columns: repeat(2, 1fr); } .steps .step:last-child { grid-column: span 2; } }
 @media (max-width: 700px) { .steps { grid-template-columns: 1fr; } .steps .step:last-child { grid-column: auto; } .page-title h1 { font-size: 36px; } }
 
+
+/* screenshots: dark blue tone to match the site, full colour on hover */
+.project img { filter: grayscale(1) sepia(0.35) hue-rotate(185deg) saturate(2.4) brightness(0.62) contrast(1.08); transition: filter 0.5s ease; }
+.project:hover img { filter: none; }
+.project img.light { filter: invert(0.9) grayscale(1) sepia(0.35) hue-rotate(185deg) saturate(2.4) brightness(0.85) contrast(1.05); }
+.project:hover img.light { filter: none; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
   .appear, .hero-photo, .hero h1 em, .badge-star { opacity: 1; transform: none; clip-path: none; filter: none; }
@@ -508,17 +515,26 @@ h1 em {
           <span class="stack">Python · SQLite · MCP · Markdown</span>
         </div>
       </article>
-      <article class="project panel wide">
+      <article class="project panel">
         <img src="shot_music-catalogue.jpg" alt="Music Catalogue screen" loading="lazy">
         <div class="project-body">
           <div class="project-top"><span class="tag">Music · For DJs</span><span class="label">Live · private</span></div>
           <h3>Music Catalogue</h3>
-          <p>Built for my own DJ library. The same track arrives from many stores and apps, and the details rarely agree. The catalogue merges them into one record, catches duplicates and shows which copy is the real one.</p>
+          <p>I DJ as Flight Mode and Pulp Friction, so I built this for my own record library. The same track arrives from many stores and apps, and the details rarely agree. The catalogue merges them into one record, catches duplicates and shows which copy is the real one.</p>
           <span class="stack">Python · FastAPI · PostgreSQL</span>
         </div>
       </article>
       <article class="project panel wide">
-        <img src="shot_homesettled.jpg" alt="HomeSettled dashboard" loading="lazy">
+        <img class="light" src="shot_pitchriders.jpg" alt="Pitch Riders front page" loading="lazy">
+        <div class="project-body">
+          <div class="project-top"><span class="tag">Music · For DJs</span><span class="label">Live</span></div>
+          <h3>Pitch Riders</h3>
+          <p>For DJs who still dig. Every new House, Minimal, Microhouse and Techno record from the shops and premiere channels, in one list. Listen, save, and get told when a record is back. Free, no ads, no tracking.</p>
+          <a class="more" href="https://www.pitchriders.com" target="_blank" rel="noopener">pitchriders.com →</a>
+        </div>
+      </article>
+      <article class="project panel wide">
+        <img class="light" src="shot_homesettled.jpg" alt="HomeSettled dashboard" loading="lazy">
         <div class="project-body">
           <div class="project-top"><span class="tag">Startup · Co-founder</span><span class="label">Pre-launch</span></div>
           <h3>HomeSettled</h3>

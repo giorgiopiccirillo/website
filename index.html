@@ -456,6 +456,11 @@ h1 em {
 .about .sign { margin-top: 22px; font-family: "Instrument Serif", "Times New Roman", serif; font-style: italic; font-size: 26px; color: #8fb3ff; }
 @media (max-width: 800px) { .about { grid-template-columns: 1fr; gap: 28px; padding: 24px; } .about img { max-width: 260px; } }
 
+
+/* screenshots: dark blue tone to match the site, full colour on hover */
+.project img { filter: grayscale(1) sepia(0.35) hue-rotate(185deg) saturate(2.4) brightness(0.62) contrast(1.08); transition: filter 0.5s ease; }
+.project:hover img { filter: none; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
   .appear, .hero-photo, .hero h1 em, .badge-star { opacity: 1; transform: none; clip-path: none; filter: none; }
@@ -503,7 +508,7 @@ h1 em {
 
       <h1>
         <span class="headline-line appear appear--mask" style="--d:0.42s">You bring the <em>idea</em>.</span>
-        <span class="headline-line appear appear--mask" style="--d:0.62s">I make it real with AI.</span>
+        <span class="headline-line appear appear--mask" style="--d:0.62s">I make it real.</span>
       </h1>
 
       <p class="lede appear appear--soft" style="--d:0.82s">You know your business. I know what AI can do with it. Together we turn your idea into a working tool, from the first conversation to the hand-over.</p>
@@ -526,7 +531,7 @@ h1 em {
         <rect x="13.4" y="2.6" width="7.2" height="18.8" rx="3.6" fill="url(#gB)"/>
         <rect x="9.2" y="10.9" width="5.6" height="2.2" rx="1.1" fill="#4a4a4a"/>
       </svg>
-      <span>Based in Berlin</span>
+      <span>Available worldwide</span>
     </div>
 
     <div class="stat appear appear--stat" style="--d:1.28s">
@@ -544,7 +549,7 @@ h1 em {
         <circle cx="20.2" cy="11" r="9.2" fill="#ffffff"/>
         <text x="20.2" y="14.6" font-family="Inter, sans-serif" font-weight="700" font-size="9.5" text-anchor="middle" fill="#111">●</text>
       </svg>
-      <span>Speaker, The PIE Live Germany 2026</span>
+      <span>Idea facilitator and builder</span>
     </div>
   </footer>
 </div>
@@ -597,9 +602,9 @@ h1 em {
       <div>
         <span class="kicker">About me</span>
         <h2>Hi, I'm <em>Giorgio</em>.</h2>
-        <p>I'm Italian and I live in Berlin. By day I work in university admissions, where I built the dashboards and reports my team runs on. I co-founded HomeSettled, and at night I play records as a DJ.</p>
+        <p>I'm Italian and I live in Berlin. By day I work in university admissions, where I built the dashboards and reports my team runs on. I co-founded HomeSettled.</p>
+        <p>Music is the other half of my life. I DJ techno as Flight Mode and house as Pulp Friction, and some of my best projects started there: a catalogue for my own record collection, and Pitch Riders, a tool that helps DJs find new vinyl.</p>
         <p>What I enjoy most is sitting down with someone who has an idea, over a coffee or a call, and working out together how AI can make it real. You don't need to speak tech. That part is my job.</p>
-        <div class="sign">Giorgio</div>
       </div>
     </div>
   </section>
@@ -643,7 +648,7 @@ h1 em {
     <div class="section-head">
       <span class="kicker">Projects</span>
       <h2>Things I have <em>built</em>.</h2>
-      <p>Dashboards, a company brain, a music catalogue for DJs and a startup. Client work is shown as a demo, so real data stays private.</p>
+      <p>Dashboards, a company brain, tools for DJs and a startup. Client work is shown as a demo, so real data stays private.</p>
     </div>
     <a class="btn btn-solid section-cta" href="projects.html">See all projects</a>
   </section>
