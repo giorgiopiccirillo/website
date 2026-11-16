@@ -1,0 +1,1160 @@
+{
+ "groups": [
+  {
+   "id": "Techno",
+   "code": "TEC"
+  },
+  {
+   "id": "House",
+   "code": "HOU"
+  },
+  {
+   "id": "Disco",
+   "code": "DIS"
+  },
+  {
+   "id": "Live",
+   "code": "LIV"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "Night Shift-TEC",
+   "label": "Night Shift",
+   "group": "Techno",
+   "school": "12 Dec",
+   "big": true
+  },
+  {
+   "id": "Low Tide-HOU",
+   "label": "Low Tide",
+   "group": "House",
+   "school": "13 Dec",
+   "big": true
+  },
+  {
+   "id": "Warehouse 9-TEC",
+   "label": "Warehouse 9",
+   "group": "Techno",
+   "school": "19 Dec",
+   "big": true
+  },
+  {
+   "id": "Sundial-DIS",
+   "label": "Sundial",
+   "group": "Disco",
+   "school": "20 Dec",
+   "big": true
+  },
+  {
+   "id": "Static Bloom-LIV",
+   "label": "Static Bloom",
+   "group": "Live",
+   "school": "10 Jan",
+   "big": true
+  },
+  {
+   "id": "Deep Cut-HOU",
+   "label": "Deep Cut",
+   "group": "House",
+   "school": "16 Jan",
+   "big": true
+  },
+  {
+   "id": "Afterglow-DIS",
+   "label": "Afterglow",
+   "group": "Disco",
+   "school": "17 Jan",
+   "big": true
+  },
+  {
+   "id": "Concrete-TEC",
+   "label": "Concrete",
+   "group": "Techno",
+   "school": "23 Jan",
+   "big": true
+  },
+  {
+   "id": "Paper Moon-LIV",
+   "label": "Paper Moon",
+   "group": "Live",
+   "school": "30 Jan",
+   "big": true
+  },
+  {
+   "id": "Slow Burn-HOU",
+   "label": "Slow Burn",
+   "group": "House",
+   "school": "6 Feb",
+   "big": true
+  },
+  {
+   "id": "Red Room-TEC",
+   "label": "Red Room",
+   "group": "Techno",
+   "school": "13 Feb",
+   "big": true
+  },
+  {
+   "id": "Velvet-DIS",
+   "label": "Velvet",
+   "group": "Disco",
+   "school": "14 Feb",
+   "big": true
+  },
+  {
+   "id": "xTEC0",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC1",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC2",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC3",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC4",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC5",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC6",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC7",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC8",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC9",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC10",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC11",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC12",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC13",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC14",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC15",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC16",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC17",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC18",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC19",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC20",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC21",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC22",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xTEC23",
+   "label": "ticket buyer",
+   "group": "Techno",
+   "school": "—"
+  },
+  {
+   "id": "xHOU0",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU1",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU2",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU3",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU4",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU5",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU6",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU7",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU8",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU9",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU10",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU11",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU12",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU13",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU14",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU15",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU16",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU17",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU18",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU19",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU20",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU21",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU22",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xHOU23",
+   "label": "ticket buyer",
+   "group": "House",
+   "school": "—"
+  },
+  {
+   "id": "xDIS0",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS1",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS2",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS3",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS4",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS5",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS6",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS7",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS8",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS9",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS10",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS11",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS12",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS13",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS14",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS15",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS16",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS17",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS18",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS19",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS20",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS21",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS22",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xDIS23",
+   "label": "ticket buyer",
+   "group": "Disco",
+   "school": "—"
+  },
+  {
+   "id": "xLIV0",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV1",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV2",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV3",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV4",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV5",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV6",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV7",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV8",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV9",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV10",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV11",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV12",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV13",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV14",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV15",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV16",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV17",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV18",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV19",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV20",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV21",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV22",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  },
+  {
+   "id": "xLIV23",
+   "label": "ticket buyer",
+   "group": "Live",
+   "school": "—"
+  }
+ ],
+ "queries": [
+  [
+   "tickets sold for Night Shift",
+   "Night Shift-TEC"
+  ],
+  [
+   "tickets sold for Low Tide",
+   "Low Tide-HOU"
+  ],
+  [
+   "tickets sold for Warehouse 9",
+   "Warehouse 9-TEC"
+  ],
+  [
+   "tickets sold for Sundial",
+   "Sundial-DIS"
+  ],
+  [
+   "tickets sold for Static Bloom",
+   "Static Bloom-LIV"
+  ],
+  [
+   "tickets sold for Deep Cut",
+   "Deep Cut-HOU"
+  ]
+ ],
+ "records": {
+  "Night Shift-TEC": {
+   "sold": 900,
+   "cap": 900,
+   "fill": 100,
+   "revenue": "19,800",
+   "price": 22
+  },
+  "Low Tide-HOU": {
+   "sold": 560,
+   "cap": 600,
+   "fill": 93,
+   "revenue": "10,080",
+   "price": 18
+  },
+  "Warehouse 9-TEC": {
+   "sold": 1009,
+   "cap": 1200,
+   "fill": 84,
+   "revenue": "25,225",
+   "price": 25
+  },
+  "Sundial-DIS": {
+   "sold": 450,
+   "cap": 450,
+   "fill": 100,
+   "revenue": "7,200",
+   "price": 16
+  },
+  "Static Bloom-LIV": {
+   "sold": 371,
+   "cap": 700,
+   "fill": 53,
+   "revenue": "10,388",
+   "price": 28
+  },
+  "Deep Cut-HOU": {
+   "sold": 387,
+   "cap": 500,
+   "fill": 77,
+   "revenue": "5,805",
+   "price": 15
+  },
+  "Afterglow-DIS": {
+   "sold": 261,
+   "cap": 450,
+   "fill": 58,
+   "revenue": "4,176",
+   "price": 16
+  },
+  "Concrete-TEC": {
+   "sold": 720,
+   "cap": 1000,
+   "fill": 72,
+   "revenue": "17,280",
+   "price": 24
+  },
+  "Paper Moon-LIV": {
+   "sold": 567,
+   "cap": 650,
+   "fill": 87,
+   "revenue": "17,010",
+   "price": 30
+  },
+  "Slow Burn-HOU": {
+   "sold": 264,
+   "cap": 550,
+   "fill": 48,
+   "revenue": "4,488",
+   "price": 17
+  },
+  "Red Room-TEC": {
+   "sold": 499,
+   "cap": 1100,
+   "fill": 45,
+   "revenue": "12,974",
+   "price": 26
+  },
+  "Velvet-DIS": {
+   "sold": 490,
+   "cap": 500,
+   "fill": 98,
+   "revenue": "9,800",
+   "price": 20
+  }
+ },
+ "kpis": [
+  {
+   "label": "Tickets sold",
+   "value": 6478,
+   "note": "of 8,600 places",
+   "series": [
+    324,
+    648,
+    1166,
+    1749,
+    2462,
+    3369,
+    4405,
+    5506,
+    6478
+   ]
+  },
+  {
+   "label": "Ticket revenue (€)",
+   "value": 144226,
+   "note": "before fees",
+   "series": [
+    7211,
+    14423,
+    25961,
+    38941,
+    54806,
+    74998,
+    98074,
+    122592,
+    144226
+   ]
+  },
+  {
+   "label": "Average fill",
+   "value": 75,
+   "suffix": "%",
+   "note": "across 12 events",
+   "series": [
+    4,
+    8,
+    14,
+    20,
+    28,
+    39,
+    51,
+    64,
+    75
+   ]
+  },
+  {
+   "label": "Sold out",
+   "value": 2,
+   "note": "Night Shift, Sundial",
+   "trend": "up",
+   "series": [
+    0,
+    0,
+    1,
+    1,
+    1,
+    2,
+    2,
+    3,
+    2
+   ]
+  }
+ ],
+ "trend": {
+  "x": [
+   "T-8",
+   "T-7",
+   "T-6",
+   "T-5",
+   "T-4",
+   "T-3",
+   "T-2",
+   "T-1",
+   "T-0"
+  ],
+  "series": [
+   {
+    "label": "Night Shift · this edition",
+    "colour": 1,
+    "cum": [
+     36,
+     90,
+     171,
+     261,
+     378,
+     522,
+     702,
+     828,
+     900
+    ],
+    "week": [
+     36,
+     54,
+     81,
+     90,
+     117,
+     144,
+     180,
+     126,
+     72
+    ]
+   },
+   {
+    "label": "Last edition",
+    "colour": 2,
+    "dashed": true,
+    "cum": [
+     23,
+     62,
+     116,
+     186,
+     271,
+     387,
+     542,
+     681,
+     774
+    ],
+    "week": [
+     23,
+     39,
+     54,
+     70,
+     85,
+     116,
+     155,
+     139,
+     93
+    ]
+   }
+  ]
+ },
+ "columns": [
+  {
+   "label": "Night S",
+   "full": "Night Shift",
+   "value": 900,
+   "target": 900
+  },
+  {
+   "label": "Low Tid",
+   "full": "Low Tide",
+   "value": 560,
+   "target": 600
+  },
+  {
+   "label": "Warehou",
+   "full": "Warehouse 9",
+   "value": 1009,
+   "target": 1200
+  },
+  {
+   "label": "Sundial",
+   "full": "Sundial",
+   "value": 450,
+   "target": 450
+  },
+  {
+   "label": "Static ",
+   "full": "Static Bloom",
+   "value": 371,
+   "target": 700
+  },
+  {
+   "label": "Deep Cu",
+   "full": "Deep Cut",
+   "value": 387,
+   "target": 500
+  },
+  {
+   "label": "Aftergl",
+   "full": "Afterglow",
+   "value": 261,
+   "target": 450
+  },
+  {
+   "label": "Concret",
+   "full": "Concrete",
+   "value": 720,
+   "target": 1000
+  },
+  {
+   "label": "Paper M",
+   "full": "Paper Moon",
+   "value": 567,
+   "target": 650
+  },
+  {
+   "label": "Slow Bu",
+   "full": "Slow Burn",
+   "value": 264,
+   "target": 550
+  },
+  {
+   "label": "Red Roo",
+   "full": "Red Room",
+   "value": 499,
+   "target": 1100
+  },
+  {
+   "label": "Velvet",
+   "full": "Velvet",
+   "value": 490,
+   "target": 500
+  }
+ ],
+ "types": [
+  {
+   "label": "Early bird",
+   "value": 1425
+  },
+  {
+   "label": "Regular",
+   "value": 2980
+  },
+  {
+   "label": "Door",
+   "value": 1101
+  },
+  {
+   "label": "Guest list",
+   "value": 518
+  },
+  {
+   "label": "Partner codes",
+   "value": 453
+  }
+ ],
+ "upcoming": [
+  {
+   "name": "Night Shift",
+   "date": "12 Dec",
+   "fill": "100%",
+   "left": 0,
+   "status": "Sold out"
+  },
+  {
+   "name": "Low Tide",
+   "date": "13 Dec",
+   "fill": "93%",
+   "left": 40,
+   "status": "Selling"
+  },
+  {
+   "name": "Warehouse 9",
+   "date": "19 Dec",
+   "fill": "84%",
+   "left": 191,
+   "status": "Selling"
+  },
+  {
+   "name": "Sundial",
+   "date": "20 Dec",
+   "fill": "100%",
+   "left": 0,
+   "status": "Sold out"
+  },
+  {
+   "name": "Static Bloom",
+   "date": "10 Jan",
+   "fill": "53%",
+   "left": 329,
+   "status": "Slow"
+  },
+  {
+   "name": "Deep Cut",
+   "date": "16 Jan",
+   "fill": "77%",
+   "left": 113,
+   "status": "Selling"
+  },
+  {
+   "name": "Afterglow",
+   "date": "17 Jan",
+   "fill": "58%",
+   "left": 189,
+   "status": "Slow"
+  }
+ ],
+ "ask": [
+  {
+   "title": "Which night needs a push?",
+   "q": "Lowest fill",
+   "a": "Red Room on 13 Feb is at 45% (601 places left). It is the slowest of all 12 events."
+  },
+  {
+   "title": "What is our best night?",
+   "q": "Highest fill",
+   "a": "Night Shift is at 100% with 900 tickets. 2 events are sold out."
+  },
+  {
+   "title": "How much have we earned?",
+   "q": "Ticket revenue",
+   "a": "Tickets bring €144,226 so far. The average ticket costs €22."
+  },
+  {
+   "title": "Are we ahead of last time?",
+   "q": "This edition against the last",
+   "a": "Night Shift has 900 tickets sold. The last edition ended with 774. That is 16% more."
+  }
+ ],
+ "log": [
+  [
+   "fetch",
+   "ticket shop export · 6,340 rows"
+  ],
+  [
+   "dedupe",
+   "one ticket per QR code"
+  ],
+  [
+   "clean",
+   "refunds and test orders out"
+  ],
+  [
+   "join",
+   "capacity per venue"
+  ],
+  [
+   "norm",
+   "event names · prices in EUR"
+  ],
+  [
+   "flag",
+   "events under 50% a week out"
+  ],
+  [
+   "check",
+   "totals match last run ✓"
+  ],
+  [
+   "done",
+   "dashboard refreshed"
+  ],
+  [
+   "wait",
+   "next sync in 5 min"
+  ]
+ ],
+ "series": [
+  {
+   "label": "Techno",
+   "value": 74,
+   "colour": 1
+  },
+  {
+   "label": "House",
+   "value": 73,
+   "colour": 3
+  },
+  {
+   "label": "Disco",
+   "value": 86,
+   "colour": 6
+  },
+  {
+   "label": "Live",
+   "value": 69,
+   "colour": 4
+  }
+ ],
+ "weeks": 8
+}

@@ -5,7 +5,7 @@ from html import escape
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-ORDER = ["uni", "shop"]  # universities first: strongest proof
+ORDER = ["uni", "events", "shop"]  # universities first: strongest proof
 
 cards = []
 names = sorted((p.name for p in (ROOT / "templates").iterdir() if (p / "template.json").exists()),
