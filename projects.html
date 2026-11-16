@@ -454,6 +454,19 @@ h1 em {
 .project img.light { filter: invert(0.9) grayscale(1) sepia(0.35) hue-rotate(185deg) saturate(2.4) brightness(0.85) contrast(1.05); }
 .project:hover img.light { filter: none; }
 
+
+/* ---------- dashboard carousel ---------- */
+.project.full { grid-column: 1 / -1; }
+.dash-carousel { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 1px solid var(--border-soft); background: #05060a; }
+.dash-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.4s ease; }
+.dash-slide.on { opacity: 1; }
+.dash-slide iframe { position: absolute; top: 0; left: 0; width: 1440px; height: 900px; border: 0; transform-origin: 0 0; pointer-events: none; }
+.dash-open { position: absolute; inset: 0; z-index: 2; }
+.dash-dots { position: absolute; z-index: 3; left: 50%; bottom: 16px; transform: translateX(-50%); display: flex; gap: 6px; padding: 5px; border-radius: 999px; background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.14); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.dash-dots button { font: inherit; font-size: 12.5px; color: #bdbdbd; background: transparent; border: 0; border-radius: 999px; padding: 6px 14px; cursor: pointer; transition: background 0.3s ease, color 0.3s ease; }
+.dash-dots button.on { background: rgba(255,255,255,0.14); color: #fff; }
+@media (max-width: 1000px) { .project.full { grid-column: 1 / -1; } }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
   .appear, .hero-photo, .hero h1 em, .badge-star { opacity: 1; transform: none; clip-path: none; filter: none; }
@@ -500,12 +513,23 @@ h1 em {
 <div class="below">
   <section class="section" style="padding-top:56px">
     <div class="projects">
-      <article class="project panel wide">
+      <article class="project panel full" id="dashboards">
+        <div class="dash-carousel" aria-label="Dashboard demo in three looks">
+          <div class="dash-slide on" data-kit="1"><iframe data-src="dashboards.html?kit=1&amp;embed=1" title="Dashboard demo, Terminal look" tabindex="-1" loading="lazy"></iframe></div>
+          <div class="dash-slide" data-kit="2"><iframe data-src="dashboards.html?kit=2&amp;embed=1" title="Dashboard demo, Aurora look" tabindex="-1" loading="lazy"></iframe></div>
+          <div class="dash-slide" data-kit="3"><iframe data-src="dashboards.html?kit=3&amp;embed=1" title="Dashboard demo, Noir look" tabindex="-1" loading="lazy"></iframe></div>
+          <a class="dash-open" href="dashboards.html" aria-label="Open the live dashboard demo"></a>
+          <div class="dash-dots" role="tablist">
+            <button type="button" class="on" data-i="0">Terminal</button>
+            <button type="button" data-i="1">Aurora</button>
+            <button type="button" data-i="2">Noir</button>
+          </div>
+        </div>
         <div class="project-body">
           <div class="project-top"><span class="tag">Dashboards and reports</span><span class="label">Demo version</span></div>
-          <h3>Live dashboard and leadership report</h3>
-          <p>A team's numbers on one screen: targets against progress, with the problems shown first. Next to it, a report for leadership that is ready to send, with key figures, charts and tables. Built for a real team and running every day.</p>
-          <a class="more" href="demo.html">Open the demo →</a>
+          <h3>Live dashboards that people actually open</h3>
+          <p>A team's numbers on one moving screen: targets against progress, problems first, and a question bar that finds the answer. One build, three looks. The same work runs every day for a real team. Here it shows a made-up online shop, so no real data leaves anyone's company.</p>
+          <a class="more" href="dashboards.html">Open the live demo →</a>
         </div>
       </article>
       <article class="project panel">
@@ -640,6 +664,42 @@ h1 em {
     });
     if (!f) c.remove();
   } catch (e) { c.remove(); }
+})();
+</script>
+<script>
+(function () {
+  var box = document.querySelector('.dash-carousel');
+  if (!box) return;
+  var slides = box.querySelectorAll('.dash-slide'), dots = box.querySelectorAll('.dash-dots button');
+  var cur = 0, timer = null, paused = false;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function scale() {
+    var k = box.clientWidth / 1440;
+    box.querySelectorAll('iframe').forEach(function (f) { f.style.transform = 'scale(' + k + ')'; });
+  }
+  function show(i) {
+    cur = i;
+    slides.forEach(function (s, n) { s.classList.toggle('on', n === i); });
+    dots.forEach(function (d, n) { d.classList.toggle('on', n === i); });
+  }
+  function play() {
+    if (reduce || timer) return;
+    timer = setInterval(function () { if (!paused) show((cur + 1) % slides.length); }, 7000);
+  }
+  dots.forEach(function (d) {
+    d.addEventListener('click', function (e) { e.preventDefault(); show(+d.dataset.i); });
+  });
+  box.addEventListener('mouseenter', function () { paused = true; });
+  box.addEventListener('mouseleave', function () { paused = false; });
+  window.addEventListener('resize', scale);
+  // load the demos only when the carousel comes into view
+  var io = new IntersectionObserver(function (entries) {
+    if (!entries.some(function (e) { return e.isIntersecting; })) return;
+    box.querySelectorAll('iframe[data-src]').forEach(function (f) { f.src = f.dataset.src; f.removeAttribute('data-src'); });
+    scale(); play(); io.disconnect();
+  }, { rootMargin: '200px' });
+  io.observe(box);
+  scale();
 })();
 </script>
 </body>

@@ -1,0 +1,123 @@
+/* ==========================================================================
+   STYLE KIT 2 · AURORA GLASS — frosted glass panels over a slow-moving aurora
+   Load AFTER stylekit1_terminal.css (it reuses Kit 1's markup and JS) and add
+   class "kit-aurora" to <body>. Data colours stay Kit 1's validated set.
+   ========================================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap");
+
+body.hud.kit-aurora {
+  --hud-bg: #060814;
+  --hud-panel: rgba(255, 255, 255, 0.045);
+  --hud-panel-2: rgba(255, 255, 255, 0.07);
+  --hud-line: rgba(255, 255, 255, 0.12);
+  --hud-line-soft: rgba(255, 255, 255, 0.08);
+  --hud-text: #f4f6ff;
+  --hud-text-2: #aab1cf;
+  --hud-muted: #6d7495;
+  --glow-a: #4f7cff;
+  --glow-b: #a35cff;
+  --glow-c: #19c3a3;
+  --hud-font: "Inter", system-ui, sans-serif;
+  --hud-r: 18px;
+  font-family: var(--hud-font);
+  font-weight: 300;
+  background: var(--hud-bg);
+  overflow-x: hidden;
+}
+
+/* the aurora: three soft colour clouds drifting behind everything */
+body.hud.kit-aurora::before {
+  content: ""; position: fixed; inset: -20%; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(40% 35% at 20% 25%, color-mix(in srgb, var(--glow-a) 45%, transparent), transparent 70%),
+    radial-gradient(35% 30% at 80% 20%, color-mix(in srgb, var(--glow-b) 40%, transparent), transparent 70%),
+    radial-gradient(45% 35% at 60% 85%, color-mix(in srgb, var(--glow-c) 28%, transparent), transparent 70%);
+  filter: blur(40px);
+  animation: aurora-drift 26s ease-in-out infinite alternate;
+}
+/* fine grain so the gradients never band */
+body.hud.kit-aurora::after {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .06;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence baseFrequency='.9' numOctaves='2'/></filter><rect width='120' height='120' filter='url(%23n)' opacity='.6'/></svg>");
+}
+@keyframes aurora-drift {
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  50%  { transform: translate3d(4%, -3%, 0) rotate(8deg) scale(1.08); }
+  100% { transform: translate3d(-4%, 3%, 0) rotate(-6deg) scale(1.02); }
+}
+
+/* glass panels: no corner brackets, soft border, inner highlight */
+body.kit-aurora .panel {
+  background: var(--hud-panel);
+  border: 1px solid var(--hud-line-soft);
+  border-radius: var(--hud-r);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 20px 50px -30px rgba(0,0,0,.8);
+  padding: 16px 18px 18px;
+}
+body.kit-aurora .panel::before, body.kit-aurora .panel::after { display: none; }
+body.kit-aurora .panel:hover { border-color: color-mix(in srgb, var(--tone) 45%, transparent); }
+
+body.kit-aurora .panel-head { font-family: "Space Grotesk", sans-serif; text-transform: none; letter-spacing: .01em; font-size: 12.5px; }
+body.kit-aurora .panel-head .tab {
+  background: color-mix(in srgb, var(--tone) 22%, transparent); color: var(--hud-text);
+  border: 1px solid color-mix(in srgb, var(--tone) 50%, transparent);
+  border-radius: 999px; padding: 1px 9px; font-weight: 500;
+}
+body.kit-aurora .panel-head .title { font-weight: 500; }
+body.kit-aurora .panel-head .tag { color: var(--hud-text-2); font-size: 11px; }
+
+/* header + command bar */
+body.kit-aurora .hud-top { font-family: "Space Grotesk", sans-serif; text-transform: none; letter-spacing: .02em; }
+body.kit-aurora .hud-top .brand { font-weight: 600; }
+body.kit-aurora .cmdbar {
+  border: 1px solid var(--hud-line); border-radius: 999px; padding: 12px 20px;
+  background: rgba(255,255,255,.05); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  font-family: "Space Grotesk", sans-serif; font-size: 14px;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--glow-a) 25%, transparent), 0 0 40px -10px var(--glow-a);
+}
+body.kit-aurora .cmdbar .prompt { color: var(--glow-a); }
+body.kit-aurora .cmdbar .caret { width: 2px; background: var(--glow-a); }
+body.kit-aurora .cmdbar .who { color: var(--hud-text-2); }
+
+/* numbers: light weight, gradient ink */
+body.kit-aurora .kpi-value, body.kit-aurora .big {
+  font-family: "Space Grotesk", sans-serif; font-weight: 300; letter-spacing: -.03em;
+  background: linear-gradient(100deg, #fff 10%, var(--glow-a) 55%, var(--glow-b) 95%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+body.kit-aurora .kpi-value { font-size: 64px; }
+body.kit-aurora .kpi-name { font-family: "Space Grotesk", sans-serif; font-weight: 500; font-size: 16px; }
+
+/* bars and meters: rounded, soft glow on the fill */
+body.kit-aurora .bar-track, body.kit-aurora .meter { height: 8px; border-radius: 999px; background: rgba(255,255,255,.06); }
+body.kit-aurora .bar-fill, body.kit-aurora .meter > span {
+  border-radius: 999px;
+  box-shadow: 0 0 14px -2px var(--bar, var(--m, var(--tone)));
+}
+body.kit-aurora .bar-row .lbl, body.kit-aurora .meter-lbl { font-family: "Space Grotesk", sans-serif; }
+
+/* boxes inside panels */
+body.kit-aurora .codebox, body.kit-aurora .shellbox {
+  background: rgba(0,0,0,.25); border: 1px solid var(--hud-line-soft); border-radius: 12px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+body.kit-aurora .tree { font-family: "JetBrains Mono", ui-monospace, monospace; }
+body.kit-aurora .tree .node { border-radius: 6px; }
+body.kit-aurora .log { font-family: "JetBrains Mono", ui-monospace, monospace; }
+body.kit-aurora .squares span { border-radius: 10px; background: rgba(255,255,255,.04); border-color: var(--hud-line-soft); }
+body.kit-aurora .squares span.on { box-shadow: 0 0 16px -4px var(--sq); }
+
+/* graph stage callouts */
+body.kit-aurora .callout, body.kit-aurora .infocard {
+  border-radius: 12px; background: rgba(10, 12, 30, .55);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  font-family: "Space Grotesk", sans-serif;
+}
+body.kit-aurora .callout { border-color: color-mix(in srgb, var(--glow-a) 60%, transparent); }
+body.kit-aurora .callout em { color: var(--glow-a); }
+body.kit-aurora .infocard .v { color: var(--glow-a); }
+body.kit-aurora .hud-tip { border-radius: 8px; font-family: "Space Grotesk", sans-serif; }
+
+@media (prefers-reduced-motion: reduce) { body.hud.kit-aurora::before { animation: none; } }

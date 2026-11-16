@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard demo · Giorgio Piccirillo</title>
+<meta name="description" content="A live dashboard demo with invented data, in three looks: Terminal, Aurora and Noir.">
+<link rel="stylesheet" href="kits/stylekit1_terminal.css">
+<script>
+  // ?kit=1 terminal (default) · ?kit=2 aurora glass · ?kit=3 noir gold · &embed=1 hides the switch
+  const KITS = { 2: ["stylekit2_aurora.css", "kit-aurora"], 3: ["stylekit3_noir.css", "kit-noir"] };
+  const Q = new URLSearchParams(location.search);
+  const KIT = Q.get("kit") || "1";
+  const EMBED = Q.get("embed") === "1";
+  if (KITS[KIT]) document.write(`<link rel="stylesheet" href="kits/${KITS[KIT][0]}">`);
+</script>
+<style>
+  .kit-switch { display: flex; gap: 6px; }
+  .kit-switch a { color: var(--hud-muted); text-decoration: none; border: 1px solid var(--hud-line); padding: 2px 8px; border-radius: var(--hud-r); }
+  .kit-switch a.on { color: var(--hud-text); border-color: var(--hud-accent); }
+  .back { color: var(--hud-muted); text-decoration: none; border: 1px solid var(--hud-line); padding: 2px 8px; border-radius: var(--hud-r); }
+  body.embed .kit-switch, body.embed .back { display: none; }
+  body.embed { overflow: hidden; }
+</style>
+</head>
+<body class="hud">
+<script>
+  if (KITS[KIT]) document.body.classList.add(KITS[KIT][1]);
+  if (EMBED) document.body.classList.add("embed");
+</script>
+<div class="hud-wrap">
+
+  <div class="hud-top">
+    <span class="brand">HALDEN &amp; CO. · ONLINE SHOP</span>
+    <span class="sample-flag">DEMO · INVENTED DATA</span>
+    <span class="right">
+      <a class="back" href="projects.html">← Projects</a>
+      <span class="kit-switch"><a href="?kit=1" data-k="1">Terminal</a><a href="?kit=2" data-k="2">Aurora</a><a href="?kit=3" data-k="3">Noir</a></span>
+      <script>document.querySelectorAll(".kit-switch a").forEach(a => a.classList.toggle("on", a.dataset.k === KIT));</script><span><span class="live-dot"></span>LIVE</span><span id="clock"></span></span>
+  </div>
+
+  <!-- 00 constellation -->
+  <section class="panel stage span-4">
+    <div class="panel-head"><span class="tab">00</span><span class="title">PRODUCT GRAPH · <span id="g-count">0</span> products · 6 markets</span><span class="tag" id="g-yaw">yaw 0.0°</span></div>
+    <canvas id="graph"></canvas>
+    <div class="callout" id="callout" style="opacity:0"><b id="co-name">—</b> / <em>MATCHED</em></div>
+    <div class="infocard" id="info">
+      <div class="t" id="ic-name">—</div>
+      <div class="k">market</div><div id="ic-campus">—</div>
+      <div class="k">category</div><div class="v" id="ic-school">—</div>
+    </div>
+    <div class="stage-foot" id="g-foot">match :: —</div>
+  </section>
+
+  <div class="cmdbar"><span class="prompt">&gt;</span><span id="cmd"></span><span class="caret"></span><span class="who">ASK THE DATA</span></div>
+
+  <div class="hud-grid">
+    <!-- 01 KPI -->
+    <section class="panel">
+      <div class="panel-head"><span class="tab">01</span><span class="title">Orders</span><span class="tag">this quarter</span></div>
+      <div class="kpi-label">all markets /</div>
+      <div class="kpi-name">one order per checkout</div>
+      <div class="kpi-value" id="kpi">0</div>
+      <div class="kpi-sub">paid and shipped</div>
+      <div class="kpi-notes">carts · <b id="kpi-offers">0</b><br>conversion · <b id="kpi-conv">0%</b><br>vs target · <b id="kpi-tgt">0%</b></div>
+      <div class="panel-foot">refunds and test orders left out</div>
+    </section>
+
+    <!-- 02 bars -->
+    <section class="panel tone-4">
+      <div class="panel-head"><span class="tab">02</span><span class="title">Orders per market</span><span class="tag">LIVE</span></div>
+      <div class="bars" id="bars"></div>
+      <div class="panel-foot">all 6 markets</div>
+    </section>
+
+    <!-- 03 record card -->
+    <section class="panel tone-1">
+      <div class="panel-head"><span class="tab">03</span><span class="title">Product card</span><span class="tag">one row</span></div>
+      <div class="codebox" id="card"></div>
+    </section>
+
+    <!-- 04 tree -->
+    <section class="panel tone-5">
+      <div class="panel-head"><span class="tab">04</span><span class="title">Market → category</span><span class="tag">drill down</span></div>
+      <div class="tree" id="tree"></div>
+      <div class="shellbox"><span style="color:var(--hud-text-2)">$ filter market=</span><span id="tree-cmd">BER</span><br><span class="ok">✓ <span id="tree-n">0</span> orders loaded</span></div>
+    </section>
+
+    <!-- 05 donut -->
+    <section class="panel tone-3">
+      <div class="panel-head"><span class="tab">05</span><span class="title">Sales channels</span><span class="tag">6 channels</span></div>
+      <div id="donut"></div>
+    </section>
+
+    <!-- 06 log -->
+    <section class="panel tone-3">
+      <div class="panel-head"><span class="tab">06</span><span class="title">Sync log</span><span class="tag">tail -f</span></div>
+      <ul class="log" id="log"></ul>
+    </section>
+
+    <!-- 07 stream -->
+    <section class="panel tone-1">
+      <div class="panel-head"><span class="tab">07</span><span class="title">Orders / day</span><span class="tag">live</span></div>
+      <div id="stream" style="margin-top:auto"></div>
+      <div class="big" id="today">0<small>today</small></div>
+      <div class="panel-foot">last 36 days, newest on the right</div>
+    </section>
+
+    <!-- 08 meters -->
+    <section class="panel tone-2">
+      <div class="panel-head"><span class="tab">08</span><span class="title">Target vs actual</span><span class="tag">quarter plan</span></div>
+      <div class="meter-lbl"><span>Coffee</span><span id="m1t">0%</span></div><div class="meter"><span id="m1" style="--m:var(--c1)"></span></div>
+      <div class="meter-lbl"><span>Tea</span><span id="m2t">0%</span></div><div class="meter"><span id="m2" style="--m:var(--c3)"></span></div>
+      <div class="meter-lbl"><span>Gear</span><span id="m3t">0%</span></div><div class="meter"><span id="m3" style="--m:var(--c6)"></span></div>
+      <div class="squares" id="sq"></div>
+      <div class="panel-foot">one square = one week of the quarter closed</div>
+    </section>
+  </div>
+</div>
+
+<script src="kits/stylekit1_terminal.js"></script>
+<script>
+/* ===== INVENTED DATA ONLY — a fictional online shop, no real company or numbers ===== */
+const C = n => getComputedStyle(document.body).getPropertyValue("--c" + n).trim();
+const campuses = [
+  { id: "Berlin",    code: "BER", color: C(1) },
+  { id: "London",    code: "LON", color: C(2) },
+  { id: "Rome",      code: "ROM", color: C(3) },
+  { id: "Paris",     code: "PAR", color: C(4) },
+  { id: "Madrid",    code: "MAD", color: C(5) },
+  { id: "Amsterdam", code: "AMS", color: C(6) },
+];
+const progs = [
+  ["Espresso Blend", "Coffee"], ["House Filter", "Coffee"], ["Single Origin", "Coffee"], ["Decaf", "Coffee"],
+  ["Cold Brew", "Coffee"], ["Subscription", "Coffee"], ["Green Tea", "Tea"], ["Chai", "Tea"],
+  ["Earl Grey", "Tea"], ["Grinder", "Gear"], ["Kettle", "Gear"], ["Dripper", "Gear"],
+  ["Mug", "Gear"], ["Gift Box", "Gear"], ["Beans 1kg", "Coffee"], ["Matcha", "Tea"],
+];
+const nodes = [];
+campuses.forEach(c => {
+  progs.forEach(([p, s], i) => { if ((i + c.code.length + c.id.length) % 3 !== 0 || i < 4)
+    nodes.push({ id: `${p}-${c.code}`, label: p, group: c.id, school: s, big: i < 9 }); });
+  for (let k = 0; k < 22; k++) nodes.push({ id: `x${c.code}${k}`, label: "product variant", group: c.id, school: "—" });
+});
+document.getElementById("g-count").textContent = nodes.filter(n => n.school !== "—").length;
+
+const queries = [
+  ["orders for Espresso Blend in Berlin", "Espresso Blend-BER"],
+  ["repeat buyers of House Filter in London", "House Filter-LON"],
+  ["conversion for Single Origin in Rome", "Single Origin-ROM"],
+  ["stock left for Decaf in Paris", "Decaf-PAR"],
+  ["returns for Espresso Blend in Madrid", "Espresso Blend-MAD"],
+  ["new customers for House Filter in Amsterdam", "House Filter-AMS"],
+];
+
+/* 00 graph + callout */
+const callout = document.getElementById("callout"), info = document.getElementById("info");
+const graph = HUD.graph(document.getElementById("graph"), nodes, campuses, {
+  onFrame(api) {
+    const p = api.screenPos; if (!p) return;
+    const stage = callout.parentElement, SW = stage.clientWidth, SH = stage.clientHeight;
+    const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+    callout.style.left = clamp(p.x + 34, 14, SW - callout.offsetWidth - 14) + "px";
+    callout.style.top = clamp(p.y - 46, 34, SH - 60) + "px"; callout.style.opacity = 1;
+    const leftSide = p.x > SW / 2;
+    info.style.left = clamp(leftSide ? p.x - 330 : p.x + 90, 14, SW - info.offsetWidth - 14) + "px";
+    info.style.top = clamp(p.y + 30, 34, SH - info.offsetHeight - 30) + "px";
+  }
+});
+setInterval(() => { document.getElementById("g-yaw").textContent = "yaw " + ((performance.now() * 0.0016 * 60 / 1000 * 180 / Math.PI) % 360).toFixed(1) + "°"; }, 200);
+
+/* command bar drives everything */
+const cardRows = id => {
+  const n = nodes.find(x => x.id === id); const camp = campuses.find(c => c.id === n.group);
+  const visits = 900 + (id.length * 137) % 1600, carts = Math.round(visits * .21), orders = Math.round(carts * .58);
+  return { n, camp, visits, carts, orders };
+};
+const startTyper = () => HUD.typer(document.getElementById("cmd"), queries.map(q => q[0]), {
+  onLine(i) {
+    const id = queries[i][1]; const r = cardRows(id);
+    graph.focusOn(id);
+    document.getElementById("co-name").textContent = `${r.n.label} · ${r.camp.code}`;
+    document.getElementById("ic-name").textContent = r.n.label;
+    document.getElementById("ic-campus").textContent = `${r.camp.id} (${r.camp.code})`;
+    document.getElementById("ic-school").textContent = r.n.school;
+    document.getElementById("g-foot").textContent = `match :: ${r.n.label} · ${r.camp.id} · ${r.n.school}`;
+    document.getElementById("card").innerHTML =
+`<span class="h">---</span>
+<span class="k">product:</span>  ${r.n.label}
+<span class="k">market:</span>   ${r.camp.id} (${r.camp.code})
+<span class="k">category:</span> ${r.n.school}
+<span class="k">period:</span>   this quarter
+<span class="h">---</span>
+<span class="h"># funnel</span>
+visits         ${r.visits}
+carts          ${r.carts}
+orders         ${r.orders}
+<span class="h"># rule</span>
+one order per checkout
+refunds left out`;
+    document.querySelectorAll("#tree .node").forEach(el => el.classList.toggle("on", el.dataset.c === r.camp.code || el.dataset.id === id));
+    document.getElementById("tree-cmd").textContent = r.camp.code;
+    HUD.countUp(document.getElementById("tree-n"), r.orders, { ms: 700 });
+    donut.focus(i % 6);
+  }
+});
+
+/* 01 KPI */
+const orders = 4826, carts = 8310, target = 5500;
+HUD.countUp(document.getElementById("kpi"), orders);
+HUD.countUp(document.getElementById("kpi-offers"), carts);
+HUD.countUp(document.getElementById("kpi-conv"), orders / carts * 100, { suffix: "%" });
+HUD.countUp(document.getElementById("kpi-tgt"), orders / target * 100, { suffix: "%" });
+
+/* 02 bars */
+let mVals = [1384, 1022, 806, 655, 519, 440];
+const bars = HUD.bars(document.getElementById("bars"),
+  campuses.map((c, i) => ({ label: c.id.toLowerCase(), value: mVals[i], color: c.color, hot: i === 0 })));
+setInterval(() => {
+  mVals = mVals.map(v => v + (Math.random() < .35 ? 1 : 0));
+  bars.update(campuses.map((c, i) => ({ label: c.id.toLowerCase(), value: mVals[i] })));
+}, 2200);
+
+/* 04 tree */
+const treeLines = [`<span class="node">markets/</span>`];
+campuses.slice(0, 4).forEach((c, ci) => {
+  const last = ci === 3;
+  treeLines.push(`<span class="node" data-c="${c.code}">${last ? "└" : "├"} ${c.code} ${c.id.toLowerCase()}/</span>`);
+  if (ci < 2) ["coffee", "tea", "gear"].forEach((s, si) =>
+    treeLines.push(`<span class="node" data-c="${c.code}">${last ? " " : "│"}  ${si === 2 ? "└" : "├"} ${s}/</span>`));
+});
+treeLines.push(`<span class="node" data-c="MAD">├ MAD madrid/</span>`, `<span class="node" data-c="AMS">└ AMS amsterdam/</span>`);
+document.getElementById("tree").innerHTML = treeLines.join("");
+
+/* 05 donut */
+const donut = HUD.donut(document.getElementById("donut"), [
+  { label: "Web shop", value: 2140, color: C(1) },
+  { label: "Subscriptions", value: 980, color: C(2) },
+  { label: "Marketplaces", value: 702, color: C(3) },
+  { label: "Cafés (B2B)", value: 511, color: C(4) },
+  { label: "Pop-up stores", value: 298, color: C(5) },
+  { label: "Gift partners", value: 195, color: C(6) },
+], { center: "44%", sub: "web shop" });
+
+/* 06 log */
+HUD.log(document.getElementById("log"), [
+  ["fetch", "shop export · 12,480 rows"],
+  ["dedupe", "one order per checkout"],
+  ["clean", "refunds and test orders out"],
+  ["join", "quarter targets · 3 categories"],
+  ["norm", "market names · currency in EUR"],
+  ["flag", "low stock under 2 weeks"],
+  ["check", "totals match last run ✓"],
+  ["done", "dashboard refreshed"],
+  ["wait", "next sync in 5 min"],
+], { every: 1400, keep: 9 });
+
+/* 07 stream */
+const seed = Array.from({ length: 36 }, (_, i) => 40 + Math.round(30 * Math.sin(i / 3) + Math.random() * 45));
+HUD.stream(document.getElementById("stream"), seed, {
+  color: "var(--c1)", every: 1600,
+  next: () => { const v = 35 + Math.round(Math.random() * 90); document.getElementById("today").firstChild.nodeValue = v; return v; },
+  label: (i, v) => `${v} orders`,
+});
+document.getElementById("today").firstChild.nodeValue = seed[seed.length - 1];
+
+/* 08 meters + squares */
+const met = [["m1", 88], ["m2", 74], ["m3", 61]];
+HUD.later(() => met.forEach(([id, v]) => {
+  document.getElementById(id).style.width = v + "%"; HUD.countUp(document.getElementById(id + "t"), v, { suffix: "%" });
+}));
+const sq = document.getElementById("sq");
+sq.innerHTML = Array.from({ length: 8 }, (_, i) => `<span data-tip="week ${i + 1}" style="--sq:${C((i % 3) * 2 + 1)}"></span>`).join("");
+let w = 0;
+setInterval(() => { const s = sq.children; [...s].forEach((e, i) => e.classList.toggle("on", i < w)); s[Math.max(0, w - 1)] && (s[Math.max(0, w - 1)].textContent = w ? "✓" : ""); w = (w + 1) % 9; if (w === 0) [...s].forEach(e => e.textContent = ""); }, 1300);
+
+HUD.clock(document.getElementById("clock"));
+startTyper();
+</script>
+</body>
+</html>

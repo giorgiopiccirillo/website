@@ -1,0 +1,116 @@
+/* ==========================================================================
+   STYLE KIT 3 · NOIR GOLD — black, hairline gold, thin serif numbers
+   The "private bank / luxury watch" look. Load AFTER stylekit1_terminal.css
+   and add class "kit-noir" to <body>. Data colours stay Kit 1's validated set.
+   ========================================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap");
+
+body.hud.kit-noir {
+  --hud-bg: #050505;
+  --hud-panel: #080808;
+  --hud-panel-2: #0d0d0c;
+  --hud-line: rgba(201, 169, 110, 0.28);
+  --hud-line-soft: rgba(201, 169, 110, 0.14);
+  --hud-text: #f3efe6;
+  --hud-text-2: #a59f92;
+  --hud-muted: #6b665c;
+  --gold: #c9a96e;
+  --gold-hi: #f1dcae;
+  --hud-accent: var(--gold);
+  --hud-font: "Inter", system-ui, sans-serif;
+  --hud-r: 0px;
+  font-family: var(--hud-font);
+  font-weight: 300;
+  background:
+    radial-gradient(80% 60% at 50% -10%, rgba(201,169,110,.07), transparent 60%),
+    var(--hud-bg);
+}
+body.kit-noir .hud-wrap { padding: 28px 32px; max-width: 1480px; }
+body.kit-noir .hud-grid { gap: 0; border-top: 1px solid var(--hud-line-soft); border-left: 1px solid var(--hud-line-soft); }
+
+/* panels become cells of one hairline grid */
+body.kit-noir .panel {
+  background: transparent; border: 0; border-radius: 0;
+  border-right: 1px solid var(--hud-line-soft); border-bottom: 1px solid var(--hud-line-soft);
+  padding: 22px 24px 24px; overflow: hidden;
+}
+/* a thin gold shimmer runs along the top edge of each cell */
+body.kit-noir .panel::before {
+  top: 0; left: -40%; right: auto; width: 40%; height: 1px; border: 0;
+  background: linear-gradient(90deg, transparent, var(--gold-hi), transparent);
+  opacity: .7; animation: noir-sweep 7s ease-in-out infinite;
+}
+body.kit-noir .panel::after { display: none; }
+body.kit-noir .hud-grid > .panel:nth-child(2)::before { animation-delay: .9s; }
+body.kit-noir .hud-grid > .panel:nth-child(3)::before { animation-delay: 1.8s; }
+body.kit-noir .hud-grid > .panel:nth-child(4)::before { animation-delay: 2.7s; }
+body.kit-noir .hud-grid > .panel:nth-child(5)::before { animation-delay: 3.6s; }
+body.kit-noir .hud-grid > .panel:nth-child(6)::before { animation-delay: 4.5s; }
+body.kit-noir .hud-grid > .panel:nth-child(7)::before { animation-delay: 5.4s; }
+@keyframes noir-sweep { 0% { left: -40%; } 60%, 100% { left: 110%; } }
+
+body.kit-noir .stage { border: 1px solid var(--hud-line-soft); margin-bottom: 0; }
+
+body.kit-noir .panel-head { font-size: 9.5px; letter-spacing: .32em; color: var(--hud-muted); margin-bottom: 18px; }
+body.kit-noir .panel-head .tab {
+  background: transparent; color: var(--gold); border: 0; padding: 0;
+  font-family: "Cormorant Garamond", serif; font-size: 14px; letter-spacing: .05em; font-weight: 500;
+}
+body.kit-noir .panel-head .tab::after { content: " —"; color: var(--hud-muted); }
+body.kit-noir .panel-head .title { color: var(--hud-text-2); font-weight: 400; }
+body.kit-noir .panel-head .tag { color: var(--gold); opacity: .8; }
+
+/* header */
+body.kit-noir .hud-top { letter-spacing: .32em; font-size: 9.5px; padding-bottom: 18px; border-bottom: 1px solid var(--hud-line-soft); margin-bottom: 18px; }
+body.kit-noir .hud-top .brand { font-family: "Cormorant Garamond", serif; font-size: 18px; letter-spacing: .18em; font-weight: 400; color: var(--hud-text); }
+body.kit-noir .live-dot { background: var(--gold); }
+
+/* command bar: just an underline */
+body.kit-noir .cmdbar {
+  background: transparent; border: 0; border-bottom: 1px solid var(--hud-line); border-radius: 0;
+  padding: 16px 2px; margin: 18px 0 26px;
+  font-family: "Cormorant Garamond", serif; font-size: 22px; font-weight: 300; font-style: italic; color: var(--hud-text);
+}
+body.kit-noir .cmdbar .prompt { color: var(--gold); font-style: normal; }
+body.kit-noir .cmdbar .caret { width: 1px; height: 22px; background: var(--gold); }
+body.kit-noir .cmdbar .who { font-family: "Inter", sans-serif; font-style: normal; font-size: 9.5px; letter-spacing: .32em; color: var(--hud-muted); }
+
+/* numbers: large, thin serif, gold sheen */
+body.kit-noir .kpi-value, body.kit-noir .big {
+  font-family: "Cormorant Garamond", serif; font-weight: 300; letter-spacing: -.01em;
+  background: linear-gradient(180deg, var(--gold-hi), var(--gold) 70%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+body.kit-noir .kpi-value { font-size: 84px; line-height: .9; }
+body.kit-noir .big { font-size: 40px; }
+body.kit-noir .kpi-label, body.kit-noir .kpi-sub { letter-spacing: .2em; text-transform: uppercase; font-size: 9.5px; color: var(--hud-muted); }
+body.kit-noir .kpi-name { font-family: "Cormorant Garamond", serif; font-size: 20px; font-weight: 400; font-style: italic; }
+body.kit-noir .kpi-notes { font-size: 11px; letter-spacing: .04em; }
+
+/* bars: hairline track, thin fill */
+body.kit-noir .bar-track, body.kit-noir .meter { height: 3px; background: rgba(201,169,110,.12); border-radius: 0; }
+body.kit-noir .bar-fill, body.kit-noir .meter > span { border-radius: 0; }
+body.kit-noir .bar-row .lbl, body.kit-noir .meter-lbl { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+body.kit-noir .bar-row .lbl b { font-family: "Cormorant Garamond", serif; font-size: 16px; font-weight: 400; letter-spacing: 0; text-transform: none; }
+
+/* boxes */
+body.kit-noir .codebox, body.kit-noir .shellbox { background: transparent; border: 1px solid var(--hud-line-soft); border-radius: 0; font-family: "JetBrains Mono", monospace; font-size: 10.5px; }
+body.kit-noir .codebox .k { color: var(--gold); }
+body.kit-noir .tree { font-family: "JetBrains Mono", monospace; }
+body.kit-noir .tree .node.on { background: rgba(201,169,110,.12); color: var(--gold-hi); }
+body.kit-noir .log { font-family: "JetBrains Mono", monospace; font-size: 10.5px; }
+body.kit-noir .log .verb { color: var(--gold); }
+body.kit-noir .legend { letter-spacing: .1em; text-transform: uppercase; font-size: 9.5px; }
+body.kit-noir .squares span { border-radius: 0; background: transparent; border-color: var(--hud-line); width: 26px; height: 34px; }
+body.kit-noir .squares span.on { background: var(--gold); }
+
+/* graph overlays */
+body.kit-noir .callout { border-color: var(--gold); background: rgba(5,5,5,.85); font-family: "Cormorant Garamond", serif; font-size: 16px; }
+body.kit-noir .callout em { color: var(--gold); font-family: "Inter", sans-serif; font-size: 9.5px; letter-spacing: .3em; }
+body.kit-noir .infocard { border-color: var(--hud-line); background: rgba(5,5,5,.88); }
+body.kit-noir .infocard .t { font-family: "Cormorant Garamond", serif; font-size: 18px; }
+body.kit-noir .infocard .v { color: var(--gold); }
+body.kit-noir .stage-foot, body.kit-noir .panel-foot { letter-spacing: .14em; text-transform: uppercase; font-size: 9px; }
+body.kit-noir .sample-flag { color: var(--gold); }
+
+@media (prefers-reduced-motion: reduce) { body.kit-noir .panel::before { animation: none; display: none; } }
