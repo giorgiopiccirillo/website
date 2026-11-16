@@ -196,7 +196,7 @@
     return {
       html: panel(n, { ...cfg, span: cfg.span || 4 }, `<div class="kpis">${d.map((k, i) => `<div class="k"><div class="l">${k.label}</div>
         <div class="v" data-r="v${i}">0</div><div class="d ${k.trend || ""}">${k.note || ""}</div>${k.series ? spark(k.series, `var(--c${i + 1})`) : ""}</div>`).join("")}</div>`),
-      init(el) { d.forEach((k, i) => HUD.countUp(el.querySelector(`[data-r="v${i}"]`), k.value, k.suffix ? { suffix: k.suffix } : {})); }
+      init(el) { d.forEach((k, i) => HUD.countUp(el.querySelector(`[data-r="v${i}"]`), k.value, { suffix: k.suffix || "", dec: Number.isInteger(k.value) ? 0 : 1 })); }
     };
   };
 

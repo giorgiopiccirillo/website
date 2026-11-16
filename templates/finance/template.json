@@ -1,0 +1,26 @@
+{
+  "id": "finance",
+  "title": "Finance dashboard demo · Giorgio Piccirillo",
+  "description": "A live loan-book dashboard demo with invented data: portfolio against limits, arrears, approvals.",
+  "brand": "DEMO LENDER · SME LOANS",
+  "flag": "DEMO · INVENTED DATA",
+  "back": {"href": "projects.html", "label": "← Projects"},
+  "field": "Finance and lending",
+  "question": "Where is the risk in the loan book, and how full are our limits?",
+  "blocks": [
+    {"type": "graph", "title": "LOAN BOOK GRAPH", "unit": "segments", "tag": "4 product lines", "fields": {"group": "product", "school": "limit"}},
+    {"type": "cmdbar", "label": "ASK THE DATA"},
+    {"type": "kpis", "title": "Loan book", "tag": "this half-year", "data": "kpis"},
+    {"type": "line", "title": "Applications by week", "span": 2, "data": "trend", "ranges": [{"label": "Cumulative", "key": "cum"}, {"label": "Per week", "key": "week"}]},
+    {"type": "columns", "title": "Balance vs limit (€M)", "tag": "12 segments", "span": 2, "tone": 3, "actual": "Balance", "targetLabel": "Limit", "data": "columns"},
+    {"type": "card", "title": "Segment card", "tag": "one row", "tone": 1,
+     "body": "<span class=\"h\">---</span>\n<span class=\"k\">segment:</span> {label}\n<span class=\"k\">product:</span> {group}\n<span class=\"k\">limit:</span>   €{limit}M\n<span class=\"h\">---</span>\n<span class=\"h\"># book</span>\nloans          {loans}\nbalance        €{balance}M\nlimit used     {use}%\narrears        {arrears}%\n<span class=\"h\"># rule</span>\none record per loan id"},
+    {"type": "donut", "title": "Portfolio by product", "tag": "4 lines", "tone": 3, "centre": "all", "sub": "balance", "data": "lines"},
+    {"type": "table", "title": "Accounts to watch", "tag": "highest arrears", "tone": 5, "data": "watch",
+     "cols": [{"key": "name", "label": "Segment"}, {"key": "balance", "label": "Balance", "num": true}, {"key": "arrears", "label": "Arrears", "num": true}, {"key": "status", "label": "Status", "pill": true}],
+     "tones": {"Watch": "warn", "Late": "warn", "Default risk": "bad"}},
+    {"type": "ask", "title": "Ask me anything", "tag": "answers from the numbers", "tone": 2, "data": "ask"},
+    {"type": "meters", "title": "Limit use by product", "tag": "balance vs limit", "tone": 2, "foot": "one square = one week of the half-year closed", "data": "usage"},
+    {"type": "log", "title": "Sync log", "tag": "tail -f", "tone": 3, "data": "log"}
+  ]
+}

@@ -25,13 +25,14 @@
   HUD.tip = tip;
 
   /* ---- count-up number ---- */
-  HUD.countUp = (el, to, { ms = 1400, suffix = "" } = {}) => {
-    if (RM) { el.textContent = fmt(to) + suffix; return; }
+  HUD.countUp = (el, to, { ms = 1400, suffix = "", dec = 0 } = {}) => {
+    const f = n => dec ? n.toLocaleString("en-GB", { minimumFractionDigits: dec, maximumFractionDigits: dec }) : fmt(n);
+    if (RM) { el.textContent = f(to) + suffix; return; }
     const from = parseFloat((el.textContent || "0").replace(/[^\d.]/g, "")) || 0;
     const t0 = performance.now();
     const id = setInterval(() => {
       const p = Math.min(1, (performance.now() - t0) / ms), e = 1 - Math.pow(1 - p, 3);
-      el.textContent = fmt(from + (to - from) * e) + suffix;
+      el.textContent = f(from + (to - from) * e) + suffix;
       if (p >= 1) clearInterval(id);
     }, 16);
   };

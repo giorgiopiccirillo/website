@@ -1,0 +1,133 @@
+{
+  "id": "health",
+  "title": "Health dashboard demo · Giorgio Piccirillo",
+  "description": "A live clinic-operations dashboard demo with invented, aggregated data: waits, no-shows, bed occupancy. No patient data.",
+  "brand": "DEMO CLINIC · OPERATIONS",
+  "flag": "DEMO · INVENTED DATA · NO PATIENT DATA",
+  "back": {
+    "href": "projects.html",
+    "label": "← Projects"
+  },
+  "field": "Health and clinics",
+  "question": "Where are the waits, the missed appointments and the full wards?",
+  "blocks": [
+    {
+      "type": "graph",
+      "title": "CLINIC GRAPH",
+      "unit": "units",
+      "tag": "4 departments",
+      "fields": {
+        "group": "department",
+        "school": "volume"
+      }
+    },
+    {
+      "type": "cmdbar",
+      "label": "ASK THE DATA"
+    },
+    {
+      "type": "kpis",
+      "title": "This week",
+      "tag": "all units",
+      "data": "kpis"
+    },
+    {
+      "type": "line",
+      "title": "Appointments by day",
+      "span": 2,
+      "data": "trend",
+      "ranges": [
+        {
+          "label": "Cumulative",
+          "key": "cum"
+        },
+        {
+          "label": "Per day",
+          "key": "week"
+        }
+      ]
+    },
+    {
+      "type": "columns",
+      "title": "Beds used vs beds",
+      "tag": "wards",
+      "span": 2,
+      "tone": 3,
+      "actual": "Beds used",
+      "targetLabel": "Beds",
+      "data": "columns"
+    },
+    {
+      "type": "card",
+      "title": "Unit card",
+      "tag": "one row",
+      "tone": 1,
+      "body": "<span class=\"h\">---</span>\n<span class=\"k\">unit:</span>       {label}\n<span class=\"k\">department:</span> {group}\n<span class=\"k\">volume:</span>     {school}\n<span class=\"h\">---</span>\n<span class=\"h\"># flow</span>\nappointments   {appts}\nno-show        {noshow}%\nwait (min)     {wait}\nbeds used      {used} of {beds}\n<span class=\"h\"># rule</span>\naggregated only, no patient data"
+    },
+    {
+      "type": "donut",
+      "title": "Visit types",
+      "tag": "5 types",
+      "tone": 3,
+      "centre": "all",
+      "sub": "appointments",
+      "data": "types"
+    },
+    {
+      "type": "table",
+      "title": "Ward status",
+      "tag": "fullest first",
+      "tone": 5,
+      "data": "wards",
+      "cols": [
+        {
+          "key": "name",
+          "label": "Ward"
+        },
+        {
+          "key": "occ",
+          "label": "Full",
+          "num": true
+        },
+        {
+          "key": "wait",
+          "label": "Wait",
+          "num": true
+        },
+        {
+          "key": "status",
+          "label": "Status",
+          "pill": true
+        }
+      ],
+      "tones": {
+        "OK": "ok",
+        "Busy": "warn",
+        "Full": "bad"
+      }
+    },
+    {
+      "type": "ask",
+      "title": "Ask me anything",
+      "tag": "answers from the numbers",
+      "tone": 2,
+      "data": "ask"
+    },
+    {
+      "type": "meters",
+      "title": "Occupancy by department",
+      "tag": "beds used vs beds",
+      "tone": 2,
+      "foot": "one square = one week closed",
+      "data": "occ"
+    },
+    {
+      "type": "log",
+      "title": "Sync log",
+      "tag": "tail -f",
+      "tone": 3,
+      "data": "log"
+    }
+  ],
+  "note": "Aggregated numbers only. No patient names or ids."
+}
