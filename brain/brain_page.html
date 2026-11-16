@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Company brain demo · Giorgio Piccirillo</title>
+<meta name="description" content="Ask a company brain a question. Every answer shows its source, and the tests prove the answers are right. Fictional company, runs in your browser.">
+<link rel="stylesheet" href="kits/stylekit1_terminal.css">
+<link rel="stylesheet" href="engine/engine.css">
+<script>
+  // ?kit=1 terminal (default) · ?kit=2 aurora · ?kit=3 noir · ?kit=4 light
+  const KITS = { 2: ["stylekit2_aurora.css", "kit-aurora"], 3: ["stylekit3_noir.css", "kit-noir"], 4: ["stylekit4_light.css", "kit-light"] };
+  const Q = new URLSearchParams(location.search);
+  const KIT = Q.get("kit") || "4";
+  if (KITS[KIT]) document.write(`<link rel="stylesheet" href="kits/${KITS[KIT][0]}">`);
+</script>
+<style>
+  .kit-switch { display: flex; gap: 6px; }
+  .kit-switch a, .back { color: var(--hud-muted); text-decoration: none; border: 1px solid var(--hud-line); padding: 2px 8px; border-radius: var(--hud-r); }
+  .kit-switch a.on { color: var(--hud-text); border-color: var(--hud-accent); }
+  .intro { margin: 4px 0 14px; color: var(--hud-text-2); max-width: 70ch; font-size: 13px; line-height: 1.55; }
+  .intro b { color: var(--hud-text); }
+  .askbar { display: flex; gap: 8px; align-items: center; }
+  .askbar input { flex: 1; min-width: 0; font: inherit; font-size: 15px; color: var(--hud-text); background: transparent; border: 0; outline: 0; padding: 4px 0; }
+  .askbar input::placeholder { color: var(--hud-muted); }
+  .askbar button, .btn { font: inherit; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--hud-text); background: color-mix(in srgb, var(--hud-accent) 18%, transparent); border: 1px solid var(--hud-accent); border-radius: var(--hud-r); padding: 5px 12px; cursor: pointer; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 14px; }
+  .chips button { font: inherit; font-size: 12px; color: var(--hud-text-2); background: var(--hud-panel); border: 1px solid var(--hud-line); border-radius: 99px; padding: 4px 11px; cursor: pointer; }
+  .chips button:hover { color: var(--hud-text); border-color: var(--hud-accent); }
+  .answer { font-size: 14px; line-height: 1.6; color: var(--hud-text); }
+  .answer .lead { font-size: 18px; line-height: 1.4; margin: 0 0 10px; }
+  .answer .lead.no { color: var(--hud-text-2); }
+  .answer .note { border-left: 3px solid var(--warn); padding: 6px 10px; margin: 10px 0; background: color-mix(in srgb, var(--warn) 8%, transparent); font-size: 13px; }
+  .src { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--hud-line-soft); font-size: 11.5px; color: var(--hud-text-2); }
+  .src b { color: var(--hud-text); font-weight: 600; }
+  .src a { color: var(--hud-accent); cursor: pointer; text-decoration: underline; }
+  .md table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin: 8px 0; }
+  .md th, .md td { text-align: left; padding: 5px 8px 5px 0; border-bottom: 1px solid var(--hud-line-soft); vertical-align: top; }
+  .md th { color: var(--hud-muted); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
+  .md h1 { font-size: 18px; margin: 0 0 8px; } .md h2 { font-size: 14px; margin: 14px 0 6px; color: var(--hud-text); }
+  .md p, .md li { color: var(--hud-text); font-size: 13px; line-height: 1.55; } .md ul, .md ol { padding-left: 20px; margin: 6px 0; }
+  .md a.wl { color: var(--hud-accent); cursor: pointer; }
+  .md code, .how code { font-size: 11.5px; background: var(--hud-panel-2); padding: 1px 5px; border-radius: 4px; }
+  mark { background: color-mix(in srgb, var(--hud-accent) 22%, transparent); color: inherit; padding: 0 2px; border-radius: 3px; }
+  .how { font-size: 12px; color: var(--hud-text-2); line-height: 1.55; }
+  .how .row { display: flex; justify-content: space-between; gap: 10px; padding: 5px 0; border-bottom: 1px solid var(--hud-line-soft); }
+  .how .row span:last-child { color: var(--hud-muted); white-space: nowrap; }
+  .how .row.top span:first-child { color: var(--hud-text); }
+  .how pre { white-space: pre-wrap; background: var(--hud-panel-2); padding: 8px 10px; border-radius: var(--hud-r); font-size: 11.5px; color: var(--hud-text); margin: 6px 0; }
+  .tests .sum { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 10px; }
+  .tests .sum .big { font-size: 34px; color: var(--hud-text); white-space: nowrap; }
+  .tests ul { list-style: none; padding: 0; margin: 0; max-height: 340px; overflow: auto; }
+  .tests li { display: grid; grid-template-columns: 22px 34px 1fr; gap: 6px; padding: 5px 0; border-bottom: 1px solid var(--hud-line-soft); font-size: 12px; color: var(--hud-text); }
+  .tests li .ok { color: var(--ok); } .tests li .bad { color: var(--bad); } .tests li .id { color: var(--hud-muted); }
+  .tests li small { display: block; color: var(--hud-muted); }
+  .pages a { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--hud-line-soft); color: var(--hud-text); text-decoration: none; cursor: pointer; font-size: 13px; }
+  .pages a span:last-child { color: var(--hud-muted); font-size: 11px; white-space: nowrap; }
+  .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  @media (max-width: 900px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .steps div { font-size: 12.5px; color: var(--hud-text-2); line-height: 1.5; }
+  .steps b { display: block; color: var(--hud-text); font-size: 13px; margin-bottom: 3px; }
+  .panel { min-height: 0; }
+</style>
+</head>
+<body class="hud">
+<script>if (KITS[KIT]) document.body.classList.add(KITS[KIT][1]);</script>
+<div class="hud-wrap">
+  <div class="hud-top">
+    <span class="brand">BEISPIEL RÄDER GMBH · COMPANY BRAIN</span>
+    <span class="sample-flag">DEMO · FICTIONAL COMPANY</span>
+    <span class="right">
+      <a class="back" href="projects.html">← Projects</a>
+      <span class="kit-switch"><a href="?kit=4" data-k="4">Light</a><a href="?kit=1" data-k="1">Terminal</a><a href="?kit=2" data-k="2">Aurora</a><a href="?kit=3" data-k="3">Noir</a></span>
+    </span>
+  </div>
+
+  <p class="intro">A bike shop with three branches. Its handbook, policies and service numbers are in one <b>company brain</b>.
+    Ask it a question. Every answer shows <b>where it comes from</b>, and the <b>tests</b> further down prove the brain is right.
+    If the brain does not know, it says so. It does not guess.</p>
+
+  <div class="cmdbar askbar"><span class="prompt">&gt;</span>
+    <input id="q" type="text" autocomplete="off" placeholder="Ask about returns, warranty, prices, branches or service numbers…" aria-label="Your question">
+    <button id="go">Ask</button></div>
+  <div class="chips" id="chips"></div>
+
+  <div class="hud-grid">
+    <section class="panel span-2 tone-1">
+      <div class="panel-head"><span class="tab">01</span><span class="title">Answer</span><span class="tag" id="a-tag">waiting</span></div>
+      <div class="answer" id="answer"><p class="lead no">Pick a question above, or type your own.</p></div>
+    </section>
+    <section class="panel span-2 tone-5">
+      <div class="panel-head"><span class="tab">02</span><span class="title">How it found the answer</span><span class="tag" id="h-tag">—</span></div>
+      <div class="how" id="how">The brain looks in two places: the wiki pages (rules and words) and the number tables (counts and revenue). This panel shows what it looked at.</div>
+    </section>
+    <section class="panel span-2 tone-3 tests">
+      <div class="panel-head"><span class="tab">03</span><span class="title">Tests</span><span class="tag">questions with known answers</span></div>
+      <div class="sum"><span class="big" id="t-big">—</span><span id="t-sub">Run the tests to check every answer against the truth.</span><button class="btn" id="run" style="margin-left:auto">Run the tests</button></div>
+      <ul id="t-list"></ul>
+      <div class="panel-foot">The same tests run every time the brain is rebuilt. A failed test means: do not trust the brain until it is fixed.</div>
+    </section>
+    <section class="panel span-2 tone-2">
+      <div class="panel-head"><span class="tab">04</span><span class="title">What is inside</span><span class="tag" id="p-tag"></span></div>
+      <div class="pages" id="pages"></div>
+      <div class="md" id="page" style="display:none"></div>
+    </section>
+    <section class="panel span-4 tone-6">
+      <div class="panel-head"><span class="tab">05</span><span class="title">How a company brain works</span><span class="tag">your company, same steps</span></div>
+      <div class="steps">
+        <div><b>1 · Sources</b>The documents and data the company already trusts: handbook, policies, exports.</div>
+        <div><b>2 · Wiki</b>AI writes them into short pages, one topic each, with an owner and a date.</div>
+        <div><b>3 · Numbers</b>Counts come from the data tables, never from text. Each answer shows the export date.</div>
+        <div><b>4 · Tests</b>Questions with known answers. They run on every rebuild and catch the day it goes wrong.</div>
+      </div>
+      <div class="panel-foot">This demo searches in your browser: no AI model, and nothing you type leaves this page. In a real setup the same brain connects to Claude, which writes the answer in full sentences and still shows the source.</div>
+    </section>
+  </div>
+</div>
+
+<script>
+const B = /*BRAIN_DATA*/;
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const fmt = n => Number(n).toLocaleString("en-GB");
+
+/* ---------- tiny markdown: headings, bold, italics, code, tables, lists, [[links]] ---------- */
+function inline(s) {
+  return esc(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\*(.+?)\*/g, "<i>$1</i>")
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\[\[([\w-]+)\]\]/g, (_, s) => { const p = B.pages.find(x => x.slug === s); return `<a class="wl" data-p="${s}">${esc(p ? p.title : s)}</a>`; });
+}
+function md(text) {
+  const out = []; const L = text.split("\n"); let i = 0;
+  while (i < L.length) {
+    const l = L[i];
+    if (/^\|/.test(l)) {
+      const rows = []; while (i < L.length && /^\|/.test(L[i])) rows.push(L[i++]);
+      const cells = r => r.replace(/^\||\|$/g, "").split("|").map(c => c.trim());
+      const body = rows.filter((r, k) => k !== 1);
+      out.push("<table><thead><tr>" + cells(body[0]).map(c => `<th>${inline(c)}</th>`).join("") + "</tr></thead><tbody>" +
+        body.slice(1).map(r => "<tr>" + cells(r).map(c => `<td>${inline(c)}</td>`).join("") + "</tr>").join("") + "</tbody></table>");
+      continue;
+    }
+    if (/^\s*(-|\d+\.)\s/.test(l)) {
+      const ord = /^\s*\d+\./.test(l), items = [];
+      while (i < L.length && /^\s*(-|\d+\.)\s/.test(L[i])) {
+        let it = L[i++].replace(/^\s*(-|\d+\.)\s/, "");
+        while (i < L.length && /^\s{2,}\S/.test(L[i]) && !/^\s*(-|\d+\.)\s/.test(L[i])) it += " " + L[i++].trim();
+        items.push(`<li>${inline(it)}</li>`);
+      }
+      out.push(`<${ord ? "ol" : "ul"}>${items.join("")}</${ord ? "ol" : "ul"}>`); continue;
+    }
+    const h = l.match(/^(#{1,3})\s+(.*)/);
+    if (h) { out.push(`<h${h[1].length}>${inline(h[2])}</h${h[1].length}>`); i++; continue; }
+    if (!l.trim()) { i++; continue; }
+    const para = [l]; i++;
+    while (i < L.length && L[i].trim() && !/^(\||#|\s*(-|\d+\.)\s)/.test(L[i])) para.push(L[i++]);
+    out.push(`<p>${inline(para.join(" "))}</p>`);
+  }
+  return out.join("");
+}
+
+/* ---------- search: pages cut into sections, BM25 ranking ---------- */
+const STOP = new Set("a an the is are am be was were do does did can could i we you he she it they my our your their of to in on at for with by from and or not no if then than this that these those what which who whom how when where why there here as about into after before over under up down out off again any all some each other such only own same so too very just also will would should may might must have has had having get got long until happen happens need want know tell please euro euros eur".split(" "));
+const SYN = { ridden: "ride", riding: "ride", rode: "ride", rides: "ride", used: "ride", returned: "return", returning: "return", refund: "return",
+  cost: "price", costs: "price", much: "price", cheaper: "cheap", discount: "cheap", winter: "november", mondays: "monday",
+  guarantee: "warranty", broken: "defect", faulty: "defect", shop: "branch", store: "branch", stores: "branch", shops: "branch",
+  open: "open", opening: "open", closed: "open", mean: "meaning", means: "meaning", definition: "meaning" };
+const stem = w => { w = SYN[w] || w; if (w.length > 4) w = w.replace(/(ings|ing|ies|es|ed|s)$/, ""); return SYN[w] || w; };
+const tok = s => s.toLowerCase().replace(/e-bike/g, "ebike").replace(/[^a-z0-9äöüß]+/g, " ").split(" ").filter(w => w.length > 1 && !STOP.has(w)).map(stem);
+
+const CHUNKS = [];
+B.pages.forEach(p => {
+  const parts = p.body.split(/\n(?=## )/);
+  parts.forEach((part, k) => {
+    const head = k === 0 ? "In short" : part.match(/^## (.*)/)[1];
+    if (/^(Related|Who to ask)$/.test(head)) return;
+    const text = k === 0 ? part.replace(/^# .*\n+/, "") : part.replace(/^## .*\n+/, "");
+    CHUNKS.push({ page: p, head, text, toks: tok(p.title + " " + p.title + " " + head + " " + text) });
+  });
+});
+const DF = {}; CHUNKS.forEach(c => new Set(c.toks).forEach(t => DF[t] = (DF[t] || 0) + 1));
+const AVG = CHUNKS.reduce((a, c) => a + c.toks.length, 0) / CHUNKS.length;
+function search(q) {
+  const qt = [...new Set(tok(q))], N = CHUNKS.length;
+  return CHUNKS.map(c => {
+    let s = 0; const hit = [];
+    qt.forEach(t => {
+      const f = c.toks.filter(x => x === t).length; if (!f) return; hit.push(t);
+      const idf = Math.log(1 + (N - DF[t] + .5) / (DF[t] + .5));
+      s += idf * f * 2.2 / (f + 1.2 * (.25 + .75 * c.toks.length / AVG));
+    });
+    return { c, s, hit };
+  }).filter(r => r.s > 0).sort((a, b) => b.s - a.s);
+}
+
+/* ---------- numbers: read the question, query the table ---------- */
+const MONTHS = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
+const TYPES = [["e-bike", "e-bike-service"], ["basic", "basic-inspection"], ["full", "full-inspection"], ["repair", "repair"]];
+const T = B.data.service_jobs;
+const BRANCHES = [...new Set(T.rows.map(r => r.branch))];
+function numberQuery(q) {
+  const s = q.toLowerCase();
+  const wantsNumber = /\bhow many\b|\brevenue\b|\bturnover\b|\bmost\b|\bfewest\b|\bjobs\b|\bnumber of\b|\btotal\b/.test(s) && !/\bhow much (is|does|do)\b/.test(s);
+  if (!wantsNumber) return null;
+  const f = {}; const year = (s.match(/20\d\d/) || ["2026"])[0];
+  const b = BRANCHES.find(x => s.includes(x.toLowerCase())); if (b) f.branch = b;
+  const ms = MONTHS.map((m, i) => s.includes(m) ? i : -1).filter(i => i >= 0);
+  let months = null;
+  if (ms.length >= 2 && /\bto\b|\buntil\b|-|–/.test(s)) { months = []; for (let i = Math.min(...ms); i <= Math.max(...ms); i++) months.push(`${year}-${String(i + 1).padStart(2, "0")}`); }
+  else if (ms.length === 1) f.month = `${year}-${String(ms[0] + 1).padStart(2, "0")}`;
+  const types = /inspection/.test(s) && !/basic|full/.test(s) ? ["basic-inspection", "full-inspection"] : TYPES.filter(([k]) => s.includes(k)).map(([, v]) => v);
+  if (types.length === 1) f.service_type = types[0];
+  const col = /revenue|turnover|euro|€|earn/.test(s) ? "revenue_eur" : "jobs";
+  const by = /\bmost\b|\bfewest\b|\bbest\b|\bwhich\b/.test(s) ? (/\bbranch/.test(s) ? "branch" : /\bmonth/.test(s) ? "month" : /\btype|service\b/.test(s) && !/branch/.test(s) ? "service_type" : null) : null;
+  let rows = T.rows.filter(r => Object.entries(f).every(([k, v]) => r[k] === v) && (!months || months.includes(r.month)) && (types.length < 2 || types.includes(r.service_type)));
+  const total = rows.reduce((a, r) => a + r[col], 0);
+  let group = null;
+  if (by) {
+    const g = {}; rows.forEach(r => g[r[by]] = (g[r[by]] || 0) + r[col]);
+    const sorted = Object.entries(g).sort((a, b) => /fewest/.test(s) ? a[1] - b[1] : b[1] - a[1]);
+    group = { by, sorted };
+  }
+  return { f, months, types, col, rows, total, group };
+}
+
+/* ---------- ask ---------- */
+function ask(q) {
+  const nq = numberQuery(q);
+  if (nq && nq.rows.length) return { kind: "number", q, nq };
+  const hits = search(q);
+  // refuse unless the best section is a strong match AND covers most of the question's words
+  const words = [...new Set(tok(q))], cover = hits.length ? hits[0].hit.length / Math.max(1, words.length) : 0;
+  if (!hits.length || hits[0].s < 1.2 || cover < 0.6) return { kind: "none", q, hits, cover, words };
+  return { kind: "doc", q, hits };
+}
+const unit = col => col === "revenue_eur" ? "€" : "";
+function show(r) {
+  const A = $("answer"), H = $("how");
+  if (r.kind === "number") {
+    const { nq } = r, meta = T.meta, filt = Object.entries(nq.f).map(([k, v]) => `${k} = ${v}`);
+    if (nq.months) filt.push(`month ${nq.months[0]} to ${nq.months[nq.months.length - 1]}`);
+    if (nq.types.length > 1) filt.push(`service_type in ${nq.types.join(", ")}`);
+    const what = nq.col === "jobs" ? "service jobs" : "service revenue (net)";
+    let lead;
+    if (nq.group) { const [k, v] = nq.group.sorted[0]; lead = `<b>${esc(k)}</b>, with ${unit(nq.col)}${fmt(v)} ${nq.col === "jobs" ? "jobs" : ""}.`; }
+    else lead = `<b>${unit(nq.col)}${fmt(nq.total)}</b> ${what}.`;
+    A.innerHTML = `<p class="lead">${lead}</p>${nq.group ? `<div class="md"><table><thead><tr><th>${nq.group.by.replace("_", " ")}</th><th>${nq.col === "jobs" ? "jobs" : "revenue €"}</th></tr></thead><tbody>${nq.group.sorted.map(([k, v]) => `<tr><td>${esc(k)}</td><td>${fmt(v)}</td></tr>`).join("")}</tbody></table></div>` : ""}
+      <div class="src"><span>Source: <b>${"service_jobs"}</b> table</span><span>exported <b>${esc(meta.exported_at)}</b></span><span>owner <b>${esc(meta.owner)}</b></span><span>from ${esc(meta.source_system)}</span></div>`;
+    H.innerHTML = `<p>This is a number question, so the brain did <b>not</b> read the text. It added up rows in the table.</p>
+      <pre>sum(${nq.col})${nq.group ? ` by ${nq.group.by}` : ""}\nfrom service_jobs\n${filt.length ? "where " + filt.join("\n  and ") : "(all rows)"}</pre>
+      <p>${nq.rows.length} rows matched.</p>`;
+    $("a-tag").textContent = "from the numbers"; $("h-tag").textContent = "table query";
+  } else if (r.kind === "doc") {
+    const top = r.hits[0], c = top.c, re = new RegExp(`\\b(${[...new Set(tok(r.q))].map(t => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})\\w*`, "gi");
+    const mark = html => html.replace(/(<[^>]+>)|([^<]+)/g, (m, tag, txt) => tag || txt.replace(re, "<mark>$&</mark>"));
+    const gap = /known gap/i.test(c.head) ? `<div class="note">Not in the official handbook yet. This comes from a note by the Head of Service. The brain says so instead of hiding it.</div>` : "";
+    A.innerHTML = `${gap}<div class="md">${mark(md(c.text))}</div>
+      <div class="src"><span>Source: <a data-p="${c.page.slug}">${esc(c.page.title)}</a> · ${esc(c.head)}</span><span>owner <b>${esc(c.page.owner)}</b></span><span>updated <b>${esc(c.page.updated)}</b></span><span>status <b>${esc(c.page.status)}</b></span></div>`;
+    H.innerHTML = `<p>Words searched: ${[...new Set(tok(r.q))].map(t => `<code>${esc(t)}</code>`).join(" ")}</p>` +
+      r.hits.slice(0, 5).map((h, i) => `<div class="row${i ? "" : " top"}"><span>${esc(h.c.page.title)} · ${esc(h.c.head)}</span><span>score ${h.s.toFixed(1)}</span></div>`).join("") +
+      `<p style="margin-top:8px">The best section wins. The others were weaker matches.</p>`;
+    $("a-tag").textContent = "from the wiki"; $("h-tag").textContent = `${r.hits.length} sections matched`;
+  } else {
+    A.innerHTML = `<p class="lead no">The brain does not cover this. It will not guess.</p><p class="md">Ask about returns, warranty, prices, branches, words used in the company, or service numbers.</p>`;
+    const missing = (r.words || []).filter(w => !(r.hits[0] && r.hits[0].hit.includes(w)));
+    H.innerHTML = `<p>No page matched well enough. A brain that guesses is worse than no brain.</p>` +
+      (missing.length ? `<p>Words the brain knows nothing about: ${missing.map(w => `<code>${esc(w)}</code>`).join(" ")}</p>` : "") +
+      (r.hits.length ? `<p>Closest section: ${esc(r.hits[0].c.page.title)} · ${esc(r.hits[0].c.head)} (too weak to use).</p>` : "");
+    $("a-tag").textContent = "not covered"; $("h-tag").textContent = "no match";
+  }
+}
+function run(q) { q = q.trim(); if (!q) return; $("q").value = q; show(ask(q)); }
+
+/* ---------- tests ---------- */
+function tests() {
+  const E = B.evals, out = [];
+  const sum = (ds, col, f = {}) => B.data[ds].rows.filter(r => Object.entries(f).every(([k, v]) => r[k] === v)).reduce((a, r) => a + r[col], 0);
+  E.search.forEach(t => { const top = search(t.query).slice(0, t.top).map(h => h.c.page.slug); out.push({ id: t.id, q: t.question, ok: top.includes(t.expect_page), why: `expected page: ${t.expect_page}` }); });
+  E.fact.forEach(t => { const p = B.pages.find(x => x.slug === t.page); out.push({ id: t.id, q: t.question, ok: !!p && t.must_contain.every(m => p.body.includes(m)), why: `page says: ${t.must_contain.join(" + ")}` }); });
+  E.number.forEach(t => { const r = ask(t.question); const got = r.kind === "number" ? r.nq.total : null; out.push({ id: t.id, q: t.question, ok: got === t.expect, why: `expected ${fmt(t.expect)}, got ${got == null ? "no number" : fmt(got)}` }); });
+  E.consistency.forEach(t => { const a = sum(t.left.dataset, t.left.value_column, t.left.filters), b = sum(t.right.dataset, t.right.value_column, t.right.filters); out.push({ id: t.id, q: t.question, ok: a === b, why: `${fmt(a)} = ${fmt(b)}` }); });
+  E.golden.forEach(t => { const a = sum(t.query.dataset, t.query.value_column, t.query.filters); out.push({ id: t.id, q: t.question, ok: Math.abs(a - t.golden_value) <= t.tolerance, why: `brain €${fmt(a)} · finance report €${fmt(t.golden_value)}` }); });
+  const E2E = { E1: r => r.kind === "doc" && r.hits[0].c.page.slug === "returns-policy" && /warranty/i.test(r.hits[0].c.text),
+    E2: r => r.kind === "number" && r.nq.total === 170, E3: r => r.kind === "none", E4: r => r.kind === "doc" && /15 %/.test(r.hits[0].c.text) };
+  E.e2e.forEach(t => { const r = ask(t.question); out.push({ id: t.id, q: t.question, ok: !!(E2E[t.id] && E2E[t.id](r)), why: t.correct_answer }); });
+  return out;
+}
+$("run").onclick = () => {
+  const res = tests(), list = $("t-list"); list.innerHTML = ""; let k = 0;
+  $("t-big").textContent = "…"; $("t-sub").textContent = "running";
+  const step = () => {
+    if (k >= res.length) { const p = res.filter(r => r.ok).length; $("t-big").textContent = `${p} / ${res.length}`; $("t-sub").textContent = p === res.length ? "all tests pass" : "some tests fail"; return; }
+    const r = res[k++], li = document.createElement("li");
+    li.innerHTML = `<span class="${r.ok ? "ok" : "bad"}">${r.ok ? "✓" : "✗"}</span><span class="id">${r.id}</span><span>${esc(r.q)}<small>${esc(r.why)}</small></span>`;
+    list.appendChild(li); setTimeout(step, 70);
+  };
+  step();
+};
+
+/* ---------- pages list + reader ---------- */
+function openPage(slug) {
+  const p = B.pages.find(x => x.slug === slug); if (!p) return;
+  const el = $("page"); $("pages").style.display = "none"; el.style.display = "block";
+  el.innerHTML = `<p><a class="wl" data-back="1">← all pages</a></p>${md(p.body)}<div class="src"><span>owner <b>${esc(p.owner)}</b></span><span>updated <b>${esc(p.updated)}</b></span><span>status <b>${esc(p.status)}</b></span></div>`;
+}
+$("pages").innerHTML = B.pages.map(p => `<a data-p="${p.slug}"><span>${esc(p.title)}</span><span>${esc(p.type)} · ${esc(p.updated)}</span></a>`).join("") +
+  `<a style="cursor:default"><span>service_jobs, monthly_totals (number tables)</span><span>exported ${esc(T.meta.exported_at)}</span></a>`;
+$("p-tag").textContent = `${B.pages.length} pages · 2 tables · from ${B.docs} documents`;
+document.addEventListener("click", e => {
+  const a = e.target.closest("[data-p],[data-back]"); if (!a) return;
+  if (a.dataset.back) { $("page").style.display = "none"; $("pages").style.display = "block"; return; }
+  openPage(a.dataset.p); $("page").closest(".panel").scrollIntoView({ behavior: "smooth", block: "nearest" });
+});
+
+/* ---------- suggestions ---------- */
+const CHIPS = ["Can a customer return a bike after riding it?", "How many service jobs did Hamburg do in October 2026?",
+  "Are inspections cheaper in winter?", "Which branch had the most e-bike services in September?",
+  "Is the Kiel branch open on Mondays?", "What is the CEO's favourite colour?"];
+$("chips").innerHTML = CHIPS.map(c => `<button>${esc(c)}</button>`).join("");
+$("chips").onclick = e => { const b = e.target.closest("button"); if (b) run(b.textContent); };
+$("go").onclick = () => run($("q").value);
+$("q").addEventListener("keydown", e => { if (e.key === "Enter") run($("q").value); });
+document.querySelectorAll(".kit-switch a").forEach(a => a.classList.toggle("on", a.dataset.k === KIT));
+run(CHIPS[0]);
+</script>
+</body>
+</html>
