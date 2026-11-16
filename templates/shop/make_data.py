@@ -6,7 +6,7 @@ from pathlib import Path
 
 random.seed(20261116)
 
-GROUPS = [("Berlin", "BER"), ("London", "LON"), ("Rome", "ROM"),
+GROUPS = [("Vienna", "VIE"), ("London", "LON"), ("Rome", "ROM"),
           ("Paris", "PAR"), ("Madrid", "MAD"), ("Amsterdam", "AMS")]
 PRODUCTS = [("Espresso Blend", "Coffee"), ("House Filter", "Coffee"), ("Single Origin", "Coffee"),
             ("Decaf", "Coffee"), ("Cold Brew", "Coffee"), ("Subscription", "Coffee"),
@@ -14,7 +14,7 @@ PRODUCTS = [("Espresso Blend", "Coffee"), ("House Filter", "Coffee"), ("Single O
             ("Kettle", "Gear"), ("Dripper", "Gear"), ("Mug", "Gear"), ("Gift Box", "Gear"),
             ("Beans 1kg", "Coffee"), ("Matcha", "Tea")]
 QUERIES = [
-    ("orders for Espresso Blend in Berlin", "Espresso Blend-BER"),
+    ("orders for Espresso Blend in Vienna", "Espresso Blend-VIE"),
     ("repeat buyers of House Filter in London", "House Filter-LON"),
     ("conversion for Single Origin in Rome", "Single Origin-ROM"),
     ("stock left for Decaf in Paris", "Decaf-PAR"),

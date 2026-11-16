@@ -83,7 +83,7 @@
     <section class="panel tone-5">
       <div class="panel-head"><span class="tab">04</span><span class="title">Market → category</span><span class="tag">drill down</span></div>
       <div class="tree" id="tree"></div>
-      <div class="shellbox"><span style="color:var(--hud-text-2)">$ filter market=</span><span id="tree-cmd">BER</span><br><span class="ok">✓ <span id="tree-n">0</span> orders loaded</span></div>
+      <div class="shellbox"><span style="color:var(--hud-text-2)">$ filter market=</span><span id="tree-cmd">VIE</span><br><span class="ok">✓ <span id="tree-n">0</span> orders loaded</span></div>
     </section>
 
     <!-- 05 donut -->
@@ -123,7 +123,7 @@
 /* ===== INVENTED DATA ONLY — a fictional online shop, no real company or numbers ===== */
 const C = n => getComputedStyle(document.body).getPropertyValue("--c" + n).trim();
 const campuses = [
-  { id: "Berlin",    code: "BER", color: C(1) },
+  { id: "Vienna",    code: "VIE", color: C(1) },
   { id: "London",    code: "LON", color: C(2) },
   { id: "Rome",      code: "ROM", color: C(3) },
   { id: "Paris",     code: "PAR", color: C(4) },
@@ -145,7 +145,7 @@ campuses.forEach(c => {
 document.getElementById("g-count").textContent = nodes.filter(n => n.school !== "—").length;
 
 const queries = [
-  ["orders for Espresso Blend in Berlin", "Espresso Blend-BER"],
+  ["orders for Espresso Blend in Vienna", "Espresso Blend-VIE"],
   ["repeat buyers of House Filter in London", "House Filter-LON"],
   ["conversion for Single Origin in Rome", "Single Origin-ROM"],
   ["stock left for Decaf in Paris", "Decaf-PAR"],
