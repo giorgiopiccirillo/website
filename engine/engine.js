@@ -183,6 +183,111 @@
     };
   };
 
+
+  /* ---------- KPI cards with a small trend line (one panel, 2-4 cards) ---------- */
+  const spark = (vals, colour) => {
+    const W = 120, H = 34, mx = Math.max(...vals), mn = Math.min(...vals), r = (mx - mn) || 1;
+    const pts = vals.map((v, i) => [i / (vals.length - 1) * W, H - 3 - (v - mn) / r * (H - 8)]);
+    const d = pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1)).join(" ");
+    return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><path d="${d} L${W} ${H} L0 ${H} Z" fill="${colour}" opacity=".12"/><path d="${d}" fill="none" stroke="${colour}" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>`;
+  };
+  BLOCKS.kpis = (cfg, data, ctx, n) => {
+    const d = data[cfg.data];
+    return {
+      html: panel(n, { ...cfg, span: cfg.span || 4 }, `<div class="kpis">${d.map((k, i) => `<div class="k"><div class="l">${k.label}</div>
+        <div class="v" data-r="v${i}">0</div><div class="d ${k.trend || ""}">${k.note || ""}</div>${k.series ? spark(k.series, `var(--c${i + 1})`) : ""}</div>`).join("")}</div>`),
+      init(el) { d.forEach((k, i) => HUD.countUp(el.querySelector(`[data-r="v${i}"]`), k.value, k.suffix ? { suffix: k.suffix } : {})); }
+    };
+  };
+
+  /* ---------- line chart: 1-3 lines, hover crosshair, optional range toggle ---------- */
+  const smooth = pts => pts.map((p, i) => {
+    if (!i) return `M${p[0].toFixed(1)} ${p[1].toFixed(1)}`;
+    const q = pts[i - 1], mx = (q[0] + p[0]) / 2;
+    return `C${mx.toFixed(1)} ${q[1].toFixed(1)} ${mx.toFixed(1)} ${p[1].toFixed(1)} ${p[0].toFixed(1)} ${p[1].toFixed(1)}`;
+  }).join(" ");
+  BLOCKS.line = (cfg, data, ctx, n) => {
+    const d = data[cfg.data], ranges = cfg.ranges || [{ label: "", key: "v" }];
+    return {
+      html: panel(n, { ...cfg, tag: "" }, `<div class="legend">${d.series.map((s, i) => `<span><i style="background:var(--c${s.colour || i + 1})"></i>${s.label}</span>`).join("")}
+        ${ranges.length > 1 ? `<span class="seg" data-r="seg">${ranges.map((r, i) => `<button data-k="${r.key}"${i ? "" : ' class="on"'}>${r.label}</button>`).join("")}</span>` : ""}</div>
+        <div class="chart" data-r="chart"></div>`),
+      init(el) {
+        const host = el.querySelector('[data-r="chart"]'); let key = ranges[0].key;
+        const W = 640, H = 220, L = 34, B = 20, T = 8, R = 8;
+        const draw = () => {
+          const all = d.series.flatMap(s => s[key]), mx = Math.max(...all) * 1.08, X = i => L + i / (d.x.length - 1) * (W - L - R), Y = v => T + (1 - v / mx) * (H - T - B);
+          const ticks = [0, .25, .5, .75, 1].map(f => f * mx);
+          const lines = d.series.map((s, i) => {
+            const pts = s[key].map((v, j) => [X(j), Y(v)]), col = `var(--c${s.colour || i + 1})`;
+            return `<path d="${smooth(pts)}" fill="none" stroke="${col}" stroke-width="2" ${s.dashed ? 'stroke-dasharray="4 4"' : ""}/>` +
+              (i === 0 ? `<path d="${smooth(pts)} L${X(pts.length - 1)} ${Y(0)} L${X(0)} ${Y(0)} Z" fill="${col}" opacity=".08"/>` : "");
+          }).join("");
+          const step = Math.ceil(d.x.length / 7);
+          host.innerHTML = `<svg viewBox="0 0 ${W} ${H}">${ticks.map(v => `<line class="grid-line" x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}"/><text class="axis" x="${L - 6}" y="${Y(v) + 3}" text-anchor="end">${Math.round(v)}</text>`).join("")}
+            ${d.x.map((x, i) => i % step ? "" : `<text class="axis" x="${X(i)}" y="${H - 5}" text-anchor="middle">${x}</text>`).join("")}${lines}
+            <line data-r="cross" class="grid-line" y1="${T}" y2="${H - B}" style="stroke:var(--hud-text-2);opacity:0"/></svg><div class="tt" data-r="tt"></div>`;
+          const svg = host.querySelector("svg"), cross = host.querySelector('[data-r="cross"]'), tt = host.querySelector('[data-r="tt"]');
+          svg.onmousemove = e => {
+            const r = svg.getBoundingClientRect(), f = (e.clientX - r.left) / r.width * W;
+            const i = Math.max(0, Math.min(d.x.length - 1, Math.round((f - L) / (W - L - R) * (d.x.length - 1))));
+            cross.setAttribute("x1", X(i)); cross.setAttribute("x2", X(i)); cross.style.opacity = 1;
+            tt.innerHTML = `<b>${d.x[i]}</b><br>` + d.series.map((s, k) => `<i style="background:var(--c${s.colour || k + 1})"></i>${s.label} ${s[key][i]}`).join("<br>");
+            tt.style.opacity = 1; tt.style.left = Math.min(X(i) / W * r.width + 12, r.width - 150) + "px"; tt.style.top = "6px";
+          };
+          svg.onmouseleave = () => { cross.style.opacity = 0; tt.style.opacity = 0; };
+        };
+        draw();
+        const seg = el.querySelector('[data-r="seg"]');
+        if (seg) seg.onclick = e => { const b = e.target.closest("button"); if (!b) return; key = b.dataset.k; seg.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); draw(); };
+      }
+    };
+  };
+
+  /* ---------- columns with a target tick on each ---------- */
+  BLOCKS.columns = (cfg, data, ctx, n) => {
+    const d = data[cfg.data];
+    return {
+      html: panel(n, cfg, `<div class="legend"><span><i style="background:var(--c1)"></i>${cfg.actual || "Actual"}</span><span><i style="background:transparent;border:1px dashed var(--hud-text-2)"></i>${cfg.targetLabel || "Target"}</span></div><div class="chart" data-r="chart"></div>`),
+      init(el) {
+        const W = 640, H = 200, L = 30, B = 22, T = 8, mx = Math.max(...d.map(x => Math.max(x.value, x.target))) * 1.12, bw = (W - L) / d.length;
+        const Y = v => T + (1 - v / mx) * (H - T - B);
+        el.querySelector('[data-r="chart"]').innerHTML = `<svg viewBox="0 0 ${W} ${H}">${[0, .5, 1].map(f => `<line class="grid-line" x1="${L}" x2="${W}" y1="${Y(f * mx)}" y2="${Y(f * mx)}"/><text class="axis" x="${L - 5}" y="${Y(f * mx) + 3}" text-anchor="end">${Math.round(f * mx)}</text>`).join("")}
+          ${d.map((x, i) => { const cx = L + i * bw + bw / 2, w = bw * .5, over = x.value >= x.target;
+            return `<g data-tip="${esc(x.full || x.label)} · ${x.value} of ${x.target}"><rect x="${cx - w / 2}" y="${Y(x.value)}" width="${w}" height="${Math.max(1, Y(0) - Y(x.value))}" rx="2" fill="var(--${over ? "c3" : "c1"})" opacity=".85"/>
+            <line x1="${cx - w / 2 - 4}" x2="${cx + w / 2 + 4}" y1="${Y(x.target)}" y2="${Y(x.target)}" stroke="var(--hud-text)" stroke-dasharray="3 3"/>
+            <text class="axis" x="${cx}" y="${H - 7}" text-anchor="middle">${esc(x.label)}</text></g>`; }).join("")}</svg>`;
+      }
+    };
+  };
+
+  /* ---------- table with status pills ---------- */
+  BLOCKS.table = (cfg, data, ctx, n) => {
+    const rows = data[cfg.data], tones = cfg.tones || {};
+    return {
+      html: panel(n, cfg, `<table class="t"><thead><tr>${cfg.cols.map(c => `<th class="${c.num ? "n" : ""}">${c.label}</th>`).join("")}</tr></thead>
+        <tbody>${rows.map(r => `<tr>${cfg.cols.map(c => { const v = r[c.key]; return `<td class="${c.num ? "n" : ""}">${c.pill ? `<span class="pill ${tones[v] || ""}">${esc(v)}</span>` : esc(v)}</td>`; }).join("")}</tr>`).join("")}</tbody></table>`)
+    };
+  };
+
+  /* ---------- "ask the data": suggestion cards, answers typed out ---------- */
+  BLOCKS.ask = (cfg, data, ctx, n) => {
+    const d = data[cfg.data];
+    return {
+      html: panel(n, cfg, `<div class="ask"><div class="sugg">${d.map((s, i) => `<button data-i="${i}"><b>${esc(s.title)}</b><small>${esc(s.q)}</small></button>`).join("")}</div>
+        <div class="ans idle" data-r="ans">Pick a question. The answer comes from the numbers on this page.</div></div>`),
+      init(el) {
+        const ans = el.querySelector('[data-r="ans"]'); let timer;
+        el.querySelector(".sugg").onclick = e => {
+          const b = e.target.closest("button"); if (!b) return;
+          el.querySelectorAll(".sugg button").forEach(x => x.classList.toggle("on", x === b));
+          const s = d[+b.dataset.i].a; ans.classList.remove("idle"); clearInterval(timer); let k = 0;
+          timer = setInterval(() => { ans.textContent = s.slice(0, ++k); if (k >= s.length) clearInterval(timer); }, 14);
+        };
+      }
+    };
+  };
+
   /* ---------- the engine ---------- */
   function run(tpl, data) {
     const bus = (() => { const h = {}; return { on: (e, f) => (h[e] = h[e] || []).push(f), emit: (e, p) => (h[e] || []).forEach(f => f(p)) }; })();

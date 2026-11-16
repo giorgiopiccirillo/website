@@ -24,6 +24,7 @@ PAGE = """<!doctype html>
 <title>{title}</title>
 <meta name="description" content="{description}">
 <link rel="stylesheet" href="kits/stylekit1_terminal.css">
+<link rel="stylesheet" href="engine/engine.css">
 <script>
   // ?kit=1 terminal (default) · ?kit=2 aurora glass · ?kit=3 noir gold · &embed=1 hides the switch
   const KITS = {{ 2: ["stylekit2_aurora.css", "kit-aurora"], 3: ["stylekit3_noir.css", "kit-noir"] }};
