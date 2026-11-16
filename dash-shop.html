@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="kits/stylekit1_terminal.css">
 <link rel="stylesheet" href="engine/engine.css">
 <script>
-  // ?kit=1 terminal (default) · ?kit=2 aurora glass · ?kit=3 noir gold · &embed=1 hides the switch
-  const KITS = { 2: ["stylekit2_aurora.css", "kit-aurora"], 3: ["stylekit3_noir.css", "kit-noir"] };
+  // ?kit=1 terminal (default) · ?kit=2 aurora glass · ?kit=3 noir gold · ?kit=4 light · &embed=1 hides the switch
+  const KITS = { 2: ["stylekit2_aurora.css", "kit-aurora"], 3: ["stylekit3_noir.css", "kit-noir"], 4: ["stylekit4_light.css", "kit-light"] };
   const Q = new URLSearchParams(location.search);
   const KIT = Q.get("kit") || "1";
   const EMBED = Q.get("embed") === "1";
@@ -35,7 +35,7 @@
     <span class="sample-flag">DEMO · INVENTED DATA</span>
     <span class="right">
       <a class="back" href="projects.html">← Projects</a>
-      <span class="kit-switch"><a href="?kit=1" data-k="1">Terminal</a><a href="?kit=2" data-k="2">Aurora</a><a href="?kit=3" data-k="3">Noir</a></span>
+      <span class="kit-switch"><a href="?kit=1" data-k="1">Terminal</a><a href="?kit=2" data-k="2">Aurora</a><a href="?kit=3" data-k="3">Noir</a><a href="?kit=4" data-k="4">Light</a></span>
       <span><span class="live-dot"></span>LIVE</span><span id="clock"></span>
     </span>
   </div>

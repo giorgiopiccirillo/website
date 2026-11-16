@@ -21,7 +21,7 @@ for nm in names:
     <h2>{escape(t['question'])}</h2>
     <p class="meta">{len(t['blocks'])} blocks · invented data</p>
     <p class="links"><a class="go" href="{href}">Open the live demo →</a>
-      <a href="{href}?kit=1">Terminal</a><a href="{href}?kit=2">Aurora</a><a href="{href}?kit=3">Noir</a></p>
+      <a href="{href}?kit=1">Terminal</a><a href="{href}?kit=2">Aurora</a><a href="{href}?kit=3">Noir</a><a href="{href}?kit=4">Light</a></p>
   </div></article>""")
 
 PAGE = """<!doctype html>
