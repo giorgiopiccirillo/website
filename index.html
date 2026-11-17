@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Giorgio Piccirillo · Ideas, built with AI</title>
-<meta name="description" content="You bring the idea, I make it real with AI. Giorgio Piccirillo helps founders and companies turn ideas into working tools: company brains, dashboards and new products. Based in Berlin.">
+<title>Giorgio Piccirillo · AI systems for companies</title>
+<meta name="description" content="Giorgio Piccirillo builds AI systems for companies: company brains, dashboards and work automation, plus hands-on AI training for teams. Built on your own data, handed over and kept running. Based in Berlin.">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cg transform='rotate(-30 12 12)'%3E%3Ccircle cx='7.3' cy='3.2' r='1.45'/%3E%3Crect x='5.5' y='4.7' width='3.6' height='14.6' rx='1.8'/%3E%3Crect x='14.9' y='4.7' width='3.6' height='14.6' rx='1.8'/%3E%3Ccircle cx='16.7' cy='20.8' r='1.45'/%3E%3C/g%3E%3C/svg%3E">
 <style>
@@ -398,6 +398,9 @@ h1 em {
 .service li::before { content: "—"; color: #6a6a6a; margin-right: 8px; }
 .service .more { margin-top: auto; padding-top: 10px; font-size: 14px; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.3); align-self: flex-start; transition: border-color 0.25s ease; }
 .service .more:hover { border-color: #fff; }
+.service.training { margin-top: 16px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px; align-items: center; }
+.service.training > div { display: flex; flex-direction: column; gap: 12px; }
+@media (max-width: 800px) { .service.training { grid-template-columns: 1fr; gap: 16px; } }
 
 .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .project { overflow: hidden; display: flex; flex-direction: column; transition: border-color 0.3s ease, transform 0.3s ease; }
@@ -521,19 +524,19 @@ h1 em {
         <img class="intro-photo" src="giorgio.jpg" alt="" width="80" height="80">
         <span class="intro-text">
           <span class="intro-name">Giorgio Piccirillo</span>
-          <span class="intro-role">AI builder for founders and companies</span>
+          <span class="intro-role">AI systems for companies</span>
         </span>
       </div>
 
       <h1>
-        <span class="headline-line appear appear--mask" style="--d:0.42s">You bring the <em>idea</em>.</span>
-        <span class="headline-line appear appear--mask" style="--d:0.62s">I make it real.</span>
+        <span class="headline-line appear appear--mask" style="--d:0.42s">Less busywork.</span>
+        <span class="headline-line appear appear--mask" style="--d:0.62s">Better <em>answers</em>.</span>
       </h1>
 
-      <p class="lede appear appear--soft" style="--d:0.82s">You know your business. I know what AI can do with it. Together we turn your idea into a working tool, from the first conversation to the hand-over.</p>
+      <p class="lede appear appear--soft" style="--d:0.82s">I build AI systems that give your team hours back every week: answers with a source, numbers people act on, and repeated work done for them. Built on your own data and tools, handed over, and kept running.</p>
 
       <div class="hero-actions">
-        <a class="btn btn-solid appear appear--btn js-mail" href="#contact" style="--d:0.96s">Tell me your idea</a>
+        <a class="btn btn-solid appear appear--btn js-mail" href="#contact" style="--d:0.96s">Book a free call</a>
         <a class="btn btn-ghost appear appear--side" href="#process" style="--d:1.10s">How it works</a>
       </div>
     </div>
@@ -568,7 +571,7 @@ h1 em {
         <circle cx="20.2" cy="11" r="9.2" fill="#ffffff"/>
         <text x="20.2" y="14.6" font-family="Inter, sans-serif" font-weight="700" font-size="9.5" text-anchor="middle" fill="#111">●</text>
       </svg>
-      <span>Idea facilitator and builder</span>
+      <span>Built, handed over, kept running</span>
     </div>
   </footer>
 </div>
@@ -577,22 +580,12 @@ h1 em {
   <section class="section" id="services">
     <div class="section-head">
       <span class="kicker">What I do</span>
-      <h2>From <em>idea</em> to working tool.</h2>
-      <p>You do not need to know AI. You need a clear idea of what you want to change. I bring the rest.</p>
+      <h2>Hours back, <em>every week</em>.</h2>
+      <p>Three systems I build for your team, and one easy way to start. You do not need to know AI. You need a problem that costs you time or money.</p>
     </div>
     <div class="services">
       <article class="service panel">
         <span class="num">01</span>
-        <h3>Ideas into products</h3>
-        <p>You have an idea for a product, a service or a better way of working. I help you shape it, test it and build a first working version with Claude and other AI tools.</p>
-        <ul>
-          <li>From a rough idea to a clear plan</li>
-          <li>A first version you can show</li>
-          <li>Honest advice on what AI can and cannot do</li>
-        </ul>
-      </article>
-      <article class="service panel">
-        <span class="num">02</span>
         <h3>Company brains</h3>
         <p>All your company knowledge in one place that an AI keeps up to date. Your team asks a question and gets an answer that shows its source.</p>
         <ul>
@@ -602,7 +595,7 @@ h1 em {
         </ul>
       </article>
       <article class="service panel">
-        <span class="num">03</span>
+        <span class="num">02</span>
         <h3>Dashboards and reports</h3>
         <p>Your data turned into the numbers people act on: a live dashboard for the team and a clear report for leadership. Set up for your field, from finance and health to education and events.</p>
         <ul>
@@ -612,7 +605,29 @@ h1 em {
         </ul>
         <a class="more" href="gallery.html">See dashboards for your field →</a>
       </article>
+      <article class="service panel">
+        <span class="num">03</span>
+        <h3>Work automation</h3>
+        <p>The work your team repeats by hand, done for them: sorting emails, reading invoices and PDFs, filing documents and drafting replies.</p>
+        <ul>
+          <li>Hours back every week</li>
+          <li>Works with your email, files and tools</li>
+          <li>A person checks before anything goes out</li>
+        </ul>
+      </article>
     </div>
+    <article class="service panel training">
+      <div>
+        <span class="num">Start here</span>
+        <h3>AI training for your team</h3>
+        <p>A hands-on workshop on Claude or ChatGPT for daily work: what to use it for, what never to put into it, and how to check its answers. Half a day or a full day, online or on site.</p>
+      </div>
+      <ul>
+        <li>Built around your team's real tasks</li>
+        <li>Prompts and AI rules your team keeps</li>
+        <li>A clear list of what to automate next</li>
+      </ul>
+    </article>
   </section>
 
   <section class="section" id="about">
@@ -621,9 +636,9 @@ h1 em {
       <div>
         <span class="kicker">About me</span>
         <h2>Hi, I'm <em>Giorgio</em>.</h2>
-        <p>I'm Italian and I live in Berlin. By day I work in university admissions, where I built the dashboards and reports my team runs on. I co-founded HomeSettled.</p>
-        <p>Music is the other half of my life. I DJ techno as Flight Mode and house as Pulp Friction, and some of my best projects started there: a catalogue for my own record collection, and Pitch Riders, a tool that helps DJs find new vinyl.</p>
-        <p>What I enjoy most is sitting down with someone who has an idea, over a coffee or a call, and working out together how AI can make it real. You don't need to speak tech. That part is my job.</p>
+        <p>I'm Italian and I live in Berlin. By day I work in university admissions, where I built the dashboards and reports a whole team runs on every week. I co-founded HomeSettled.</p>
+        <p>I also build for myself: a catalogue that merges my record collection from many stores into one clean record, and Pitch Riders, a tool that helps DJs find new vinyl. I DJ as Flight Mode and Pulp Friction.</p>
+        <p>What I do best is take a slow, manual process and turn it into a system that runs by itself, with a person still in control. You don't need to speak tech. That part is my job.</p>
       </div>
     </div>
   </section>
@@ -631,14 +646,14 @@ h1 em {
   <section class="section" id="process">
     <div class="section-head">
       <span class="kicker">How it works</span>
-      <h2>A plan made <em>for you</em>, not a package.</h2>
-      <p>Every business is different, so every project starts by listening.</p>
+      <h2>A clear price <em>before</em> we start.</h2>
+      <p>Every project starts by listening. Then you get a written proposal: what I build, how long it takes and what it costs.</p>
     </div>
     <ol class="steps">
       <li class="step panel">
         <span class="num">01</span>
         <h3>We talk</h3>
-        <p>A free first call. You tell me your idea or the problem you want to solve.</p>
+        <p>A free first call. You tell me what slows your team down or costs you money.</p>
       </li>
       <li class="step panel">
         <span class="num">02</span>
@@ -647,8 +662,8 @@ h1 em {
       </li>
       <li class="step panel">
         <span class="num">03</span>
-        <h3>We plan together</h3>
-        <p>A tailor-made plan: what we build, in which order, how long it takes and what it costs.</p>
+        <h3>You get a proposal</h3>
+        <p>One written proposal within two working days: scope, timeline and a fixed price.</p>
       </li>
       <li class="step panel">
         <span class="num">04</span>
@@ -658,7 +673,7 @@ h1 em {
       <li class="step panel">
         <span class="num">05</span>
         <h3>You own it</h3>
-        <p>I hand it over and show your team how to use it. It is yours to keep.</p>
+        <p>I hand it over and train your team. It is yours. A monthly plan keeps it running when your work changes.</p>
       </li>
     </ol>
   </section>
@@ -667,7 +682,7 @@ h1 em {
     <div class="section-head">
       <span class="kicker">Projects</span>
       <h2>Things I have <em>built</em>.</h2>
-      <p>Dashboards, a company brain, tools for DJs and a startup. Client work is shown as a demo, so real data stays private.</p>
+      <p>Dashboards, a company brain, data tools and a startup. Client work is shown as a demo, so real data stays private.</p>
     </div>
     <a class="btn btn-solid section-cta" href="projects.html">See all projects</a>
   </section>
@@ -675,8 +690,8 @@ h1 em {
   <section class="section" id="contact">
     <div class="contact panel">
       <span class="kicker">Contact</span>
-      <h2>Got an idea? <em>Let's talk</em>.</h2>
-      <p>Tell me what you want to build or what slows your team down. The first call is free, and you leave it with a clear next step.</p>
+      <h2>What slows your team down? <em>Let's talk</em>.</h2>
+      <p>Tell me which work takes too long or which numbers you can't trust. The first call is free, and you leave it with a clear next step.</p>
       <div class="hero-actions">
         <a class="btn btn-solid js-mail" href="#contact">Send me an email</a>
         <a class="btn btn-ghost" href="projects.html">See my projects</a>
@@ -694,7 +709,7 @@ h1 em {
 (function () {
   var EMAIL = "giorgiopiccirillo89" + "@" + "gmail.com";
   Array.prototype.forEach.call(document.querySelectorAll('.js-mail'), function (a) {
-    a.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('An idea I would like to build');
+    a.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('A problem I want to solve');
   });
 
   var els = Array.prototype.slice.call(document.querySelectorAll('.appear, .hero-photo'));
