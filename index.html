@@ -467,18 +467,10 @@ h1 em {
 
 
 /* ---------- intro: who I am, before what I do ---------- */
-.intro {
-  display: inline-flex; align-items: center; gap: 12px; margin-bottom: var(--badge-mb);
-  padding: 6px 18px 6px 6px; border-radius: 999px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.14) 0%, rgba(40,40,40,0.7) 55%, rgba(10,10,10,0.85) 100%);
-  border: 1px solid rgba(255,255,255,0.16);
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  text-align: left;
-}
-.intro-photo { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; display: block; flex: none; box-shadow: 0 0 0 1px rgba(255,255,255,0.25); }
-.intro-text { display: flex; flex-direction: column; gap: 2px; line-height: 1.2; }
-.intro-name { font-size: calc(var(--badge) + 2px); font-weight: 600; letter-spacing: -0.02em; color: #fff; }
-.intro-role { font-size: var(--badge); color: #bdbdbd; letter-spacing: -0.01em; }
+.intro { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: var(--badge-mb); line-height: 1.1; }
+.intro-name { font-family: "Instrument Serif", "Times New Roman", Times, serif; font-style: italic; font-weight: 400; font-size: 40px; letter-spacing: -0.01em; color: #e3e9ff; }
+.intro-role { display: flex; align-items: center; gap: 10px; font-size: var(--badge); color: #cdd4ee; letter-spacing: -0.01em; }
+.intro-role::before, .intro-role::after { content: ""; width: 28px; height: 1px; background: rgba(255,255,255,0.45); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
@@ -521,11 +513,8 @@ h1 em {
   <main class="hero">
     <div class="hero-copy">
       <div class="intro appear appear--pop" style="--d:0.22s">
-        <img class="intro-photo" src="giorgio.jpg" alt="" width="80" height="80">
-        <span class="intro-text">
-          <span class="intro-name">Giorgio Piccirillo</span>
-          <span class="intro-role">AI systems for companies</span>
-        </span>
+        <span class="intro-name">Giorgio Piccirillo</span>
+        <span class="intro-role">AI systems for companies</span>
       </div>
 
       <h1>
