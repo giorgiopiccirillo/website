@@ -11,7 +11,7 @@
   // ?kit=1 terminal (default) · ?kit=2 aurora · ?kit=3 noir · ?kit=4 light
   const KITS = { 2: ["stylekit2_aurora.css", "kit-aurora"], 3: ["stylekit3_noir.css", "kit-noir"], 4: ["stylekit4_light.css", "kit-light"] };
   const Q = new URLSearchParams(location.search);
-  const KIT = Q.get("kit") || "4";
+  const KIT = "4";  // one look: the work is on the brain, not on its form
   if (KITS[KIT]) document.write(`<link rel="stylesheet" href="kits/${KITS[KIT][0]}">`);
 </script>
 <style>
@@ -57,8 +57,10 @@
   .pages a span:last-child { color: var(--hud-muted); font-size: 11px; white-space: nowrap; }
   .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
   @media (max-width: 900px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  .steps div { font-size: 12.5px; color: var(--hud-text-2); line-height: 1.5; }
-  .steps b { display: block; color: var(--hud-text); font-size: 13px; margin-bottom: 3px; }
+  .steps { list-style: none; margin: 0; padding: 0; counter-reset: none; }
+  .steps li { position: relative; font-size: 13.5px; color: var(--hud-text-2); line-height: 1.55; background: var(--hud-panel-2); border-radius: 10px; padding: 14px 16px; }
+  .steps b { display: block; color: var(--hud-text); font-size: 16px; margin-bottom: 4px; }
+  @media (min-width: 901px) { .steps li:not(:last-child)::after { content: "→"; position: absolute; right: -11px; top: 50%; transform: translateY(-50%); color: var(--hud-accent); font-size: 16px; } }
   .panel { min-height: 0; }
 </style>
 </head>
@@ -70,7 +72,6 @@
     <span class="sample-flag">DEMO · FICTIONAL COMPANY</span>
     <span class="right">
       <a class="back" href="projects.html">← Projects</a>
-      <span class="kit-switch"><a href="?kit=4" data-k="4">Light</a><a href="?kit=1" data-k="1">Terminal</a><a href="?kit=2" data-k="2">Aurora</a><a href="?kit=3" data-k="3">Noir</a></span>
     </span>
   </div>
 
@@ -84,34 +85,34 @@
   <div class="chips" id="chips"></div>
 
   <div class="hud-grid">
+    <section class="panel span-4 tone-6">
+      <div class="panel-head"><span class="tab">01</span><span class="title">The process</span><span class="tag">what I do in your company, step by step</span></div>
+      <ol class="steps">
+        <li><b>1 · Sources</b>The documents and data the company already trusts: handbook, policies, exports.</li>
+        <li><b>2 · Wiki</b>AI writes them into short pages, one topic each, with an owner and a date.</li>
+        <li><b>3 · Numbers</b>Counts come from the data tables, never from text. Each answer shows the export date.</li>
+        <li><b>4 · Tests</b>Questions with known answers. They run on every rebuild and catch the day it goes wrong.</li>
+      </ol>
+      <div class="panel-foot">This demo searches in your browser: no AI model, and nothing you type leaves this page. In a real setup the same brain connects to Claude, which writes the answer in full sentences and still shows the source.</div>
+    </section>
     <section class="panel span-2 tone-1">
-      <div class="panel-head"><span class="tab">01</span><span class="title">Answer</span><span class="tag" id="a-tag">waiting</span></div>
+      <div class="panel-head"><span class="tab">02</span><span class="title">Answer</span><span class="tag" id="a-tag">waiting</span></div>
       <div class="answer" id="answer"><p class="lead no">Pick a question above, or type your own.</p></div>
     </section>
     <section class="panel span-2 tone-5">
-      <div class="panel-head"><span class="tab">02</span><span class="title">How it found the answer</span><span class="tag" id="h-tag">—</span></div>
+      <div class="panel-head"><span class="tab">03</span><span class="title">How it found the answer</span><span class="tag" id="h-tag">—</span></div>
       <div class="how" id="how">The brain looks in two places: the wiki pages (rules and words) and the number tables (counts and revenue). This panel shows what it looked at.</div>
     </section>
     <section class="panel span-2 tone-3 tests">
-      <div class="panel-head"><span class="tab">03</span><span class="title">Tests</span><span class="tag">questions with known answers</span></div>
+      <div class="panel-head"><span class="tab">04</span><span class="title">Tests</span><span class="tag">questions with known answers</span></div>
       <div class="sum"><span class="big" id="t-big">—</span><span id="t-sub">Run the tests to check every answer against the truth.</span><button class="btn" id="run" style="margin-left:auto">Run the tests</button></div>
       <ul id="t-list"></ul>
       <div class="panel-foot">The same tests run every time the brain is rebuilt. A failed test means: do not trust the brain until it is fixed.</div>
     </section>
     <section class="panel span-2 tone-2">
-      <div class="panel-head"><span class="tab">04</span><span class="title">What is inside</span><span class="tag" id="p-tag"></span></div>
+      <div class="panel-head"><span class="tab">05</span><span class="title">What is inside</span><span class="tag" id="p-tag"></span></div>
       <div class="pages" id="pages"></div>
       <div class="md" id="page" style="display:none"></div>
-    </section>
-    <section class="panel span-4 tone-6">
-      <div class="panel-head"><span class="tab">05</span><span class="title">How a company brain works</span><span class="tag">your company, same steps</span></div>
-      <div class="steps">
-        <div><b>1 · Sources</b>The documents and data the company already trusts: handbook, policies, exports.</div>
-        <div><b>2 · Wiki</b>AI writes them into short pages, one topic each, with an owner and a date.</div>
-        <div><b>3 · Numbers</b>Counts come from the data tables, never from text. Each answer shows the export date.</div>
-        <div><b>4 · Tests</b>Questions with known answers. They run on every rebuild and catch the day it goes wrong.</div>
-      </div>
-      <div class="panel-foot">This demo searches in your browser: no AI model, and nothing you type leaves this page. In a real setup the same brain connects to Claude, which writes the answer in full sentences and still shows the source.</div>
     </section>
   </div>
 </div>
@@ -320,7 +321,7 @@ $("chips").innerHTML = CHIPS.map(c => `<button>${esc(c)}</button>`).join("");
 $("chips").onclick = e => { const b = e.target.closest("button"); if (b) run(b.textContent); };
 $("go").onclick = () => run($("q").value);
 $("q").addEventListener("keydown", e => { if (e.key === "Enter") run($("q").value); });
-document.querySelectorAll(".kit-switch a").forEach(a => a.classList.toggle("on", a.dataset.k === KIT));
+
 run(CHIPS[0]);
 </script>
 </body>
