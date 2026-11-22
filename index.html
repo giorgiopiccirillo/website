@@ -414,6 +414,17 @@ h1 em {
 .project .stack { margin-top: auto; padding-top: 6px; font-size: 12.5px; color: #7a7a7a; }
 .project .more { font-size: 14px; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.3); align-self: flex-start; }
 
+
+.feedback[hidden] { display: none; }
+.quotes { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 16px; }
+.quote { padding: 26px; display: flex; flex-direction: column; gap: 14px; margin: 0; }
+.quote blockquote { margin: 0; font-size: 16px; line-height: 1.6; color: #e6e6e6; letter-spacing: -0.01em; }
+.quote blockquote::before { content: "\201C"; display: block; font-family: "Instrument Serif", serif; font-size: 48px; line-height: .6; color: #6a6a6a; margin-bottom: 8px; }
+.quote figcaption { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; font-size: 13.5px; color: #9a9a9a; }
+.quote figcaption b { display: block; color: #fff; font-weight: 500; }
+.quote .work { font-size: 11.5px; color: #111; background: #d8d8d8; border-radius: 4px; padding: 3px 7px; white-space: nowrap; }
+.feedback-cta { margin-top: 22px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; color: #9a9a9a; font-size: 14px; }
+.feedback-cta[hidden] { display: none; }
 .contact { text-align: center; padding: 72px 32px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
 .contact p { color: #9a9a9a; font-size: 16px; max-width: 520px; line-height: 1.6; }
 .contact .hero-actions { margin-top: 10px; }
@@ -671,6 +682,16 @@ h1 em {
     <a class="btn btn-solid section-cta" href="projects.html">See all projects</a>
   </section>
 
+  <section class="section feedback" id="feedback" hidden>
+    <div class="section-head">
+      <span class="kicker">Feedback</span>
+      <h2>What people <em>say</em>.</h2>
+      <p>Written by the people I worked with, in their own words.</p>
+    </div>
+    <div class="quotes" id="quotes"></div>
+    <div class="feedback-cta" id="feedback-cta" hidden><span>Did we work together?</span><a class="btn btn-ghost" id="feedback-link" href="#" target="_blank" rel="noopener">Leave feedback</a></div>
+  </section>
+
   <section class="section" id="contact">
     <div class="contact panel">
       <span class="kicker">Contact</span>
@@ -757,6 +778,27 @@ h1 em {
     });
     if (!f) c.remove();
   } catch (e) { c.remove(); }
+})();
+</script>
+<script src="feedback.js?v=1"></script>
+<script>
+(function () {
+  var F = window.FEEDBACK || {}, Q = F.QUOTES || [], url = F.FORM_URL || "";
+  if (!Q.length && !url) return;  // nothing yet: keep the section hidden
+  var sec = document.getElementById("feedback"), box = document.getElementById("quotes");
+  if (!Q.length) { sec.querySelector(".section-head p").textContent = "The first notes are on their way."; box.remove(); }
+  Q.forEach(function (q) {  // textContent only: quotes come from other people
+    var fig = document.createElement("figure"); fig.className = "quote panel";
+    var bq = document.createElement("blockquote"); bq.textContent = q.quote; fig.appendChild(bq);
+    var cap = document.createElement("figcaption"), who = document.createElement("span"), nm = document.createElement("b");
+    nm.textContent = q.name; who.appendChild(nm);
+    who.appendChild(document.createTextNode([q.role, q.company].filter(Boolean).join(", ")));
+    cap.appendChild(who);
+    if (q.work) { var t = document.createElement("span"); t.className = "work"; t.textContent = q.work; cap.appendChild(t); }
+    fig.appendChild(cap); box.appendChild(fig);
+  });
+  if (url) { document.getElementById("feedback-link").href = url; document.getElementById("feedback-cta").hidden = false; }
+  sec.hidden = false;
 })();
 </script>
 </body>
