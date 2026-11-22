@@ -454,6 +454,10 @@ h1 em {
 /* ---------- dashboard carousel ---------- */
 .project.full { grid-column: 1 / -1; }
 .project.full > img { aspect-ratio: 21 / 8; }
+.project img { filter: grayscale(0.9) brightness(0.5); transition: filter 0.5s ease; }
+.project img.light { filter: grayscale(0.9) brightness(0.38); }
+.project:hover img { filter: none; }
+@media (hover: none) { .project img, .project img.light { filter: none; } }
 .dash-carousel { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 1px solid var(--border-soft); background: #05060a; }
 .dash-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.4s ease; }
 .dash-slide.on { opacity: 1; }
