@@ -399,7 +399,7 @@ h1 em {
 .service .more { margin-top: auto; padding-top: 10px; font-size: 14px; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.3); align-self: flex-start; transition: border-color 0.25s ease; }
 .service .more:hover { border-color: #fff; }
 
-.projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 .project { overflow: hidden; display: flex; flex-direction: column; transition: border-color 0.3s ease, transform 0.3s ease; }
 .project:hover { border-color: rgba(255,255,255,0.28); }
 .project.wide { grid-column: span 2; }
@@ -420,7 +420,7 @@ h1 em {
 .site-foot a { color: #9a9a9a; }
 
 @media (max-width: 1000px) {
-  .services, .projects { grid-template-columns: 1fr 1fr; }
+  .services { grid-template-columns: 1fr 1fr; }
   .services .service:last-child { grid-column: span 2; }
 }
 @media (max-width: 700px) {
@@ -457,6 +457,7 @@ h1 em {
 
 /* ---------- dashboard carousel ---------- */
 .project.full { grid-column: 1 / -1; }
+.project.full > img { aspect-ratio: 21 / 8; }
 .dash-carousel { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 1px solid var(--border-soft); background: #05060a; }
 .dash-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.4s ease; }
 .dash-slide.on { opacity: 1; }
@@ -514,23 +515,26 @@ h1 em {
   <section class="section" style="padding-top:56px">
     <div class="projects">
       <article class="project panel full" id="dashboards">
-        <div class="dash-carousel" aria-label="Dashboard demo in three looks">
-          <div class="dash-slide on" data-kit="1"><iframe data-src="dashboards.html?kit=1&amp;embed=1" title="Dashboard demo, Terminal look" tabindex="-1" loading="lazy"></iframe></div>
-          <div class="dash-slide" data-kit="2"><iframe data-src="dashboards.html?kit=2&amp;embed=1" title="Dashboard demo, Aurora look" tabindex="-1" loading="lazy"></iframe></div>
-          <div class="dash-slide" data-kit="3"><iframe data-src="dashboards.html?kit=3&amp;embed=1" title="Dashboard demo, Noir look" tabindex="-1" loading="lazy"></iframe></div>
-          <a class="dash-open" href="dashboards.html" aria-label="Open the live dashboard demo"></a>
+        <div class="dash-carousel" aria-label="Five dashboard demos, one per sector">
+          <div class="dash-slide on"><iframe data-src="dash-finance.html?embed=1" title="Finance dashboard demo" tabindex="-1" loading="lazy"></iframe></div>
+          <div class="dash-slide"><iframe data-src="dash-health.html?embed=1" title="Health dashboard demo" tabindex="-1" loading="lazy"></iframe></div>
+          <div class="dash-slide"><iframe data-src="dash-uni.html?embed=1" title="University dashboard demo" tabindex="-1" loading="lazy"></iframe></div>
+          <div class="dash-slide"><iframe data-src="dash-events.html?embed=1" title="Events dashboard demo" tabindex="-1" loading="lazy"></iframe></div>
+          <div class="dash-slide"><iframe data-src="dash-shop.html?embed=1" title="Shop dashboard demo" tabindex="-1" loading="lazy"></iframe></div>
+          <a class="dash-open" href="gallery.html" aria-label="See all five dashboard demos"></a>
           <div class="dash-dots" role="tablist">
-            <button type="button" class="on" data-i="0">Terminal</button>
-            <button type="button" data-i="1">Aurora</button>
-            <button type="button" data-i="2">Noir</button>
+            <button type="button" class="on" data-i="0">Finance</button>
+            <button type="button" data-i="1">Health</button>
+            <button type="button" data-i="2">University</button>
+            <button type="button" data-i="3">Events</button>
+            <button type="button" data-i="4">Shop</button>
           </div>
         </div>
         <div class="project-body">
-          <div class="project-top"><span class="tag">Dashboards and reports</span><span class="label">Demo version</span></div>
+          <div class="project-top"><span class="tag">Dashboards and reports</span><span class="label">5 live demos</span></div>
           <h3>Live dashboards that people actually open</h3>
-          <p>A team's numbers on one moving screen: targets against progress, problems first, and a question bar that finds the answer. One build, three looks. The same work runs every day for a real team. Here it shows a made-up online shop, so no real data leaves anyone's company.</p>
-          <a class="more" href="dashboards.html">Open the live demo →</a>
-          <a class="more" href="gallery.html">More fields: finance, health, events →</a>
+          <p>A team's numbers on one screen: targets against progress and problems first. Each field gets its own layout and its own main picture: a risk map for a lender, a bed map for a clinic, a funnel for admissions. The same work runs every day for a real team. All demo data is invented.</p>
+          <a class="more" href="gallery.html">See all five demos</a>
         </div>
       </article>
       <article class="project panel">
@@ -543,6 +547,14 @@ h1 em {
         </div>
       </article>
       <article class="project panel">
+        <div class="project-body">
+          <div class="project-top"><span class="tag">AI tool</span><span class="label">Prototype</span></div>
+          <h3>reverse-brand</h3>
+          <p>Turns a public website into a measured brand guide: fonts, colours, spacing and design tokens, plus slides and a video built from them.</p>
+          <span class="stack">Node.js · Playwright · ffmpeg</span>
+        </div>
+      </article>
+      <article class="project panel">
         <img src="shot_music-catalogue.jpg" alt="Music Catalogue screen" loading="lazy">
         <div class="project-body">
           <div class="project-top"><span class="tag">Music · For DJs</span><span class="label">Live · private</span></div>
@@ -551,7 +563,7 @@ h1 em {
           <span class="stack">Python · FastAPI · PostgreSQL</span>
         </div>
       </article>
-      <article class="project panel wide">
+      <article class="project panel">
         <img class="light" src="shot_pitchriders.jpg" alt="Pitch Riders front page" loading="lazy">
         <div class="project-body">
           <div class="project-top"><span class="tag">Music · For DJs</span><span class="label">Live</span></div>
@@ -560,21 +572,13 @@ h1 em {
           <a class="more" href="https://www.pitchriders.com" target="_blank" rel="noopener">pitchriders.com →</a>
         </div>
       </article>
-      <article class="project panel wide">
+      <article class="project panel full">
         <img class="light" src="shot_homesettled.jpg" alt="HomeSettled dashboard" loading="lazy">
         <div class="project-body">
           <div class="project-top"><span class="tag">Startup · Co-founder</span><span class="label">Pre-launch</span></div>
           <h3>HomeSettled</h3>
           <p>An arrival operating system for international students coming to Germany.</p>
           <a class="more" href="https://homesettled.de" target="_blank" rel="noopener">homesettled.de →</a>
-        </div>
-      </article>
-      <article class="project panel">
-        <div class="project-body">
-          <div class="project-top"><span class="tag">AI tool</span><span class="label">Prototype</span></div>
-          <h3>reverse-brand</h3>
-          <p>Turns a public website into a measured brand guide: fonts, colours, spacing and design tokens, plus slides and a video built from them.</p>
-          <span class="stack">Node.js · Playwright · ffmpeg</span>
         </div>
       </article>
     </div>
