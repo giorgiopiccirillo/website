@@ -16,7 +16,7 @@ for nm in names:
     href = f"dash-{nm}.html"
     fields.append(t["field"])
     note = f'<p class="note">{escape(t["note"])}</p>' if t.get("note") else ""
-    cards.append(f"""<article class="card">
+    cards.append(f"""<article class="card" id="f-{nm}">
   <a class="thumb" href="{href}" aria-label="Open the {escape(t['field'])} demo"><iframe src="{href}?embed=1" loading="lazy" tabindex="-1" title=""></iframe></a>
   <div class="body">
     <span class="field">{escape(t['field'])}</span>
@@ -25,8 +25,7 @@ for nm in names:
     <p class="links"><a class="go" href="{href}">Open the live demo →</a></p>
   </div></article>""")
 
-chips = "".join(f'<span class="chip on">{escape(f)}</span>' for f in fields) + \
-    '<span class="chip">Logistics</span><span class="chip">Insurance</span><span class="chip">Real estate</span><span class="chip">Non-profit</span><a class="chip ask" href="index.html#contact">Your field? Tell me →</a>'
+chips = '<label class="pick"><span>Show me</span><select id="pick"><option value="">all five demos</option>' + "".join(f'<option value="f-{nm}">{escape(f)}</option>' for nm, f in zip(names, fields)) + '<option value="other">another field</option></select></label><p class="any">These are five examples, not a list of limits. Logistics, insurance, real estate, non-profit or something else: the same work fits any field with data. <a href="index.html#contact">Tell me yours →</a></p>'
 
 PAGE = """<!doctype html>
 <html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,14 +37,14 @@ PAGE = """<!doctype html>
 header,main,.steps,.foot{max-width:1100px;margin:0 auto;padding:0 16px}header{padding-top:40px}
 h1{font-size:clamp(26px,4vw,40px);margin:0 0 8px;line-height:1.15}header p{color:var(--mute);max-width:62ch;margin:0 0 20px}
 .back{color:var(--mute);text-decoration:none;font-size:13px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px}.chip{font-size:12px;color:var(--mute);border:1px dashed var(--line);padding:3px 11px;border-radius:99px;text-decoration:none}
+.chips{margin:0 0 28px}.pick{display:inline-flex;align-items:center;gap:10px;font-size:14px;color:var(--mute)}.pick select{font:inherit;font-size:15px;color:var(--text);background:var(--panel);border:1px solid var(--acc);border-radius:10px;padding:8px 12px;cursor:pointer}.any{color:var(--mute);font-size:13.5px;max-width:62ch;margin:12px 0 0}.any a{color:var(--text)}.card.hide{display:none}.chip{font-size:12px;color:var(--mute);border:1px dashed var(--line);padding:3px 11px;border-radius:99px;text-decoration:none}
 .chip.on{color:var(--text);border:1px solid var(--acc);background:color-mix(in srgb,var(--acc) 12%,transparent)}.chip.ask{color:var(--text);border-style:solid}
 .grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));padding-bottom:40px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
 .thumb{display:block;position:relative;aspect-ratio:16/10;overflow:hidden;background:#000}
 .thumb iframe{position:absolute;left:0;top:0;width:1400px;height:875px;border:0;transform-origin:0 0;transform:scale(var(--s,.25));pointer-events:none}
-.body{padding:14px 16px 16px}.field{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
-h2{font-size:18px;margin:4px 0 6px;line-height:1.3}.meta{color:var(--mute);font-size:13px;margin:0 0 10px}.note{color:var(--mute);font-size:12px;margin:-4px 0 10px}
+.body{padding:14px 16px 16px}.field{display:block;font-size:24px;font-weight:700;line-height:1.2;color:var(--text);letter-spacing:-.01em}
+h2{font-size:15px;font-weight:400;color:var(--mute);margin:6px 0 8px;line-height:1.45}.steps h2,.steps>h2{color:var(--text)}.meta{color:var(--mute);font-size:13px;margin:0 0 10px}.note{color:var(--mute);font-size:12px;margin:-4px 0 10px}
 .links{display:flex;flex-wrap:wrap;gap:8px;margin:0}.links a{color:var(--mute);font-size:12px;text-decoration:none;border:1px solid var(--line);padding:2px 9px;border-radius:99px}
 .links a.go{color:var(--text);border-color:var(--acc);font-size:13px}.links a:hover{color:var(--text)}
 .steps{padding-bottom:60px}.steps h2{font-size:clamp(20px,3vw,28px);margin:0 0 6px}.steps>p{color:var(--mute);max-width:62ch;margin:0 0 18px}
@@ -71,6 +70,13 @@ h2{font-size:18px;margin:4px 0 6px;line-height:1.3}.meta{color:var(--mute);font-
 <p class="foot" style="padding:18px 0 0">Your data is messy, or you only want it to look better? Both are fine. <a href="index.html#contact">Tell me what you have →</a> · <a href="index.html#services">What else I build</a></p>
 </section>
 <script>
+  // dropdown: show one field, or all; "another field" goes to contact
+  document.getElementById("pick").addEventListener("change", e => {
+    const v = e.target.value;
+    if (v === "other") { location.href = "index.html#contact"; return; }
+    document.querySelectorAll(".card").forEach(c => c.classList.toggle("hide", !!v && c.id !== v));
+    fit();
+  });
   // scale each live preview to the width of its card
   const fit = () => document.querySelectorAll(".thumb").forEach(t => t.style.setProperty("--s", t.clientWidth / 1400));
   fit(); addEventListener("resize", fit);
