@@ -129,5 +129,7 @@
       "data": "log"
     }
   ],
-  "note": "Aggregated numbers only. No patient names or ids."
+  "note": "Aggregated numbers only. No patient names or ids.",
+  "kit": "6",
+  "look": "Clinic"
 }

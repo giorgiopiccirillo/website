@@ -4,29 +4,130 @@
   "description": "A live ticket-sales dashboard demo with invented data: fill per event, revenue, which night needs a push.",
   "brand": "DEMO CLUB · EVENTS",
   "flag": "DEMO · INVENTED DATA",
-  "back": {"href": "projects.html", "label": "← Projects"},
+  "back": {
+    "href": "projects.html",
+    "label": "← Projects"
+  },
   "field": "Events and clubs",
   "question": "Which nights are selling, and which one needs a push this week?",
   "blocks": [
-    {"type": "graph", "title": "EVENT GRAPH", "unit": "events", "tag": "4 series",
-     "fields": {"group": "series", "school": "date"}},
-    {"type": "cmdbar", "label": "ASK THE DATA"},
-    {"type": "kpis", "title": "Winter season", "tag": "12 events", "data": "kpis"},
-    {"type": "line", "title": "Tickets by week to the door", "span": 2, "data": "trend",
-     "ranges": [{"label": "Cumulative", "key": "cum"}, {"label": "Per week", "key": "week"}]},
-    {"type": "columns", "title": "Sold vs capacity", "tag": "12 events", "span": 2, "tone": 3,
-     "actual": "Sold", "targetLabel": "Capacity", "data": "columns"},
-    {"type": "card", "title": "Event card", "tag": "one row", "tone": 1,
-     "body": "<span class=\"h\">---</span>\n<span class=\"k\">event:</span>  {label}\n<span class=\"k\">series:</span> {group}\n<span class=\"k\">date:</span>   {school}\n<span class=\"h\">---</span>\n<span class=\"h\"># tickets</span>\nsold           {sold}\ncapacity       {cap}\nfill           {fill}%\nrevenue        €{revenue}\n<span class=\"h\"># rule</span>\none ticket per QR code"},
-    {"type": "donut", "title": "Ticket types", "tag": "5 types", "tone": 3,
-     "centre": "all", "sub": "tickets", "data": "types"},
-    {"type": "table", "title": "Next events", "tag": "this week", "tone": 5, "data": "upcoming",
-     "cols": [{"key": "name", "label": "Event"}, {"key": "date", "label": "Date"},
-              {"key": "fill", "label": "Fill", "num": true}, {"key": "status", "label": "Status", "pill": true}],
-     "tones": {"Sold out": "ok", "Selling": "warn", "Slow": "bad"}},
-    {"type": "ask", "title": "Ask me anything", "tag": "answers from the numbers", "tone": 2, "data": "ask"},
-    {"type": "meters", "title": "Fill by series", "tag": "sold vs capacity", "tone": 2,
-     "foot": "one square = one week of the season closed", "data": "series"},
-    {"type": "log", "title": "Sync log", "tag": "tail -f", "tone": 3, "data": "log"}
-  ]
+    {
+      "type": "graph",
+      "title": "EVENT GRAPH",
+      "unit": "events",
+      "tag": "4 series",
+      "fields": {
+        "group": "series",
+        "school": "date"
+      }
+    },
+    {
+      "type": "cmdbar",
+      "label": "ASK THE DATA"
+    },
+    {
+      "type": "kpis",
+      "title": "Winter season",
+      "tag": "12 events",
+      "data": "kpis"
+    },
+    {
+      "type": "line",
+      "title": "Tickets by week to the door",
+      "span": 2,
+      "data": "trend",
+      "ranges": [
+        {
+          "label": "Cumulative",
+          "key": "cum"
+        },
+        {
+          "label": "Per week",
+          "key": "week"
+        }
+      ]
+    },
+    {
+      "type": "columns",
+      "title": "Sold vs capacity",
+      "tag": "12 events",
+      "span": 2,
+      "tone": 3,
+      "actual": "Sold",
+      "targetLabel": "Capacity",
+      "data": "columns"
+    },
+    {
+      "type": "card",
+      "title": "Event card",
+      "tag": "one row",
+      "tone": 1,
+      "body": "<span class=\"h\">---</span>\n<span class=\"k\">event:</span>  {label}\n<span class=\"k\">series:</span> {group}\n<span class=\"k\">date:</span>   {school}\n<span class=\"h\">---</span>\n<span class=\"h\"># tickets</span>\nsold           {sold}\ncapacity       {cap}\nfill           {fill}%\nrevenue        €{revenue}\n<span class=\"h\"># rule</span>\none ticket per QR code"
+    },
+    {
+      "type": "donut",
+      "title": "Ticket types",
+      "tag": "5 types",
+      "tone": 3,
+      "centre": "all",
+      "sub": "tickets",
+      "data": "types"
+    },
+    {
+      "type": "table",
+      "title": "Next events",
+      "tag": "this week",
+      "tone": 5,
+      "data": "upcoming",
+      "cols": [
+        {
+          "key": "name",
+          "label": "Event"
+        },
+        {
+          "key": "date",
+          "label": "Date"
+        },
+        {
+          "key": "fill",
+          "label": "Fill",
+          "num": true
+        },
+        {
+          "key": "status",
+          "label": "Status",
+          "pill": true
+        }
+      ],
+      "tones": {
+        "Sold out": "ok",
+        "Selling": "warn",
+        "Slow": "bad"
+      }
+    },
+    {
+      "type": "ask",
+      "title": "Ask me anything",
+      "tag": "answers from the numbers",
+      "tone": 2,
+      "data": "ask"
+    },
+    {
+      "type": "meters",
+      "title": "Fill by series",
+      "tag": "sold vs capacity",
+      "tone": 2,
+      "foot": "one square = one week of the season closed",
+      "data": "series"
+    },
+    {
+      "type": "log",
+      "title": "Sync log",
+      "tag": "tail -f",
+      "tone": 3,
+      "data": "log"
+    }
+  ],
+  "kit": "8",
+  "look": "Afterhours"
 }

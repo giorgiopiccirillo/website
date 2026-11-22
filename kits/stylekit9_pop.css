@@ -1,0 +1,38 @@
+/* KIT 9 · POP — online shop. Cream, bold black outlines, hard shadows, bright brand colours. */
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Sans:wght@400;500;700&display=swap");
+body.hud.kit-pop{--hud-bg:#fff1df;--hud-panel:#ffffff;--hud-panel-2:#fff8ee;--hud-line:#111111;--hud-line-soft:#ead9c2;
+ --hud-text:#111111;--hud-text-2:#4a4237;--hud-muted:#857a6b;--hud-accent:#ff5a36;
+ --c1:#ff5a36;--c2:#3a5bff;--c3:#00a87e;--c4:#f5a800;--c5:#e5408f;--c6:#7c4dff;
+ --ok:#00a87e;--warn:#e09600;--bad:#e5333a;color-scheme:light;
+ --hud-font:"DM Sans",system-ui,sans-serif;--hud-r:14px;font-family:var(--hud-font);font-size:13px;
+ background:radial-gradient(#e9d6bb 1px,transparent 1.2px) 0 0/18px 18px,var(--hud-bg)}
+body.kit-pop .hud-wrap{max-width:1480px;padding:20px}
+body.kit-pop .hud-grid{gap:18px}
+body.kit-pop .hud-top{text-transform:none;letter-spacing:0;font-size:12.5px;font-weight:500}
+body.kit-pop .hud-top .brand{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:20px;background:#111;color:#fff1df;padding:4px 12px;border-radius:999px}
+body.kit-pop .sample-flag{background:#f5a800;color:#111;padding:2px 10px;border:2px solid #111;border-radius:999px}
+body.kit-pop .panel{border:2px solid #111;box-shadow:5px 5px 0 #111;padding:16px 18px}
+body.kit-pop .panel::before,body.kit-pop .panel::after{display:none}
+body.kit-pop .panel:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--tone);transition:.15s}
+body.kit-pop .panel-head{text-transform:none;letter-spacing:0;font-size:14px;color:var(--hud-text)}
+body.kit-pop .panel-head .tab{background:var(--tone);color:#fff;border:2px solid #111;border-radius:999px;padding:0 9px}
+body.kit-pop .panel-head .title{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:16px}
+body.kit-pop .panel-head .tag{color:var(--hud-text-2)}
+body.kit-pop .cmdbar{background:#fff;border:2px solid #111;border-radius:999px;box-shadow:4px 4px 0 var(--hud-accent);font-weight:500;font-size:14px;padding:12px 20px}
+body.kit-pop .cmdbar .who{color:#111;font-weight:700}
+body.kit-pop .kpis .k{background:var(--hud-panel-2);border:2px solid #111;border-radius:12px}
+body.kit-pop .kpis .k .v,body.kit-pop .kpi-value,body.kit-pop .big{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;letter-spacing:-.03em;color:var(--tone)}
+body.kit-pop .big{color:var(--hud-text)}
+body.kit-pop .kpis .k .l{text-transform:none;letter-spacing:0;font-weight:700;font-size:11.5px;color:#111}
+body.kit-pop .bar-track,body.kit-pop .meter{height:14px;border:2px solid #111;border-radius:99px;background:#fff}
+body.kit-pop .bar-fill,body.kit-pop .meter>span{border-radius:99px}
+body.kit-pop .seg{border:2px solid #111;border-radius:999px}
+body.kit-pop .seg button.on{background:#111;color:#fff}
+body.kit-pop .stage{background:#16110c;border:2px solid #111}
+body.kit-pop .stage .panel-head .title,body.kit-pop .stage .panel-head .tag{color:#fff1df}
+body.kit-pop .callout,body.kit-pop .infocard{background:#fff;color:#111;border:2px solid #111;border-radius:10px;box-shadow:3px 3px 0 var(--hud-accent)}
+body.kit-pop .callout b,body.kit-pop .infocard .t{color:#111}
+body.kit-pop .infocard .k{color:#857a6b}
+body.kit-pop .codebox,body.kit-pop .shellbox{background:#fff8ee;border:2px solid #111;color:#111}
+body.kit-pop .tree .node.on{color:#111}
+body.kit-pop .hud-tip{background:#111;color:#fff;border-radius:8px}

@@ -1,0 +1,34 @@
+/* KIT 6 · CLINIC — health. Calm white and teal, soft rounded cards, a quiet heartbeat line. */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+body.hud.kit-clinic{--hud-bg:#eef5f4;--hud-panel:#ffffff;--hud-panel-2:#f4f9f8;--hud-line:#d3e4e1;--hud-line-soft:#e3eeec;
+ --hud-text:#0f2a2e;--hud-text-2:#4b6a6d;--hud-muted:#7d9698;--hud-accent:#0e9f8e;
+ --c1:#0e9f8e;--c2:#3b7ddd;--c3:#e48a3a;--c4:#8a6fd8;--c5:#d9557a;--c6:#5fa548;
+ --ok:#1f9d63;--warn:#c98a10;--bad:#d64545;color-scheme:light;
+ --hud-font:"Manrope",system-ui,sans-serif;--hud-r:16px;font-family:var(--hud-font);font-size:13px;
+ background:radial-gradient(60% 40% at 85% 0%,rgba(14,159,142,.14),transparent 70%),radial-gradient(50% 40% at 0% 100%,rgba(59,125,221,.10),transparent 70%),var(--hud-bg)}
+body.kit-clinic .hud-wrap{max-width:1480px}
+body.kit-clinic .hud-grid{gap:16px}
+body.kit-clinic .hud-top{text-transform:none;letter-spacing:.01em;font-size:12.5px;background:#fff;border-radius:999px;padding:10px 18px;box-shadow:0 1px 2px rgba(15,42,46,.05)}
+body.kit-clinic .hud-top .brand{font-weight:800;color:var(--hud-accent)}
+body.kit-clinic .hud-top .brand::before{content:"✚";margin-right:8px}
+body.kit-clinic .panel{border:1px solid var(--hud-line-soft);box-shadow:0 1px 2px rgba(15,42,46,.04),0 12px 30px -12px rgba(15,42,46,.12);padding:18px 20px}
+body.kit-clinic .panel::before,body.kit-clinic .panel::after{display:none}
+body.kit-clinic .panel-head{text-transform:none;letter-spacing:0;font-size:13px}
+body.kit-clinic .panel-head .tab{background:color-mix(in srgb,var(--tone) 13%,white);color:var(--tone);border-radius:999px;padding:2px 9px}
+body.kit-clinic .panel-head .title{font-weight:700}
+body.kit-clinic .cmdbar{background:#fff;border:1px solid var(--hud-line);border-radius:999px;padding:12px 20px;position:relative;overflow:hidden;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='40'><path d='M0 20h120l8-12 8 26 8-22 6 8h150' fill='none' stroke='%230e9f8e' stroke-opacity='.25' stroke-width='1.5'/></svg>");background-repeat:no-repeat;background-position:right 120px center}
+body.kit-clinic .kpis .k{background:var(--hud-panel-2);border:0;border-radius:12px}
+body.kit-clinic .kpis .k .v,body.kit-clinic .kpi-value,body.kit-clinic .big{font-weight:800;letter-spacing:-.02em;color:var(--hud-text)}
+body.kit-clinic .kpis .k .l{text-transform:none;letter-spacing:0;font-size:11.5px;font-weight:600}
+body.kit-clinic .meter,body.kit-clinic .bar-track{background:#e3eeec;border-radius:99px}
+body.kit-clinic .meter>span,body.kit-clinic .bar-fill{border-radius:99px}
+body.kit-clinic .seg{border-radius:999px}
+body.kit-clinic .stage{background:radial-gradient(60% 70% at 50% 50%,#134e4c,#0a2b2d 75%);border:0;color:#e8f5f3}
+body.kit-clinic .stage .panel-head .title,body.kit-clinic .stage .panel-head .tag{color:#e8f5f3}
+body.kit-clinic .stage .panel-head .tab{background:rgba(255,255,255,.14);color:#fff}
+body.kit-clinic .callout,body.kit-clinic .infocard{background:rgba(8,36,38,.92);color:#e8f5f3;border-color:rgba(120,230,215,.4);border-radius:10px}
+body.kit-clinic .callout b,body.kit-clinic .infocard .t{color:#fff}
+body.kit-clinic .callout em,body.kit-clinic .infocard .v{color:#5fe0cf}
+body.kit-clinic .codebox,body.kit-clinic .shellbox{background:var(--hud-panel-2);border-color:var(--hud-line-soft)}
+body.kit-clinic .hud-tip{background:#0f2a2e;color:#fff}

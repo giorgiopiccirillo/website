@@ -1,0 +1,30 @@
+/* KIT 8 · AFTERHOURS — events and clubs. Black room, neon magenta and acid lime, poster type, scanlines. */
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap");
+body.hud.kit-afterhours{--hud-bg:#040206;--hud-panel:rgba(14,8,20,.82);--hud-panel-2:#120a1a;--hud-line:rgba(255,43,214,.28);--hud-line-soft:rgba(255,255,255,.07);
+ --hud-text:#f7f2ff;--hud-text-2:#b2a6c6;--hud-muted:#6e6482;--hud-accent:#ff2bd6;--lime:#c6ff3d;
+ --c1:#ff2bd6;--c2:#c6ff3d;--c3:#3de8ff;--c4:#ff8a1f;--c5:#8c5bff;--c6:#ff4d6d;
+ --hud-font:"Space Mono",ui-monospace,monospace;--hud-r:0px;font-family:var(--hud-font);font-size:12px;
+ background:radial-gradient(50% 40% at 15% 0%,rgba(255,43,214,.22),transparent 70%),radial-gradient(45% 40% at 95% 100%,rgba(61,232,255,.14),transparent 70%),var(--hud-bg)}
+body.hud.kit-afterhours::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:40;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px)}
+body.kit-afterhours .hud-top{font-size:11px;letter-spacing:.24em}
+body.kit-afterhours .hud-top .brand{font-family:"Anton",sans-serif;font-size:22px;letter-spacing:.06em;font-weight:400;color:#fff;text-shadow:0 0 18px var(--hud-accent)}
+body.kit-afterhours .sample-flag{color:var(--lime)}
+body.kit-afterhours .live-dot{background:var(--lime);box-shadow:0 0 12px var(--lime)}
+body.kit-afterhours .panel{border:1px solid var(--hud-line-soft);box-shadow:inset 0 0 0 1px rgba(0,0,0,.4),0 0 40px -24px var(--tone);overflow:hidden}
+body.kit-afterhours .panel::after{display:none}
+body.kit-afterhours .panel::before{top:0;left:-30%;right:auto;width:30%;height:2px;border:0;background:linear-gradient(90deg,transparent,var(--tone),transparent);animation:ah-sweep 3.2s linear infinite}
+@keyframes ah-sweep{to{left:110%}}
+body.kit-afterhours .panel-head{letter-spacing:.2em}
+body.kit-afterhours .panel-head .tab{background:var(--tone);color:#000;box-shadow:0 0 14px var(--tone)}
+body.kit-afterhours .panel-head .title{font-family:"Anton",sans-serif;font-weight:400;font-size:15px;letter-spacing:.08em}
+body.kit-afterhours .cmdbar{background:#000;border:1px solid var(--hud-accent);box-shadow:0 0 30px -8px var(--hud-accent),inset 0 0 20px -10px var(--hud-accent)}
+body.kit-afterhours .cmdbar .caret{background:var(--lime)}
+body.kit-afterhours .kpis .k{background:#000;border:1px solid var(--hud-line-soft);border-bottom:2px solid var(--hud-accent)}
+body.kit-afterhours .kpis .k:nth-child(2n){border-bottom-color:var(--lime)}
+body.kit-afterhours .kpis .k .v,body.kit-afterhours .kpi-value,body.kit-afterhours .big{font-family:"Anton",sans-serif;font-weight:400;font-size:40px;letter-spacing:.02em;color:#fff;text-shadow:0 0 22px color-mix(in srgb,var(--hud-accent) 70%,transparent)}
+body.kit-afterhours .kpis .k:nth-child(2n) .v{text-shadow:0 0 22px color-mix(in srgb,var(--lime) 60%,transparent)}
+body.kit-afterhours .bar-fill,body.kit-afterhours .meter>span{box-shadow:0 0 12px var(--bar,var(--m,var(--tone)))}
+body.kit-afterhours .stage{background:radial-gradient(55% 65% at 50% 50%,rgba(140,91,255,.18),transparent 70%),#020103}
+body.kit-afterhours .callout{border-color:var(--lime);background:rgba(0,0,0,.9)}
+body.kit-afterhours .callout em,body.kit-afterhours .infocard .v{color:var(--lime)}
+@media (prefers-reduced-motion:reduce){body.kit-afterhours .panel::before{animation:none;display:none}}

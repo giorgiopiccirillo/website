@@ -27,9 +27,11 @@ PAGE = """<!doctype html>
 <link rel="stylesheet" href="engine/engine.css">
 <script>
   // ?kit=1 terminal (default) · ?kit=2 aurora glass · ?kit=3 noir gold · ?kit=4 light · &embed=1 hides the switch
-  const KITS = {{ 2: ["stylekit2_aurora.css", "kit-aurora"], 3: ["stylekit3_noir.css", "kit-noir"], 4: ["stylekit4_light.css", "kit-light"] }};
+  const KITS = {{ 2: ["stylekit2_aurora.css", "kit-aurora"], 3: ["stylekit3_noir.css", "kit-noir"], 4: ["stylekit4_light.css", "kit-light"],
+    5: ["stylekit5_ledger.css", "kit-ledger"], 6: ["stylekit6_clinic.css", "kit-clinic"], 7: ["stylekit7_campus.css", "kit-campus"],
+    8: ["stylekit8_afterhours.css", "kit-afterhours"], 9: ["stylekit9_pop.css", "kit-pop"] }};
   const Q = new URLSearchParams(location.search);
-  const KIT = Q.get("kit") || "1";
+  const KIT = Q.get("kit") || "{kit}";  // each sector has its own look
   const EMBED = Q.get("embed") === "1";
   if (KITS[KIT]) document.write(`<link rel="stylesheet" href="kits/${{KITS[KIT][0]}}">`);
 </script>
@@ -53,7 +55,6 @@ PAGE = """<!doctype html>
     <span class="sample-flag">{flag}</span>
     <span class="right">
       {back}
-      <span class="kit-switch"><a href="?kit=1" data-k="1">Terminal</a><a href="?kit=2" data-k="2">Aurora</a><a href="?kit=3" data-k="3">Noir</a><a href="?kit=4" data-k="4">Light</a></span>
       <span><span class="live-dot"></span>LIVE</span><span id="clock"></span>
     </span>
   </div>
@@ -63,7 +64,6 @@ PAGE = """<!doctype html>
 <script src="kits/stylekit1_terminal.js"></script>
 <script src="engine/engine.js"></script>
 <script>
-  document.querySelectorAll(".kit-switch a").forEach(a => a.classList.toggle("on", a.dataset.k === KIT));
   ENGINE.run(JSON.parse(document.getElementById("tpl").textContent), JSON.parse(document.getElementById("data").textContent));
 </script>
 </body>
@@ -80,7 +80,7 @@ def build(name: str) -> Path:
         title=escape(tpl["title"]), description=escape(tpl.get("description", "")),
         brand=escape(tpl["brand"]), flag=escape(tpl.get("flag", "")),
         back=f'<a class="back" href="{escape(back["href"])}">{escape(back["label"])}</a>' if back else "",
-        tpl=js_json(tpl), data=js_json(data))
+        tpl=js_json(tpl), data=js_json(data), kit=escape(str(tpl.get("kit", "1"))))
     out = ROOT / f"dash-{name}.html"
     out.write_text(page, encoding="utf-8")
     return out

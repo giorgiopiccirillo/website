@@ -4,29 +4,131 @@
   "description": "A live admissions dashboard demo with invented data: applications, offers, enrolment against target, adviser workload.",
   "brand": "DEMO UNIVERSITY · ADMISSIONS",
   "flag": "DEMO · INVENTED DATA",
-  "back": {"href": "projects.html", "label": "← Projects"},
+  "back": {
+    "href": "projects.html",
+    "label": "← Projects"
+  },
   "field": "University admissions",
   "question": "Are we on target for the intake, and where do we lose applicants?",
   "blocks": [
-    {"type": "graph", "title": "PROGRAMME GRAPH", "unit": "programmes", "tag": "3 levels",
-     "fields": {"group": "level", "school": "fee"}},
-    {"type": "cmdbar", "label": "ASK THE DATA"},
-    {"type": "kpis", "title": "Intake 2027/28", "tag": "this year", "data": "kpis"},
-    {"type": "line", "title": "Applications by week", "span": 2, "data": "trend",
-     "ranges": [{"label": "Cumulative", "key": "cum"}, {"label": "Per week", "key": "week"}]},
-    {"type": "columns", "title": "Enrolled vs target", "tag": "12 programmes", "span": 2, "tone": 3,
-     "actual": "Enrolled", "targetLabel": "Target", "data": "columns"},
-    {"type": "card", "title": "Programme card", "tag": "one row", "tone": 1,
-     "body": "<span class=\"h\">---</span>\n<span class=\"k\">programme:</span> {label}\n<span class=\"k\">level:</span>     {group}\n<span class=\"k\">fee:</span>       {school}\n<span class=\"h\">---</span>\n<span class=\"h\"># funnel</span>\napplications   {applications}\noffers         {offers}\nenrolled       {enrolled}\ntarget         {target}\n<span class=\"h\"># rule</span>\none record per student"},
-    {"type": "donut", "title": "Where students come from", "tag": "top 5", "tone": 3,
-     "centre": "640", "sub": "students", "data": "countries"},
-    {"type": "table", "title": "Adviser workload", "tag": "this week", "tone": 5, "data": "advisers",
-     "cols": [{"key": "name", "label": "Adviser"}, {"key": "decided", "label": "Decided", "num": true},
-              {"key": "open", "label": "Open", "num": true}, {"key": "load", "label": "Load", "pill": true}],
-     "tones": {"On track": "ok", "Busy": "warn", "Overloaded": "bad"}},
-    {"type": "ask", "title": "Ask me anything", "tag": "answers from the numbers", "tone": 2, "data": "ask"},
-    {"type": "meters", "title": "Target by level", "tag": "enrolled vs target", "tone": 2,
-     "foot": "one square = one week of the intake closed", "data": "levels"},
-    {"type": "log", "title": "Sync log", "tag": "tail -f", "tone": 3, "data": "log"}
-  ]
+    {
+      "type": "graph",
+      "title": "PROGRAMME GRAPH",
+      "unit": "programmes",
+      "tag": "3 levels",
+      "fields": {
+        "group": "level",
+        "school": "fee"
+      }
+    },
+    {
+      "type": "cmdbar",
+      "label": "ASK THE DATA"
+    },
+    {
+      "type": "kpis",
+      "title": "Intake 2027/28",
+      "tag": "this year",
+      "data": "kpis"
+    },
+    {
+      "type": "line",
+      "title": "Applications by week",
+      "span": 2,
+      "data": "trend",
+      "ranges": [
+        {
+          "label": "Cumulative",
+          "key": "cum"
+        },
+        {
+          "label": "Per week",
+          "key": "week"
+        }
+      ]
+    },
+    {
+      "type": "columns",
+      "title": "Enrolled vs target",
+      "tag": "12 programmes",
+      "span": 2,
+      "tone": 3,
+      "actual": "Enrolled",
+      "targetLabel": "Target",
+      "data": "columns"
+    },
+    {
+      "type": "card",
+      "title": "Programme card",
+      "tag": "one row",
+      "tone": 1,
+      "body": "<span class=\"h\">---</span>\n<span class=\"k\">programme:</span> {label}\n<span class=\"k\">level:</span>     {group}\n<span class=\"k\">fee:</span>       {school}\n<span class=\"h\">---</span>\n<span class=\"h\"># funnel</span>\napplications   {applications}\noffers         {offers}\nenrolled       {enrolled}\ntarget         {target}\n<span class=\"h\"># rule</span>\none record per student"
+    },
+    {
+      "type": "donut",
+      "title": "Where students come from",
+      "tag": "top 5",
+      "tone": 3,
+      "centre": "640",
+      "sub": "students",
+      "data": "countries"
+    },
+    {
+      "type": "table",
+      "title": "Adviser workload",
+      "tag": "this week",
+      "tone": 5,
+      "data": "advisers",
+      "cols": [
+        {
+          "key": "name",
+          "label": "Adviser"
+        },
+        {
+          "key": "decided",
+          "label": "Decided",
+          "num": true
+        },
+        {
+          "key": "open",
+          "label": "Open",
+          "num": true
+        },
+        {
+          "key": "load",
+          "label": "Load",
+          "pill": true
+        }
+      ],
+      "tones": {
+        "On track": "ok",
+        "Busy": "warn",
+        "Overloaded": "bad"
+      }
+    },
+    {
+      "type": "ask",
+      "title": "Ask me anything",
+      "tag": "answers from the numbers",
+      "tone": 2,
+      "data": "ask"
+    },
+    {
+      "type": "meters",
+      "title": "Target by level",
+      "tag": "enrolled vs target",
+      "tone": 2,
+      "foot": "one square = one week of the intake closed",
+      "data": "levels"
+    },
+    {
+      "type": "log",
+      "title": "Sync log",
+      "tag": "tail -f",
+      "tone": 3,
+      "data": "log"
+    }
+  ],
+  "kit": "7",
+  "look": "Campus"
 }

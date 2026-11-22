@@ -1,0 +1,23 @@
+/* KIT 5 · LEDGER — finance. Deep green-black, graph-paper grid, emerald + brass, mono numbers. */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap");
+body.hud.kit-ledger{--hud-bg:#06100e;--hud-panel:rgba(10,24,21,.86);--hud-panel-2:#0d1f1b;--hud-line:rgba(190,220,200,.16);--hud-line-soft:rgba(190,220,200,.09);
+ --hud-text:#eef3ea;--hud-text-2:#9fb3a8;--hud-muted:#62786d;--hud-accent:#3ddc97;--brass:#d6b25e;
+ --c1:#3ddc97;--c2:#d6b25e;--c3:#5aa9e6;--c4:#e2725b;--c5:#b48cf2;--c6:#7fd1c7;
+ --hud-font:"IBM Plex Sans",system-ui,sans-serif;--hud-r:3px;font-family:var(--hud-font);font-size:12.5px;
+ background:linear-gradient(rgba(61,220,151,.035) 1px,transparent 1px) 0 0/24px 24px,linear-gradient(90deg,rgba(61,220,151,.035) 1px,transparent 1px) 0 0/24px 24px,radial-gradient(70% 50% at 50% 0%,rgba(61,220,151,.10),transparent 70%),var(--hud-bg)}
+body.kit-ledger .hud-top{border:1px solid var(--hud-line);background:rgba(10,24,21,.9);padding:9px 14px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em}
+body.kit-ledger .hud-top .brand{color:var(--brass)}
+body.kit-ledger .live-dot{background:var(--hud-accent);box-shadow:0 0 10px var(--hud-accent)}
+body.kit-ledger .panel{border:1px solid var(--hud-line-soft);border-top:2px solid var(--tone);backdrop-filter:blur(6px)}
+body.kit-ledger .panel::before,body.kit-ledger .panel::after{display:none}
+body.kit-ledger .panel-head{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em}
+body.kit-ledger .panel-head .tab{background:transparent;color:var(--tone);border:1px solid var(--tone);padding:0 6px}
+body.kit-ledger .cmdbar{font-family:"IBM Plex Mono",monospace;border-color:var(--hud-line);background:#081613;border-left:3px solid var(--hud-accent)}
+body.kit-ledger .kpi-value,body.kit-ledger .big,body.kit-ledger .kpis .k .v{font-family:"IBM Plex Mono",monospace;font-weight:300;letter-spacing:-.02em;color:var(--hud-text)}
+body.kit-ledger .kpis .k{background:#081613;border-color:var(--hud-line-soft);border-left:2px solid var(--brass)}
+body.kit-ledger .kpis .k .v{font-size:30px}
+body.kit-ledger .kpis .k .l{font-family:"IBM Plex Mono",monospace;color:var(--brass)}
+body.kit-ledger .stage{background:radial-gradient(60% 70% at 50% 50%,rgba(61,220,151,.08),transparent 70%),#040b09}
+body.kit-ledger .callout{border-color:var(--hud-accent);background:rgba(4,11,9,.92);font-family:"IBM Plex Mono",monospace}
+body.kit-ledger .callout em,body.kit-ledger .infocard .v{color:var(--hud-accent)}
+body.kit-ledger table.t td{font-family:"IBM Plex Mono",monospace}

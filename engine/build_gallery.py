@@ -17,13 +17,12 @@ for nm in names:
     fields.append(t["field"])
     note = f'<p class="note">{escape(t["note"])}</p>' if t.get("note") else ""
     cards.append(f"""<article class="card">
-  <a class="thumb" href="{href}" aria-label="Open the {escape(t['field'])} demo"><iframe src="{href}?embed=1&kit=2" loading="lazy" tabindex="-1" title=""></iframe></a>
+  <a class="thumb" href="{href}" aria-label="Open the {escape(t['field'])} demo"><iframe src="{href}?embed=1" loading="lazy" tabindex="-1" title=""></iframe></a>
   <div class="body">
     <span class="field">{escape(t['field'])}</span>
     <h2>{escape(t['question'])}</h2>
-    <p class="meta">Live demo · invented data</p>{note}
-    <p class="links"><a class="go" href="{href}">Open the live demo →</a>
-      <a href="{href}?kit=1">Terminal</a><a href="{href}?kit=2">Aurora</a><a href="{href}?kit=3">Noir</a><a href="{href}?kit=4">Light</a></p>
+    <p class="meta">Live demo · {escape(t.get('look', ''))} look · invented data</p>{note}
+    <p class="links"><a class="go" href="{href}">Open the live demo →</a></p>
   </div></article>""")
 
 chips = "".join(f'<span class="chip on">{escape(f)}</span>' for f in fields) + \
@@ -57,7 +56,7 @@ h2{font-size:18px;margin:4px 0 6px;line-height:1.3}.meta{color:var(--mute);font-
 @media (prefers-reduced-motion:reduce){.thumb iframe{display:none}}
 </style></head><body>
 <header><a class="back" href="projects.html">← Projects</a><h1>One engine. Your field.</h1>
-<p>The same building blocks, set up for the questions of your sector. Open a demo, try it, pick a look. All numbers are invented.</p>
+<p>The same building blocks, set up for the questions of your sector. Each one has its own look, made for its sector. Open a demo and try it. All numbers are invented.</p>
 <div class="chips">{chips}</div></header>
 <main><div class="grid">
 {cards}
