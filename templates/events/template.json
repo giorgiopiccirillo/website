@@ -12,29 +12,27 @@
   "question": "Which nights are selling, and which one needs a push this week?",
   "blocks": [
     {
-      "type": "graph",
-      "title": "EVENT GRAPH",
-      "unit": "events",
-      "tag": "4 series",
-      "fields": {
-        "group": "series",
-        "school": "date"
-      }
+      "type": "lineup",
+      "title": "The winter line-up",
+      "tag": "12 nights · fill per night",
+      "span": 4,
+      "tone": 1
     },
     {
-      "type": "cmdbar",
-      "label": "ASK THE DATA"
-    },
-    {
-      "type": "kpis",
-      "title": "Winter season",
-      "tag": "12 events",
-      "data": "kpis"
+      "type": "countdown",
+      "title": "Doors open",
+      "tag": "next night",
+      "span": 1,
+      "tone": 2,
+      "event": "Low Tide · House · Sat 13 Dec",
+      "hours": 40.5,
+      "left": 40,
+      "sold": 12
     },
     {
       "type": "line",
-      "title": "Tickets by week to the door",
-      "span": 2,
+      "title": "Night Shift · tickets to the door",
+      "span": 3,
       "data": "trend",
       "ranges": [
         {
@@ -48,21 +46,12 @@
       ]
     },
     {
-      "type": "columns",
-      "title": "Sold vs capacity",
-      "tag": "12 events",
-      "span": 2,
+      "type": "log",
+      "title": "Sales feed",
+      "tag": "tail -f",
       "tone": 3,
-      "actual": "Sold",
-      "targetLabel": "Capacity",
-      "data": "columns"
-    },
-    {
-      "type": "card",
-      "title": "Event card",
-      "tag": "one row",
-      "tone": 1,
-      "body": "<span class=\"h\">---</span>\n<span class=\"k\">event:</span>  {label}\n<span class=\"k\">series:</span> {group}\n<span class=\"k\">date:</span>   {school}\n<span class=\"h\">---</span>\n<span class=\"h\"># tickets</span>\nsold           {sold}\ncapacity       {cap}\nfill           {fill}%\nrevenue        €{revenue}\n<span class=\"h\"># rule</span>\none ticket per QR code"
+      "data": "log",
+      "span": 2
     },
     {
       "type": "donut",
@@ -71,46 +60,8 @@
       "tone": 3,
       "centre": "all",
       "sub": "tickets",
-      "data": "types"
-    },
-    {
-      "type": "table",
-      "title": "Next events",
-      "tag": "this week",
-      "tone": 5,
-      "data": "upcoming",
-      "cols": [
-        {
-          "key": "name",
-          "label": "Event"
-        },
-        {
-          "key": "date",
-          "label": "Date"
-        },
-        {
-          "key": "fill",
-          "label": "Fill",
-          "num": true
-        },
-        {
-          "key": "status",
-          "label": "Status",
-          "pill": true
-        }
-      ],
-      "tones": {
-        "Sold out": "ok",
-        "Selling": "warn",
-        "Slow": "bad"
-      }
-    },
-    {
-      "type": "ask",
-      "title": "Ask me anything",
-      "tag": "answers from the numbers",
-      "tone": 2,
-      "data": "ask"
+      "data": "types",
+      "span": 1
     },
     {
       "type": "meters",
@@ -118,16 +69,11 @@
       "tag": "sold vs capacity",
       "tone": 2,
       "foot": "one square = one week of the season closed",
-      "data": "series"
-    },
-    {
-      "type": "log",
-      "title": "Sync log",
-      "tag": "tail -f",
-      "tone": 3,
-      "data": "log"
+      "data": "series",
+      "span": 1
     }
   ],
   "kit": "8",
-  "look": "Afterhours"
+  "look": "Afterhours",
+  "layout": "events"
 }

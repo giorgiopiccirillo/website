@@ -14,7 +14,7 @@
     `<div class="panel-head"><span class="tab">${String(n).padStart(2, "0")}</span>` +
     `<span class="title">${cfg.title || ""}</span><span class="tag">${cfg.tag || ""}</span></div>`;
   const panel = (n, cfg, inner, extra = "") =>
-    `<section class="panel${cfg.tone ? " tone-" + cfg.tone : ""}${cfg.span ? " span-" + cfg.span : ""}${extra}">${head(n, cfg)}${inner}` +
+    `<section class="panel${cfg.tone ? " tone-" + cfg.tone : ""}${cfg.span ? " span-" + cfg.span : ""}${cfg.rows ? " rows-" + cfg.rows : ""}${cfg.stack ? " stack" : ""}${extra}">${head(n, cfg)}${inner}` +
     `${cfg.foot ? `<div class="panel-foot">${cfg.foot}</div>` : ""}</section>`;
   const fill = (tpl, o) => tpl.replace(/\{(\w+)\}/g, (_, k) => (o[k] == null ? "" : o[k]));
 
@@ -301,13 +301,14 @@
       }
     };
     const root = document.getElementById("root");
+    if (tpl.layout) document.body.classList.add("layout-" + tpl.layout);
     const made = []; let n = 0;
     tpl.blocks.forEach(cfg => {
       const make = BLOCKS[cfg.type];
       if (!make) { console.warn("unknown block", cfg.type); return; }
       const outside = OUTSIDE.has(cfg.type);
       const b = make(cfg, data, ctx, n);
-      if (cfg.type !== "cmdbar") n++;
+      if (!["cmdbar", "headline", "ticker"].includes(cfg.type)) n++;
       made.push({ b, outside });
     });
     const wrap = html => { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstElementChild; };

@@ -56,7 +56,7 @@ h2{font-size:18px;margin:4px 0 6px;line-height:1.3}.meta{color:var(--mute);font-
 @media (prefers-reduced-motion:reduce){.thumb iframe{display:none}}
 </style></head><body>
 <header><a class="back" href="projects.html">← Projects</a><h1>One engine. Your field.</h1>
-<p>The same building blocks, set up for the questions of your sector. Each one has its own look, made for its sector. Open a demo and try it. All numbers are invented.</p>
+<p>Every sector gets its own layout, its own main picture and its own look, built around the question that sector asks. Open a demo and try it. All numbers are invented.</p>
 <div class="chips">{chips}</div></header>
 <main><div class="grid">
 {cards}

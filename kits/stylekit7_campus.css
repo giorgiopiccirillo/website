@@ -31,3 +31,9 @@ body.kit-campus .callout b,body.kit-campus .infocard .t{color:#fff;font-family:"
 body.kit-campus .callout em,body.kit-campus .infocard .v{color:#e7c27a}
 body.kit-campus .codebox,body.kit-campus .shellbox{background:var(--hud-panel-2);border-color:var(--hud-line-soft)}
 body.kit-campus .hud-tip{background:#1b2140;color:#fff}
+body.kit-campus .headline h1{font-family:"Fraunces",serif;font-weight:300;letter-spacing:-.01em;max-width:26ch}
+body.kit-campus .headline h1::first-line{font-style:italic}
+body.kit-campus .headline .kicker{color:var(--crimson);font-weight:600}
+body.kit-campus .headline p{font-size:17px;border-left:2px solid var(--crimson);padding-left:14px}
+body.kit-campus .f-bar b{font-family:"Fraunces",serif;font-weight:300}
+body.kit-campus .f-l{font-family:"Fraunces",serif}

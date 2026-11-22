@@ -12,66 +12,34 @@
   "question": "Where is the risk in the loan book, and how full are our limits?",
   "blocks": [
     {
-      "type": "graph",
-      "title": "LOAN BOOK GRAPH",
-      "unit": "segments",
-      "tag": "4 product lines",
-      "fields": {
-        "group": "product",
-        "school": "limit"
-      }
-    },
-    {
-      "type": "cmdbar",
-      "label": "ASK THE DATA"
+      "type": "ticker"
     },
     {
       "type": "kpis",
-      "title": "Loan book",
+      "title": "Book today",
       "tag": "this half-year",
-      "data": "kpis"
+      "data": "kpis",
+      "span": 1,
+      "rows": 2,
+      "stack": true
     },
     {
-      "type": "line",
-      "title": "Applications by week",
+      "type": "riskmap",
+      "title": "Risk map",
+      "tag": "limit used vs arrears · bubble = balance",
+      "span": 3,
+      "rows": 2,
+      "tone": 4
+    },
+    {
+      "type": "hbars",
+      "title": "Limit used by segment",
+      "tag": "fullest first",
+      "data": "columns",
+      "sort": "use",
       "span": 2,
-      "data": "trend",
-      "ranges": [
-        {
-          "label": "Cumulative",
-          "key": "cum"
-        },
-        {
-          "label": "Per week",
-          "key": "week"
-        }
-      ]
-    },
-    {
-      "type": "columns",
-      "title": "Balance vs limit (€M)",
-      "tag": "12 segments",
-      "span": 2,
-      "tone": 3,
-      "actual": "Balance",
-      "targetLabel": "Limit",
-      "data": "columns"
-    },
-    {
-      "type": "card",
-      "title": "Segment card",
-      "tag": "one row",
-      "tone": 1,
-      "body": "<span class=\"h\">---</span>\n<span class=\"k\">segment:</span> {label}\n<span class=\"k\">product:</span> {group}\n<span class=\"k\">limit:</span>   €{limit}M\n<span class=\"h\">---</span>\n<span class=\"h\"># book</span>\nloans          {loans}\nbalance        €{balance}M\nlimit used     {use}%\narrears        {arrears}%\n<span class=\"h\"># rule</span>\none record per loan id"
-    },
-    {
-      "type": "donut",
-      "title": "Portfolio by product",
-      "tag": "4 lines",
-      "tone": 3,
-      "centre": "all",
-      "sub": "balance",
-      "data": "lines"
+      "tone": 2,
+      "warn": 0
     },
     {
       "type": "table",
@@ -104,31 +72,35 @@
         "Watch": "warn",
         "Late": "warn",
         "Default risk": "bad"
-      }
+      },
+      "span": 2
+    },
+    {
+      "type": "line",
+      "title": "Applications by week",
+      "span": 3,
+      "data": "trend",
+      "ranges": [
+        {
+          "label": "Cumulative",
+          "key": "cum"
+        },
+        {
+          "label": "Per week",
+          "key": "week"
+        }
+      ]
     },
     {
       "type": "ask",
       "title": "Ask me anything",
       "tag": "answers from the numbers",
       "tone": 2,
-      "data": "ask"
-    },
-    {
-      "type": "meters",
-      "title": "Limit use by product",
-      "tag": "balance vs limit",
-      "tone": 2,
-      "foot": "one square = one week of the half-year closed",
-      "data": "usage"
-    },
-    {
-      "type": "log",
-      "title": "Sync log",
-      "tag": "tail -f",
-      "tone": 3,
-      "data": "log"
+      "data": "ask",
+      "span": 1
     }
   ],
   "kit": "5",
-  "look": "Ledger"
+  "look": "Ledger",
+  "layout": "finance"
 }

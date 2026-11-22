@@ -12,18 +12,13 @@
   "question": "Which products and markets are selling, and are we on target?",
   "blocks": [
     {
-      "type": "graph",
-      "title": "PRODUCT GRAPH",
-      "unit": "products",
-      "tag": "6 markets",
-      "fields": {
-        "group": "market",
-        "school": "category"
-      }
-    },
-    {
-      "type": "cmdbar",
-      "label": "ASK THE DATA"
+      "type": "citymap",
+      "title": "Where the orders go",
+      "tag": "6 markets · roasted in Vienna",
+      "data": "bars",
+      "span": 3,
+      "rows": 2,
+      "tone": 1
     },
     {
       "type": "kpi",
@@ -33,47 +28,16 @@
       "name": "one order per checkout",
       "sub": "paid and shipped",
       "foot": "refunds and test orders left out",
-      "data": "kpi"
+      "data": "kpi",
+      "span": 1,
+      "rows": 2
     },
     {
-      "type": "bars",
-      "title": "Orders per market",
-      "tag": "LIVE",
-      "tone": 4,
-      "foot": "all 6 markets",
-      "data": "bars"
-    },
-    {
-      "type": "card",
-      "title": "Product card",
-      "tag": "one row",
-      "tone": 1,
-      "body": "<span class=\"h\">---</span>\n<span class=\"k\">product:</span>  {label}\n<span class=\"k\">market:</span>   {group} ({code})\n<span class=\"k\">category:</span> {school}\n<span class=\"k\">period:</span>   this quarter\n<span class=\"h\">---</span>\n<span class=\"h\"># funnel</span>\nvisits         {visits}\ncarts          {carts}\norders         {orders}\n<span class=\"h\"># rule</span>\none order per checkout\nrefunds left out"
-    },
-    {
-      "type": "tree",
-      "title": "Market → category",
-      "tag": "drill down",
-      "tone": 5,
-      "cmd": "$ filter market=",
-      "loaded": "orders loaded",
-      "data": "tree"
-    },
-    {
-      "type": "donut",
-      "title": "Sales channels",
-      "tag": "6 channels",
-      "tone": 3,
-      "centre": "44%",
-      "sub": "web shop",
-      "data": "channels"
-    },
-    {
-      "type": "log",
-      "title": "Sync log",
-      "tag": "tail -f",
-      "tone": 3,
-      "data": "log"
+      "type": "shelf",
+      "title": "Top products this quarter",
+      "tag": "visits → carts → orders",
+      "span": 4,
+      "tone": 2
     },
     {
       "type": "stream",
@@ -83,7 +47,18 @@
       "unit": "today",
       "item": "orders",
       "foot": "last 36 days, newest on the right",
-      "data": "stream"
+      "data": "stream",
+      "span": 2
+    },
+    {
+      "type": "donut",
+      "title": "Sales channels",
+      "tag": "6 channels",
+      "tone": 3,
+      "centre": "44%",
+      "sub": "web shop",
+      "data": "channels",
+      "span": 1
     },
     {
       "type": "meters",
@@ -91,9 +66,11 @@
       "tag": "quarter plan",
       "tone": 2,
       "foot": "one square = one week of the quarter closed",
-      "data": "meters"
+      "data": "meters",
+      "span": 1
     }
   ],
   "kit": "9",
-  "look": "Pop"
+  "look": "Pop",
+  "layout": "shop"
 }
