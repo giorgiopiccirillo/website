@@ -23,8 +23,8 @@ PAGE = """<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{description}">
-<link rel="stylesheet" href="kits/stylekit1_terminal.css">
-<link rel="stylesheet" href="engine/engine.css?v=2">
+<link rel="stylesheet" href="kits/stylekit1_terminal.css?v=3">
+<link rel="stylesheet" href="engine/engine.css?v=3">
 <script>
   // ?kit=1 terminal (default) · ?kit=2 aurora glass · ?kit=3 noir gold · ?kit=4 light · &embed=1 hides the switch
   const KITS = {{ 2: ["stylekit2_aurora.css", "kit-aurora"], 3: ["stylekit3_noir.css", "kit-noir"], 4: ["stylekit4_light.css", "kit-light"],
@@ -33,14 +33,14 @@ PAGE = """<!doctype html>
   const Q = new URLSearchParams(location.search);
   const KIT = Q.get("kit") || "{kit}";  // each sector has its own look
   const EMBED = Q.get("embed") === "1";
-  if (KITS[KIT]) document.write(`<link rel="stylesheet" href="kits/${{KITS[KIT][0]}}?v=2">`);
+  if (KITS[KIT]) document.write(`<link rel="stylesheet" href="kits/${{KITS[KIT][0]}}?v=3">`);
 </script>
 <style>
   .kit-switch {{ display: flex; gap: 6px; }}
   .kit-switch a {{ color: var(--hud-muted); text-decoration: none; border: 1px solid var(--hud-line); padding: 2px 8px; border-radius: var(--hud-r); }}
   .kit-switch a.on {{ color: var(--hud-text); border-color: var(--hud-accent); }}
   .back {{ color: var(--hud-muted); text-decoration: none; border: 1px solid var(--hud-line); padding: 2px 8px; border-radius: var(--hud-r); }}
-  body.embed .kit-switch, body.embed .back {{ display: none; }}
+  body.embed .kit-switch, body.embed .back, body.embed .legal {{ display: none; }}
   body.embed {{ overflow: hidden; }}
 </style>
 </head>
@@ -59,11 +59,12 @@ PAGE = """<!doctype html>
     </span>
   </div>
 </div>
+<p class="legal" style="margin:24px 0 8px;font-size:11px;opacity:.7"><a href="impressum.html" style="color:inherit">Impressum</a> · <a href="privacy.html" style="color:inherit">Privacy</a></p>
 <script id="tpl" type="application/json">{tpl}</script>
 <script id="data" type="application/json">{data}</script>
 <script src="kits/stylekit1_terminal.js"></script>
-<script src="engine/engine.js?v=2"></script>
-<script src="engine/blocks_sector.js?v=2"></script>
+<script src="engine/engine.js?v=3"></script>
+<script src="engine/blocks_sector.js?v=3"></script>
 <script>
   ENGINE.run(JSON.parse(document.getElementById("tpl").textContent), JSON.parse(document.getElementById("data").textContent));
 </script>

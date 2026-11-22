@@ -1,5 +1,5 @@
 /* KIT 5 · LEDGER — finance. Deep green-black, graph-paper grid, emerald + brass, mono numbers. */
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap");
+@import url("../fonts/ibmplexmono-ibmplexsans.css");
 body.hud.kit-ledger{--hud-bg:#06100e;--hud-panel:rgba(10,24,21,.86);--hud-panel-2:#0d1f1b;--hud-line:rgba(190,220,200,.16);--hud-line-soft:rgba(190,220,200,.09);
  --hud-text:#eef3ea;--hud-text-2:#9fb3a8;--hud-muted:#62786d;--hud-accent:#3ddc97;--brass:#d6b25e;
  --c1:#3ddc97;--c2:#d6b25e;--c3:#5aa9e6;--c4:#e2725b;--c5:#b48cf2;--c6:#7fd1c7;

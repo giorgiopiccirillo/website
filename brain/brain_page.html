@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Company brain demo · Giorgio Piccirillo</title>
 <meta name="description" content="Ask a company brain a question. Every answer shows its source, and the tests prove the answers are right. Fictional company, runs in your browser.">
-<link rel="stylesheet" href="kits/stylekit1_terminal.css">
-<link rel="stylesheet" href="engine/engine.css">
+<link rel="stylesheet" href="kits/stylekit1_terminal.css?v=3">
+<link rel="stylesheet" href="engine/engine.css?v=3">
 <script>
   // ?kit=1 terminal (default) · ?kit=2 aurora · ?kit=3 noir · ?kit=4 light
   const KITS = { 2: ["stylekit2_aurora.css", "kit-aurora"], 3: ["stylekit3_noir.css", "kit-noir"], 4: ["stylekit4_light.css", "kit-light"] };
   const Q = new URLSearchParams(location.search);
   const KIT = "4";  // one look: the work is on the brain, not on its form
-  if (KITS[KIT]) document.write(`<link rel="stylesheet" href="kits/${KITS[KIT][0]}">`);
+  if (KITS[KIT]) document.write(`<link rel="stylesheet" href="kits/${KITS[KIT][0]}?v=3">`);
 </script>
 <style>
   .kit-switch { display: flex; gap: 6px; }
@@ -117,6 +117,7 @@
   </div>
 </div>
 
+<div class="hud-wrap" style="padding-top:0"><p class="legal" style="margin:24px 0 8px;font-size:11px;opacity:.7"><a href="impressum.html" style="color:inherit">Impressum</a> · <a href="privacy.html" style="color:inherit">Privacy</a></p></div>
 <script>
 const B = /*BRAIN_DATA*/;
 const $ = id => document.getElementById(id);

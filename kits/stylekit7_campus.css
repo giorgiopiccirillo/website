@@ -1,5 +1,5 @@
 /* KIT 7 · CAMPUS — university. Ivory paper, Oxford blue and crimson, editorial serif numbers. */
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700&family=Source+Sans+3:wght@400;500;600&display=swap");
+@import url("../fonts/fraunces-sourcesans3.css");
 body.hud.kit-campus{--hud-bg:#f5efe3;--hud-panel:#fffcf5;--hud-panel-2:#f8f2e6;--hud-line:#ddd2bd;--hud-line-soft:#e9e0cd;
  --hud-text:#1b2140;--hud-text-2:#545a73;--hud-muted:#8a8676;--hud-accent:#1f3a8a;--crimson:#a3232c;
  --c1:#1f3a8a;--c2:#a3232c;--c3:#2f7d5b;--c4:#bf861b;--c5:#7a4fa0;--c6:#3c8fb0;

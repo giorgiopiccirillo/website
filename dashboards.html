@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dashboard demo · Giorgio Piccirillo</title>
 <meta name="description" content="A live dashboard demo with invented data, in three looks: Terminal, Aurora and Noir.">
-<link rel="stylesheet" href="kits/stylekit1_terminal.css">
+<link rel="stylesheet" href="kits/stylekit1_terminal.css?v=3">
 <script>
   // ?kit=1 terminal (default) · ?kit=2 aurora glass · ?kit=3 noir gold · &embed=1 hides the switch
   const KITS = { 2: ["stylekit2_aurora.css", "kit-aurora"], 3: ["stylekit3_noir.css", "kit-noir"] };
   const Q = new URLSearchParams(location.search);
   const KIT = Q.get("kit") || "1";
   const EMBED = Q.get("embed") === "1";
-  if (KITS[KIT]) document.write(`<link rel="stylesheet" href="kits/${KITS[KIT][0]}">`);
+  if (KITS[KIT]) document.write(`<link rel="stylesheet" href="kits/${KITS[KIT][0]}?v=3">`);
 </script>
 <style>
   .kit-switch { display: flex; gap: 6px; }
@@ -277,5 +277,6 @@ setInterval(() => { const s = sq.children; [...s].forEach((e, i) => e.classList.
 HUD.clock(document.getElementById("clock"));
 startTyper();
 </script>
+<p class="legal" style="max-width:1100px;margin:24px auto;padding:0 16px;font-size:12px;opacity:.65;font-family:inherit"><a href="impressum.html" style="color:inherit">Impressum</a> · <a href="privacy.html" style="color:inherit">Privacy</a></p>
 </body>
 </html>

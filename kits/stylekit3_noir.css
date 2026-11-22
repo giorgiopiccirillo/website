@@ -3,7 +3,7 @@
    The "private bank / luxury watch" look. Load AFTER stylekit1_terminal.css
    and add class "kit-noir" to <body>. Data colours stay Kit 1's validated set.
    ========================================================================== */
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap");
+@import url("../fonts/cormorantgaramond-inter.css");
 
 body.hud.kit-noir {
   --hud-bg: #050505;

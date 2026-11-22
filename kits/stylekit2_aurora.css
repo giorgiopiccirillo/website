@@ -3,7 +3,7 @@
    Load AFTER stylekit1_terminal.css (it reuses Kit 1's markup and JS) and add
    class "kit-aurora" to <body>. Data colours stay Kit 1's validated set.
    ========================================================================== */
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap");
+@import url("../fonts/spacegrotesk-inter.css");
 
 body.hud.kit-aurora {
   --hud-bg: #060814;

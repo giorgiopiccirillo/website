@@ -1,5 +1,5 @@
 /* KIT 8 · AFTERHOURS — events and clubs. Black room, neon magenta and acid lime, poster type, scanlines. */
-@import url("https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap");
+@import url("../fonts/anton-spacemono.css");
 body.hud.kit-afterhours{--hud-bg:#040206;--hud-panel:rgba(14,8,20,.82);--hud-panel-2:#120a1a;--hud-line:rgba(255,43,214,.28);--hud-line-soft:rgba(255,255,255,.07);
  --hud-text:#f7f2ff;--hud-text-2:#b2a6c6;--hud-muted:#6e6482;--hud-accent:#ff2bd6;--lime:#c6ff3d;
  --c1:#ff2bd6;--c2:#c6ff3d;--c3:#3de8ff;--c4:#ff8a1f;--c5:#8c5bff;--c6:#ff4d6d;

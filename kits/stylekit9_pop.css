@@ -1,5 +1,5 @@
 /* KIT 9 · POP — online shop. Cream, bold black outlines, hard shadows, bright brand colours. */
-@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Sans:wght@400;500;700&display=swap");
+@import url("../fonts/bricolagegrotesque-dmsans.css");
 body.hud.kit-pop{--hud-bg:#fff1df;--hud-panel:#ffffff;--hud-panel-2:#fff8ee;--hud-line:#111111;--hud-line-soft:#ead9c2;
  --hud-text:#111111;--hud-text-2:#4a4237;--hud-muted:#857a6b;--hud-accent:#ff5a36;
  --c1:#ff5a36;--c2:#3a5bff;--c3:#00a87e;--c4:#f5a800;--c5:#e5408f;--c6:#7c4dff;

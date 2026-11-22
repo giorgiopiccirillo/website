@@ -1155,6 +1155,7 @@ def render(data: dict) -> str:
 </div>
 <script id="app">
 {_js()}</script>
+<p class="legal" style="max-width:1100px;margin:24px auto;padding:0 16px;font-size:12px;opacity:.65;font-family:inherit"><a href="impressum.html" style="color:inherit">Impressum</a> · <a href="privacy.html" style="color:inherit">Privacy</a></p>
 </body>
 </html>
 """

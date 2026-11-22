@@ -1,5 +1,5 @@
 /* KIT 6 · CLINIC — health. Calm white and teal, soft rounded cards, a quiet heartbeat line. */
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+@import url("../fonts/manrope.css");
 body.hud.kit-clinic{--hud-bg:#eef5f4;--hud-panel:#ffffff;--hud-panel-2:#f4f9f8;--hud-line:#d3e4e1;--hud-line-soft:#e3eeec;
  --hud-text:#0f2a2e;--hud-text-2:#4b6a6d;--hud-muted:#7d9698;--hud-accent:#0e9f8e;
  --c1:#0e9f8e;--c2:#3b7ddd;--c3:#e48a3a;--c4:#8a6fd8;--c5:#d9557a;--c6:#5fa548;
