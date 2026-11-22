@@ -507,36 +507,13 @@ h1 em {
   <section class="section page-title" style="margin-top:auto;padding-bottom:56px;width:100%">
     <span class="kicker">Projects</span>
     <h1 class="appear appear--soft" style="--d:0.3s">Things I have <em>built</em>.</h1>
-    <div class="section-head"><p>Every project here is a working tool, used every day. Client work is shown as a demo, so real data stays private.</p></div>
+    <div class="section-head"><p>Every project here is a working tool, used every day. Client work is shown as a demo, so real data stays private. Dashboards have their own page: <a href="gallery.html" style="color:#fff;border-bottom:1px solid rgba(255,255,255,.3)">see the five demos</a>.</p></div>
   </section>
 </div>
 
 <div class="below">
   <section class="section" style="padding-top:56px">
     <div class="projects">
-      <article class="project panel full" id="dashboards">
-        <div class="dash-carousel" aria-label="Five dashboard demos, one per sector">
-          <div class="dash-slide on"><iframe data-src="dash-finance.html?embed=1" title="Finance dashboard demo" tabindex="-1" loading="lazy"></iframe></div>
-          <div class="dash-slide"><iframe data-src="dash-health.html?embed=1" title="Health dashboard demo" tabindex="-1" loading="lazy"></iframe></div>
-          <div class="dash-slide"><iframe data-src="dash-uni.html?embed=1" title="University dashboard demo" tabindex="-1" loading="lazy"></iframe></div>
-          <div class="dash-slide"><iframe data-src="dash-events.html?embed=1" title="Events dashboard demo" tabindex="-1" loading="lazy"></iframe></div>
-          <div class="dash-slide"><iframe data-src="dash-shop.html?embed=1" title="Shop dashboard demo" tabindex="-1" loading="lazy"></iframe></div>
-          <a class="dash-open" href="gallery.html" aria-label="See all five dashboard demos"></a>
-          <div class="dash-dots" role="tablist">
-            <button type="button" class="on" data-i="0">Finance</button>
-            <button type="button" data-i="1">Health</button>
-            <button type="button" data-i="2">University</button>
-            <button type="button" data-i="3">Events</button>
-            <button type="button" data-i="4">Shop</button>
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-top"><span class="tag">Dashboards and reports</span><span class="label">5 live demos</span></div>
-          <h3>Live dashboards that people actually open</h3>
-          <p>A team's numbers on one screen: targets against progress and problems first. Each field gets its own layout and its own main picture: a risk map for a lender, a bed map for a clinic, a funnel for admissions. The same work runs every day for a real team. All demo data is invented.</p>
-          <a class="more" href="gallery.html">See all five demos</a>
-        </div>
-      </article>
       <article class="project panel">
         <div class="project-body">
           <div class="project-top"><span class="tag">Company brain</span><span class="label">Live demo</span></div>
@@ -670,42 +647,6 @@ h1 em {
     });
     if (!f) c.remove();
   } catch (e) { c.remove(); }
-})();
-</script>
-<script>
-(function () {
-  var box = document.querySelector('.dash-carousel');
-  if (!box) return;
-  var slides = box.querySelectorAll('.dash-slide'), dots = box.querySelectorAll('.dash-dots button');
-  var cur = 0, timer = null, paused = false;
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function scale() {
-    var k = box.clientWidth / 1440;
-    box.querySelectorAll('iframe').forEach(function (f) { f.style.transform = 'scale(' + k + ')'; });
-  }
-  function show(i) {
-    cur = i;
-    slides.forEach(function (s, n) { s.classList.toggle('on', n === i); });
-    dots.forEach(function (d, n) { d.classList.toggle('on', n === i); });
-  }
-  function play() {
-    if (reduce || timer) return;
-    timer = setInterval(function () { if (!paused) show((cur + 1) % slides.length); }, 7000);
-  }
-  dots.forEach(function (d) {
-    d.addEventListener('click', function (e) { e.preventDefault(); show(+d.dataset.i); });
-  });
-  box.addEventListener('mouseenter', function () { paused = true; });
-  box.addEventListener('mouseleave', function () { paused = false; });
-  window.addEventListener('resize', scale);
-  // load the demos only when the carousel comes into view
-  var io = new IntersectionObserver(function (entries) {
-    if (!entries.some(function (e) { return e.isIntersecting; })) return;
-    box.querySelectorAll('iframe[data-src]').forEach(function (f) { f.src = f.dataset.src; f.removeAttribute('data-src'); });
-    scale(); play(); io.disconnect();
-  }, { rootMargin: '200px' });
-  io.observe(box);
-  scale();
 })();
 </script>
 </body>
